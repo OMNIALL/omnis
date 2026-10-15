@@ -1,0 +1,50 @@
+[
+  {
+    "id": "TN-439341",
+    "createdAt": "2026-10-15T19:06:10.166Z",
+    "fullName": "maissa mathlouthi",
+    "phone": "53909569",
+    "governorate": "Tunis",
+    "city": "Bizerte",
+    "address": "Bizerte 7009",
+    "notes": "",
+    "paymentMethod": "Paiement à la livraison",
+    "items": [
+      {
+        "id": "focus-30",
+        "name": "FOCUS",
+        "price": 39,
+        "color": "#E8432A",
+        "quantity": 1
+      }
+    ],
+    "subtotal": 39,
+    "shippingFee": 7,
+    "total": 46,
+    "status": "Expédié"
+  },
+  {
+    "id": "TN-942810",
+    "createdAt": "2026-10-15T18:56:33.645Z",
+    "fullName": "Youssef Trabelsi",
+    "phone": "98 456 789",
+    "governorate": "Tunis",
+    "city": "La Marsa",
+    "address": "12 Avenue Habib Bourguiba, Résidence Les Palmiers",
+    "notes": "Appeler avant d'arriver SVP",
+    "paymentMethod": "Paiement à la livraison",
+    "items": [
+      {
+        "id": "focus-30",
+        "name": "FOCUS",
+        "price": 39,
+        "quantity": 2,
+        "color": "#E8432A"
+      }
+    ],
+    "subtotal": 78,
+    "shippingFee": 7,
+    "total": 85,
+    "status": "Nouveau"
+  }
+]
