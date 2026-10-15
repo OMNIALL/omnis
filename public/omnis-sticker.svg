@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <circle cx="60" cy="60" r="54" fill="#FFC83D" stroke="#14110F" stroke-width="7" />
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#14110F" stroke-width="2" stroke-opacity="0.35" />
+  <text x="60" y="69" text-anchor="middle" font-family="'Unbounded', sans-serif, system-ui" font-weight="900" font-size="22" letter-spacing="-0.02em" fill="#14110F">OMNIS</text>
+</svg>
