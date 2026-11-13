@@ -3,6 +3,7 @@
 import Link from "next/link";
 import OmnisLogo from "./OmnisLogo";
 import { useLanguage } from "@/context/LanguageContext";
+import { SOCIAL_LINKS } from "@/config/site";
 
 export default function Footer() {
   const { language } = useLanguage();
@@ -12,7 +13,7 @@ export default function Footer() {
     {
       title: isAr ? "المنتجات" : "Produits",
       links: [
-        { label: "FOCUS (Pastilles)", href: "/products/focus" },
+        { label: "FOCUS (Gélules)", href: "/products/focus" },
         { label: isAr ? "ÉNERGIE (قريباً)" : "ÉNERGIE (Bientôt)", href: "/#produits" },
         { label: isAr ? "SOMMEIL (قريباً)" : "SOMMEIL (Bientôt)", href: "/#produits" },
         { label: isAr ? "IMMUNITÉ (قريباً)" : "IMMUNITÉ (Bientôt)", href: "/#produits" },
@@ -41,7 +42,7 @@ export default function Footer() {
   const socialLinks = [
     {
       name: "Instagram",
-      href: "https://instagram.com",
+      href: SOCIAL_LINKS.instagram,
       icon: (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -52,7 +53,7 @@ export default function Footer() {
     },
     {
       name: "TikTok",
-      href: "https://tiktok.com",
+      href: SOCIAL_LINKS.tiktok,
       icon: (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.51a6.37 6.37 0 00-.79-.05A6.35 6.35 0 003.14 15.2a6.35 6.35 0 0010.86 4.48V13.2a8.2 8.2 0 005.59 2.18V11.9a4.84 4.84 0 01-3.77-1.44V6.69h3.77z" />
@@ -61,7 +62,7 @@ export default function Footer() {
     },
     {
       name: "Facebook",
-      href: "https://facebook.com",
+      href: SOCIAL_LINKS.facebook,
       icon: (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
@@ -89,25 +90,21 @@ export default function Footer() {
               style={{ opacity: 0.6 }}
             >
               {isAr
-                ? "مكملات غذائية عصرية مصنوعة بكل فخر في تونس 🇹🇳. تركيز فائق، طاقة بدون هبوط، ونكهات لذيذة."
-                : "Des compléments alimentaires fabriqués en Tunisie. Simples, efficaces, avec un goût de ouf."}
+                ? "مكمّلات غذائية مصنوعة في تونس، بتركيبات قصيرة و جرعات واضحة."
+                : "Des compléments alimentaires fabriqués en Tunisie, aux formules courtes et aux doses affichées."}
             </p>
 
             {/* Social Icons */}
             <div className="flex gap-3 mt-6">
-              {socialLinks.map((social) => (
+              {socialLinks.filter((s) => s.href).map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-200 hover:scale-110"
-                  style={{
-                    backgroundColor: "var(--sun)",
-                    borderColor: "var(--sun)",
-                    color: "var(--ink)",
-                  }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center border transition-colors duration-200 hover:bg-cream hover:text-ink"
+                  style={{ borderColor: "rgba(255,244,227,0.3)", color: "var(--cream)" }}
                 >
                   {social.icon}
                 </a>
@@ -132,10 +129,10 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-xs sm:text-sm transition-colors hover:text-sun block"
+                      className="text-sm transition-colors hover:text-sun block"
                       style={{
                         color: "var(--cream)",
-                        opacity: 0.7,
+                        opacity: 0.8,
                         textDecoration: "none",
                       }}
                     >
@@ -158,7 +155,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p
             className="text-xs text-center sm:text-left"
-            style={{ opacity: 0.5, maxWidth: "560px", lineHeight: 1.6 }}
+            style={{ opacity: 0.7, maxWidth: "560px", lineHeight: 1.6 }}
           >
             {isAr
               ? "هذه المنتجات هي مكملات غذائية ولا تعوض نظاماً غذائياً متنوعاً ومتوازناً أو نمط حياة صحي. يُنصح بعدم تجاوز الجرعة اليومية الموصى بها."
@@ -166,14 +163,6 @@ export default function Footer() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs" style={{ opacity: 0.6 }}>
             <span>© 2026 OMNIS. {isAr ? "جميع الحقوق محفوظة." : "Tous droits réservés."}</span>
-            <span>·</span>
-            <Link
-              href="/admin"
-              className="hover:underline hover:text-sun transition-colors font-bold text-sun/90"
-              title="Panneau d'administration"
-            >
-              🔒 Espace Admin
-            </Link>
           </div>
         </div>
       </div>

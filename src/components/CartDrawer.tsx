@@ -2,6 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { FREE_SHIPPING_MIN_BOTTLES, linePrice } from "@/lib/pricing";
 import Link from "next/link";
 
 export default function CartDrawer() {
@@ -9,11 +11,13 @@ export default function CartDrawer() {
     items,
     isOpen,
     closeCart,
-    totalPrice,
+    cartQuote,
     totalItems,
     updateQuantity,
     removeItem,
   } = useCart();
+  const { language } = useLanguage();
+  const isAr = language === "ar";
 
   return (
     <AnimatePresence>
@@ -57,7 +61,7 @@ export default function CartDrawer() {
                 className="w-10 h-10 rounded-full flex items-center justify-center border-2 hover:rotate-90 transition-transform duration-300"
                 style={{
                   backgroundColor: "var(--sun)",
-                  borderColor: "var(--ink)",
+                  borderColor: "var(--line)",
                 }}
                 aria-label="Fermer le panier"
               >
@@ -79,10 +83,10 @@ export default function CartDrawer() {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
                   <div
-                    className="w-20 h-20 rounded-full flex items-center justify-center border-3"
+                    className="w-20 h-20 rounded-full flex items-center justify-center border"
                     style={{
                       backgroundColor: "var(--sun)",
-                      border: "3px solid var(--ink)",
+                      border: "1px solid var(--line)",
                     }}
                   >
                     <svg
@@ -113,8 +117,8 @@ export default function CartDrawer() {
                       className="flex items-center gap-4 p-4 rounded-2xl border-2"
                       style={{
                         backgroundColor: "white",
-                        borderColor: "var(--ink)",
-                        boxShadow: "4px 4px 0 var(--ink)",
+                        borderColor: "var(--line)",
+                        boxShadow: "var(--shadow-card)",
                       }}
                       layout
                       initial={{ opacity: 0, x: 30 }}
@@ -126,7 +130,7 @@ export default function CartDrawer() {
                         className="w-12 h-12 rounded-full border-2 shrink-0 flex items-center justify-center"
                         style={{
                           backgroundColor: item.color,
-                          borderColor: "var(--ink)",
+                          borderColor: "var(--line)",
                         }}
                       >
                         <span
@@ -149,7 +153,7 @@ export default function CartDrawer() {
                           {item.name}
                         </p>
                         <p className="text-sm font-bold" style={{ color: "var(--harissa)" }}>
-                          {item.price} TND
+                          {linePrice(item.id, item.price, item.quantity)} DT
                         </p>
                       </div>
 
@@ -161,7 +165,7 @@ export default function CartDrawer() {
                           }
                           className="w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-sm hover:bg-sun transition-colors"
                           style={{
-                            borderColor: "var(--ink)",
+                            borderColor: "var(--line)",
                             color: "var(--ink)",
                           }}
                           aria-label="Diminuer quantité"
@@ -177,7 +181,7 @@ export default function CartDrawer() {
                           }
                           className="w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-sm hover:bg-sun transition-colors"
                           style={{
-                            borderColor: "var(--ink)",
+                            borderColor: "var(--line)",
                             color: "var(--ink)",
                           }}
                           aria-label="Augmenter quantité"
@@ -215,11 +219,24 @@ export default function CartDrawer() {
                 className="p-5 shrink-0"
                 style={{ borderTop: "3px solid var(--ink)" }}
               >
+                {cartQuote.savings > 0 && (
+                  <div className="flex items-center justify-between mb-2 text-sm" style={{ color: "var(--harissa)" }}>
+                    <span className="font-bold">{isAr ? "التوفير" : "Économie pack"}</span>
+                    <span className="font-bold">−{cartQuote.savings} DT</span>
+                  </div>
+                )}
                 {/* Shipping note */}
                 <div className="flex items-center justify-between mb-2 text-sm">
-                  <span className="opacity-60">Livraison</span>
-                  <span className="font-bold">7 TND</span>
+                  <span className="opacity-60">{isAr ? "التوصيل" : "Livraison"}</span>
+                  <span className="font-bold">
+                    {cartQuote.shipping === 0 ? (isAr ? "مجاني" : "Offerte") : `${cartQuote.shipping} DT`}
+                  </span>
                 </div>
+                {cartQuote.bottles < FREE_SHIPPING_MIN_BOTTLES && (
+                  <p className="text-xs font-bold mb-3 p-2 rounded-lg" style={{ backgroundColor: "rgba(255,200,61,0.35)" }}>
+                    {isAr ? "التوصيل مجاني من علبتين" : "Livraison offerte dès 2 flacons"}
+                  </p>
+                )}
                 <div className="flex items-center justify-between mb-4">
                   <span className="font-bold text-lg">Total</span>
                   <span
@@ -229,7 +246,7 @@ export default function CartDrawer() {
                       color: "var(--harissa)",
                     }}
                   >
-                    {totalPrice + 7} TND
+                    {cartQuote.total} DT
                   </span>
                 </div>
                 <Link
@@ -237,13 +254,13 @@ export default function CartDrawer() {
                   onClick={closeCart}
                   className="btn-sticker btn-primary w-full text-center block"
                 >
-                  Commander · {totalPrice + 7} TND
+                  {isAr ? "كوموندي" : "Commander"} · {cartQuote.total} DT
                 </Link>
                 <p
                   className="text-center text-xs mt-3 opacity-50"
                   style={{ lineHeight: 1.4 }}
                 >
-                  Paiement à la livraison disponible
+                  {isAr ? "تخلّص كي توصلك" : "Paiement à la livraison"}
                 </p>
               </div>
             )}

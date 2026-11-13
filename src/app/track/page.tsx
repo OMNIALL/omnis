@@ -1,5 +1,6 @@
 "use client";
 
+import { MapPin, Package, Truck, Zap } from "lucide-react";
 import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import Footer from "@/components/Footer";
 import StickerCircle from "@/components/StickerCircle";
 import type { Order } from "@/app/api/orders/route";
 
+import { whatsappLink } from "@/config/site";
 function TrackingContent() {
   const searchParams = useSearchParams();
   const initialId = searchParams.get("id") || "";
@@ -20,7 +22,7 @@ function TrackingContent() {
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
 
-  const fetchTracking = useCallback(async (idToFetch: string) => {
+  const fetchTracking = useCallback(async (idToFetch: string) =>{
     if (!idToFetch.trim()) return;
     try {
       setLoading(true);
@@ -44,16 +46,16 @@ function TrackingContent() {
   }, []);
 
   // Initial fetch if query param present
-  useEffect(() => {
+  useEffect(() =>{
     if (initialId) {
       fetchTracking(initialId);
     }
   }, [initialId, fetchTracking]);
 
   // Real-time polling every 3 seconds if an order is active
-  useEffect(() => {
+  useEffect(() =>{
     if (!order?.id) return;
-    const interval = setInterval(async () => {
+    const interval = setInterval(async () =>{
       try {
         const res = await fetch(`/api/orders?id=${encodeURIComponent(order.id)}&_t=${Date.now()}`, {
           cache: "no-store",
@@ -71,7 +73,7 @@ function TrackingContent() {
     return () => clearInterval(interval);
   }, [order?.id]);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
+  const handleSearchSubmit = (e: React.FormEvent) =>{
     e.preventDefault();
     fetchTracking(searchId);
   };
@@ -81,29 +83,29 @@ function TrackingContent() {
       title: "Commande Confirmée",
       desc: "Reçue et enregistrée dans le système OMNIS",
       statusKey: "Nouveau",
-      icon: "📦",
+      icon: Package,
     },
     {
       title: "En Préparation",
-      desc: "Pastilles dosées et emballées avec soin",
+      desc: "Gélules dosées et flacons scellés avec soin",
       statusKey: "En préparation",
-      icon: "⚡",
+      icon: Zap,
     },
     {
       title: "En Cours de Livraison",
       desc: "Pris en charge par notre transporteur express",
       statusKey: "Expédié",
-      icon: "🚚",
+      icon: Truck,
     },
     {
       title: "Livré & Encaissé",
       desc: "Colis remis en main propre contre paiement",
       statusKey: "Livré",
-      icon: "📍",
+      icon: MapPin,
     },
   ];
 
-  const getStepStatus = (stepIndex: number, currentStatus: Order["status"]) => {
+  const getStepStatus = (stepIndex: number, currentStatus: Order["status"]) =>{
     const statusOrder: Record<Order["status"], number> = {
       Nouveau: 0,
       "En préparation": 1,
@@ -123,15 +125,15 @@ function TrackingContent() {
     <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Header */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border-2 border-ink bg-sun text-xs font-black uppercase tracking-wider mb-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-line bg-paper text-xs font-black uppercase tracking-wider mb-3">
           <span className="w-2.5 h-2.5 rounded-full bg-harissa animate-ping" />
-          SUIVI EN TEMPS RÉEL (TUNISIE 🇹🇳)
+          SUIVI EN TEMPS RÉEL (TUNISIE )
         </div>
         <h1
-          className="heading-xl text-3xl sm:text-4xl md:text-5xl text-ink uppercase"
+          className="heading-xl text-3xl sm:text-4xl md:text-5xl text-ink"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          OÙ EST MA COMMANDE ?
+          Où est ma commande ?
         </h1>
         <p className="text-sm sm:text-base text-ink/70 mt-2 max-w-lg mx-auto font-sans">
           Entre ton numéro de commande (ex: <strong>TN-942810</strong>) ou ton numéro de téléphone pour suivre l&apos;acheminement en direct.
@@ -148,8 +150,8 @@ function TrackingContent() {
             onChange={(e) => setSearchId(e.target.value)}
             placeholder="N° de commande (TN-XXXXXX) ou téléphone"
             required
-            className="flex-1 px-5 py-3.5 rounded-full border-3 border-ink text-sm sm:text-base bg-white focus:outline-none focus:ring-2 focus:ring-harissa font-bold text-ink"
-            style={{ boxShadow: "4px 4px 0 var(--ink)" }}
+            className="flex-1 px-5 py-3.5 rounded-full border border-ink text-sm sm:text-base bg-white focus:outline-none focus:ring-2 focus:ring-harissa font-bold text-ink"
+            style={{ boxShadow: "var(--shadow-card)" }}
           />
           <button
             type="submit"
@@ -162,7 +164,7 @@ function TrackingContent() {
 
         {error && (
           <p className="text-harissa font-bold text-xs sm:text-sm mt-3 bg-harissa/10 py-2 px-4 rounded-xl border border-harissa/30 inline-block">
-            ⚠️ {error}
+             {error}
           </p>
         )}
       </div>
@@ -172,17 +174,17 @@ function TrackingContent() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-6 sm:p-10 rounded-3xl border-3 bg-white"
+          className="p-6 sm:p-10 rounded-3xl border bg-white"
           style={{
-            borderColor: "var(--ink)",
-            boxShadow: "8px 8px 0 var(--ink)",
+            borderColor: "var(--line)",
+            boxShadow: "var(--shadow-card)",
           }}
         >
           {/* Top Status Banner */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b-2 border-ink/15">
             <div>
-              <span className="text-xs font-black uppercase tracking-wider text-ink/50 block">
-                COMMANDE IDENTIFIÉE
+              <span className="text-xs font-black uppercase tracking-wider text-muted block">
+                Commande identifiée
               </span>
               <div className="flex items-center gap-3 mt-1">
                 <span className="font-mono font-black text-2xl text-ink">
@@ -197,7 +199,7 @@ function TrackingContent() {
                         : order.status === "Annulé"
                         ? "var(--harissa)"
                         : "var(--sun)",
-                    borderColor: "var(--ink)",
+                    borderColor: "var(--line)",
                     color: order.status === "Annulé" ? "white" : "var(--ink)",
                   }}
                 >
@@ -207,7 +209,7 @@ function TrackingContent() {
             </div>
 
             {/* Live Indicator */}
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream border-2 border-ink text-xs font-bold text-ink">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream border border-line text-xs font-bold text-ink">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>Connecté en direct · Mis à jour à {lastUpdated.toLocaleTimeString("fr-TN")}</span>
             </div>
@@ -216,15 +218,15 @@ function TrackingContent() {
           {/* Stepper Timeline */}
           <div className="py-8">
             <h2
-              className="heading-lg text-lg text-ink uppercase mb-6"
+              className="heading-lg text-lg text-ink mb-6"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              ÉTAPES DE LIVRAISON
+              Étapes de livraison
             </h2>
 
             <div className="relative">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
-                {steps.map((step, idx) => {
+                {steps.map((step, idx) =>{
                   const state = getStepStatus(idx, order.status);
                   const isCompleted = state === "completed";
                   const isCurrent = state === "current";
@@ -232,9 +234,9 @@ function TrackingContent() {
                   return (
                     <div
                       key={step.title}
-                      className={`p-5 rounded-2xl border-3 transition-all flex flex-col justify-between ${
+                      className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
                         isCurrent
-                          ? "bg-sun border-ink shadow-[4px_4px_0_var(--ink)] scale-105"
+                          ? "bg-paper border-ink shadow-[4px_4px_0_var(--ink)] scale-105"
                           : isCompleted
                           ? "bg-cream/70 border-ink"
                           : "bg-gray-50 border-ink/30 opacity-60"
@@ -242,17 +244,17 @@ function TrackingContent() {
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="text-2xl">{step.icon}</span>
+                          <step.icon className="w-6 h-6" strokeWidth={1.5} />
                           <span
                             className={`w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-black ${
                               isCompleted
                                 ? "bg-emerald-500 text-white border-ink"
                                 : isCurrent
                                 ? "bg-ink text-sun border-ink"
-                                : "bg-transparent border-ink/40 text-ink/40"
+                                : "bg-transparent border-ink/40 text-muted"
                             }`}
                           >
-                            {isCompleted ? "✓" : idx + 1}
+                            {isCompleted ? "" : idx + 1}
                           </span>
                         </div>
 
@@ -281,18 +283,18 @@ function TrackingContent() {
           {/* Details Grid: Destination vs Package */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t-2 border-ink/15">
             {/* Delivery Destination */}
-            <div className="p-5 rounded-2xl border-2 border-ink bg-cream/40 space-y-2">
-              <span className="text-[0.65rem] font-black uppercase tracking-wider text-ink/50 block">
-                DESTINATAIRE & LIEU DE DÉPÔT
+            <div className="p-5 rounded-2xl border border-line bg-cream/40 space-y-2">
+              <span className="text-[0.65rem] font-black uppercase tracking-wider text-muted block">
+                Destinataire & lieu de dépôt
               </span>
               <p className="font-black text-base text-ink">
                 {order.fullName}
               </p>
               <p className="text-xs font-bold text-ink/80">
-                📞 {order.phone}
+                 {order.phone}
               </p>
               <p className="text-xs text-ink/80 pt-1">
-                📍 {order.address}, {order.city} ({order.governorate})
+                 {order.address}, {order.city} ({order.governorate})
               </p>
               {order.notes && (
                 <p className="text-xs text-harissa italic pt-1 border-t border-ink/10">
@@ -302,9 +304,9 @@ function TrackingContent() {
             </div>
 
             {/* Package & Payment Summary */}
-            <div className="p-5 rounded-2xl border-2 border-ink bg-cream/40 space-y-2">
-              <span className="text-[0.65rem] font-black uppercase tracking-wider text-ink/50 block">
-                CONTENU DU COLIS & ENCAISSEMENT
+            <div className="p-5 rounded-2xl border border-line bg-cream/40 space-y-2">
+              <span className="text-[0.65rem] font-black uppercase tracking-wider text-muted block">
+                Contenu du colis & encaissement
               </span>
 
               <div className="space-y-1.5 py-1">
@@ -324,11 +326,11 @@ function TrackingContent() {
               </div>
 
               <div className="flex justify-between font-black text-base text-ink pt-1 border-t border-ink/20">
-                <span>TOTAL À PAYER AU LIVREUR :</span>
+                <span>Total à payer au livreur :</span>
                 <span className="text-harissa text-lg">{order.total} TND</span>
               </div>
-              <span className="text-[0.65rem] font-medium text-ink/60 block">
-                💵 Espèces à la remise en main propre
+              <span className="text-[0.65rem] font-medium text-muted block">
+                 Espèces à la remise en main propre
               </span>
             </div>
           </div>
@@ -340,12 +342,12 @@ function TrackingContent() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href={`https://wa.me/21698456789?text=${encodeURIComponent(`Bonjour OMNIS, je souhaite avoir des nouvelles de ma commande ${order.id}`)}`}
+                href={whatsappLink(`Bonjour OMNIS, je souhaite avoir des nouvelles de ma commande ${order.id}`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-sticker btn-secondary text-xs px-5 py-2.5"
               >
-                💬 Support WhatsApp
+                 Support WhatsApp
               </a>
               <Link href="/" className="btn-sticker btn-primary text-xs px-5 py-2.5">
                 Retour Boutique
@@ -357,9 +359,9 @@ function TrackingContent() {
 
       {/* Demo helper if no order loaded */}
       {!order && !loading && (
-        <div className="mt-12 p-8 rounded-3xl border-3 border-ink bg-sun/30 text-center max-w-lg mx-auto">
+        <div className="mt-12 p-8 rounded-3xl border border-ink bg-sun/30 text-center max-w-lg mx-auto">
           <StickerCircle size={70} color="var(--sun)" shadow={true} innerRing={true} className="mx-auto mb-3">
-            <span className="text-2xl">💡</span>
+            <span className="text-2xl"></span>
           </StickerCircle>
           <h3 className="font-black text-sm uppercase text-ink">
             Exemple de suivi
@@ -368,11 +370,11 @@ function TrackingContent() {
             Tu viens de faire un test ? Clique sur le code ci-dessous pour tester le suivi instantané :
           </p>
           <button
-            onClick={() => {
+            onClick={() =>{
               setSearchId("TN-942810");
               fetchTracking("TN-942810");
             }}
-            className="mt-3 px-4 py-2 rounded-xl border-2 border-ink bg-white font-mono font-black text-xs text-harissa hover:bg-cream transition-colors"
+            className="mt-3 px-4 py-2 rounded-xl border border-line bg-white font-mono font-black text-xs text-harissa hover:bg-cream transition-colors"
           >
             Tester avec TN-942810 →
           </button>

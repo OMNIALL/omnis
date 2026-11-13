@@ -1,227 +1,116 @@
 "use client";
 
+/*
+ * Hero headline variants (pick one, or A/B test — see marketing/copy-variants.md):
+ *  A (current, outcome):  « L'énergie d'un café. Sans le crash. »
+ *  B (problem-led):       « Ton 3ème café ne marche plus ? Passe à une gélule. »
+ *  C (ease):              « Une gélule le matin. Concentré jusqu'au soir. »
+ *  D (local trust):       « Le focus, fabriqué en Tunisie. »
+ */
+
 import { motion } from "framer-motion";
-import StickerCircle from "./StickerCircle";
-import IngredientPill from "./IngredientPill";
+import Link from "next/link";
+import Image from "next/image";
+import { Banknote, Truck, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { DELIVERY_TIME } from "@/lib/pricing";
+import { ORDER_HREF } from "@/config/site";
 
 export default function Hero() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const isAr = language === "ar";
+
+  const trust = isAr
+    ? [
+        { Icon: MapPin, label: "مصنوع في تونس" },
+        { Icon: Banknote, label: "تخلّص كي توصلك" },
+        { Icon: Truck, label: `توصيل ${DELIVERY_TIME.ar}` },
+      ]
+    : [
+        { Icon: MapPin, label: "Fabriqué en Tunisie" },
+        { Icon: Banknote, label: "Paiement à la livraison" },
+        { Icon: Truck, label: `Livraison ${DELIVERY_TIME.fr}` },
+      ];
+
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-      <div
-        className="relative overflow-hidden w-full max-w-7xl mx-auto"
-        style={{
-          backgroundColor: "var(--harissa)",
-          borderRadius: "32px",
-          border: "3px solid var(--ink)",
-        }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 sm:p-10 lg:p-16 relative z-10">
-          {/* Left: Text Content */}
-          <div className="flex flex-col justify-center gap-6 sm:gap-8">
-            <motion.h1
-              className="heading-xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-              style={{ color: "var(--cream)" }}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              {t.heroHeadline1}{" "}
-              <br className="hidden sm:block" />
-              <span style={{ color: "var(--sun)" }}>{t.heroHeadlineHighlight}</span>
-            </motion.h1>
+    <section className="w-full px-4 sm:px-6 lg:px-8 pt-5 sm:pt-8 pb-10">
+      <div className="relative w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+        {/* Copy — first on every screen size so the CTA is above the fold on phones */}
+        <div className="flex flex-col gap-4 sm:gap-6">
+          <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            {isAr ? "100 ملغ كافيين طبيعي · 180 ملغ L-théanine" : "100 mg caféine naturelle · 180 mg L-théanine"}
+          </motion.p>
 
-            <motion.p
-              className="text-base sm:text-lg max-w-md"
-              style={{
-                color: "var(--cream)",
-                fontFamily: "var(--font-body)",
-                opacity: 0.9,
-                lineHeight: 1.6,
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {t.heroSubtitle}
-            </motion.p>
+          <motion.h1
+            className="heading-xl text-[2.35rem] leading-[1.04] sm:text-6xl lg:text-7xl text-ink"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {isAr ? (
+              <>الإينرجي متاع قهوة. <span className="text-harissa">من غير الطيحة.</span></>
+            ) : (
+              <>L&apos;énergie d&apos;un café. <span className="text-harissa italic">Sans le crash.</span></>
+            )}
+          </motion.h1>
 
-            <motion.div
-              className="flex flex-wrap gap-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <a href="#produits" className="btn-sticker btn-primary">
-                {t.btnOrder}
-              </a>
-              <a href="#ingredients" className="btn-sticker btn-outline">
-                {t.btnDiscover}
-              </a>
-            </motion.div>
+          <motion.p
+            className="text-base sm:text-lg text-muted max-w-md"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {isAr
+              ? "كاشية وحدة في النهار باش تقعد مركّز في المراجعة، الخدمة و السبور، من غير ما تولّي نيرفي."
+              : "Une gélule par jour pour rester concentré en révisions, au travail ou au sport, sans la nervosité d'un café de trop."}
+          </motion.p>
 
-            {/* Ingredient Pills */}
-            <motion.div
-              className="flex flex-wrap gap-2 mt-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <IngredientPill
-                name="L-THÉANINE"
-                dosage="180 MG"
-                color="var(--sun)"
-              />
-              <IngredientPill
-                name="CAFÉINE"
-                dosage="80 MG"
-                color="var(--cream)"
-              />
-            </motion.div>
+          <motion.div
+            className="flex flex-wrap items-center gap-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Link href={ORDER_HREF} className="btn-sticker btn-primary">
+              {isAr ? "كوموندي · 39 DT" : "Je commande · 39 DT"}
+            </Link>
+            <a href="#comment-ca-marche" className="btn-sticker btn-outline hidden sm:inline-flex">
+              {isAr ? "كيفاش يخدم؟" : "Comment ça marche"}
+            </a>
+          </motion.div>
 
-            {/* Caption */}
-            <motion.p
-              className="label-sm mt-1"
-              style={{
-                color: "var(--cream)",
-                opacity: 0.6,
-                fontSize: "0.65rem",
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              transition={{ delay: 0.8 }}
-            >
-              {t.heroCaption}
-            </motion.p>
-          </div>
-
-          {/* Right: Sticker Composition */}
-          <div className="relative flex items-center justify-center min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
-            {/* Large yellow "FOCUS" circle */}
-            <motion.div
-              className="absolute"
-              animate={{ y: [0, -12, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <StickerCircle
-                size={220}
-                color="var(--sun)"
-                shadow={true}
-                innerRing={true}
-                delay={0.3}
-              >
-                <span
-                  className="heading-xl text-3xl sm:text-4xl"
-                  style={{ color: "var(--ink)" }}
-                >
-                  FOCUS
-                </span>
-              </StickerCircle>
-            </motion.div>
-
-            {/* Cream circle */}
-            <motion.div
-              className="absolute"
-              style={{ top: "5%", right: "10%" }}
-              animate={{ y: [0, -8, 0] }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-            >
-              <StickerCircle
-                size={100}
-                color="var(--cream)"
-                shadow={true}
-                innerRing={true}
-                rotate={-3}
-                delay={0.5}
-              />
-            </motion.div>
-
-            {/* Black circle with yellow S */}
-            <motion.div
-              className="absolute"
-              style={{ bottom: "10%", right: "5%" }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                duration: 4.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-            >
-              <StickerCircle
-                size={80}
-                color="var(--ink)"
-                borderColor="var(--ink)"
-                shadow={false}
-                innerRing={true}
-                rotate={3}
-                delay={0.7}
-              >
-                <span
-                  className="heading-xl text-2xl"
-                  style={{ color: "var(--sun)" }}
-                >
-                  S
-                </span>
-              </StickerCircle>
-            </motion.div>
-
-            {/* Extra small cream circle */}
-            <motion.div
-              className="absolute hidden sm:block"
-              style={{ top: "25%", left: "5%" }}
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 5.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1.5,
-              }}
-            >
-              <StickerCircle
-                size={60}
-                color="var(--cream)"
-                shadow={true}
-                innerRing={false}
-                rotate={-2}
-                delay={0.9}
-              />
-            </motion.div>
-
-            {/* Extra yellow small circle */}
-            <motion.div
-              className="absolute hidden md:block"
-              style={{ bottom: "20%", left: "10%" }}
-              animate={{ y: [0, -8, 0], rotate: [0, 5, 0] }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 2,
-              }}
-            >
-              <StickerCircle
-                size={50}
-                color="var(--sun)"
-                shadow={true}
-                innerRing={false}
-                rotate={2}
-                delay={1.1}
-              />
-            </motion.div>
-          </div>
+          {/* Trust strip, directly under the CTA */}
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-muted">
+            {trust.map(({ Icon, label }) => (
+              <li key={label} className="flex items-center gap-1.5">
+                <Icon className="w-4 h-4 text-ink" strokeWidth={1.75} />
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
+
+        {/* Product visual — short on phones, tall on desktop */}
+        <motion.div
+          className="relative rounded-[28px] bg-paper border border-line overflow-hidden aspect-[4/3] lg:aspect-auto lg:min-h-[520px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Image
+            src="/images/focus-34-alt.webp"
+            alt={isAr ? "علبة OMNIS FOCUS محلولة و كاشيات نباتية" : "Flacon OMNIS FOCUS ouvert et gélules végétales"}
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
+          <div className="absolute bottom-4 start-4 flex flex-wrap gap-2">
+            <span className="rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-semibold text-ink">
+              {isAr ? "التوصيل مجاني من علبتين" : "Livraison offerte dès 2 flacons"}
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

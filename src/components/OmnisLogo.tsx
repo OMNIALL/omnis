@@ -28,9 +28,9 @@ export default function OmnisLogo({
     <div className={`flex flex-col items-start ${className}`}>
       <div className="flex items-center gap-1">
         <span
-          className={`${s.text} font-[var(--font-heading)] font-black tracking-tight uppercase`}
+          className={`${s.text} font-[var(--font-display)] font-black tracking-tight uppercase`}
           style={{
-            fontFamily: "var(--font-heading)",
+            fontFamily: "var(--font-display)",
             fontWeight: 900,
             color,
           }}
@@ -49,7 +49,7 @@ export default function OmnisLogo({
           <span
             className={`${s.badgeText} font-black`}
             style={{
-              fontFamily: "var(--font-heading)",
+              fontFamily: "var(--font-display)",
               fontWeight: 900,
               color: color === "var(--cream)" ? "var(--ink)" : "var(--ink)",
             }}

@@ -1,146 +1,74 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { focusProduct } from "@/data/products";
-import StickerCircle from "./StickerCircle";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Coffee, Leaf, Zap } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import CompositionPanel from "./CompositionPanel";
 
 export default function IngredientsSection() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const ingredients = focusProduct.ingredients;
+  const { language } = useLanguage();
+  const isAr = language === "ar";
+
+  const steps = isAr
+    ? [
+        { Icon: Coffee, title: "كافيين طبيعي من الغوارانا", text: "100 ملغ، قدّ قهوة. هو اللي يعطيك الإينرجي." },
+        { Icon: Leaf, title: "L-théanine", text: "180 ملغ، حاجة طبيعية موجودة في التاي. تخلّي الإينرجي تجي أنعم." },
+        { Icon: Zap, title: "فيتامين B6 و B12", text: "يساهمو في نقص التعب و في الخدمة العادية للجهاز العصبي." },
+      ]
+    : [
+        { Icon: Coffee, title: "Caféine naturelle de guarana", text: "100 mg, l'équivalent d'un café. C'est elle qui apporte l'énergie." },
+        { Icon: Leaf, title: "L-théanine", text: "180 mg, présente naturellement dans le thé. Elle accompagne la caféine pour une énergie plus douce." },
+        { Icon: Zap, title: "Vitamines B6 et B12", text: "Contribuent à réduire la fatigue et au fonctionnement normal du système nerveux." },
+      ];
 
   return (
-    <section
-      id="ingredients"
-      className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundColor: "var(--cream)" }}
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
-        <motion.div
-          className="text-center mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2
-            className="heading-xl text-3xl sm:text-4xl md:text-5xl mb-4"
-            style={{ color: "var(--ink)" }}
+    <section id="ingredients" className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div>
+          <p className="eyebrow mb-3">{isAr ? "الفورمولة" : "La formule"}</p>
+          <motion.h2
+            className="heading-xl text-3xl sm:text-5xl text-ink mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            CE QU&apos;IL Y A DEDANS
-          </h2>
-          <p className="text-base sm:text-lg max-w-lg mx-auto opacity-60">
-            Clique sur un ingrédient pour en savoir plus.
+            {isAr ? "ثلاثة مكوّنات. حتى حاجة مخبّية." : "Trois actifs. Rien de caché."}
+          </motion.h2>
+          <p className="text-muted text-lg mb-10 max-w-md">
+            {isAr
+              ? "الكافيين يفيّقك، و الـ L-théanine تخلّيه رايق. النتيجة: تركيز صافي من غير ما تولّي نيرفي."
+              : "La caféine réveille, la L-théanine l'adoucit. Résultat : un focus calme, sans le côté nerveux d'un excès de café."}
           </p>
-        </motion.div>
-
-        {/* Interactive Circles */}
-        <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10">
-          {ingredients.map((ing, i) => (
-            <motion.button
-              key={ing.name}
-              onClick={() =>
-                setActiveIndex(activeIndex === i ? null : i)
-              }
-              className="flex flex-col items-center gap-3 group"
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, type: "spring" }}
-            >
-              <StickerCircle
-                size={100}
-                color={ing.color}
-                shadow={activeIndex === i}
-                innerRing={true}
-                animate={false}
-                rotate={activeIndex === i ? 0 : (i % 2 === 0 ? -3 : 3)}
-                className={`transition-all duration-200 ${
-                  activeIndex === i ? "ring-4 ring-harissa" : ""
-                }`}
-              >
-                <span
-                  className="heading-lg text-[0.6rem] sm:text-xs text-center leading-tight px-2"
-                  style={{ color: "var(--ink)" }}
-                >
-                  {ing.name.split(" ")[0]}
+          <ol className="space-y-6">
+            {steps.map(({ Icon, title, text }, i) => (
+              <li key={title} className="flex gap-4">
+                <span className="shrink-0 w-11 h-11 rounded-full border border-line bg-paper flex items-center justify-center">
+                  <Icon className="w-5 h-5 text-harissa" strokeWidth={1.75} />
                 </span>
-              </StickerCircle>
-              <span
-                className="label-sm text-center"
-                style={{
-                  fontSize: "0.6rem",
-                  color:
-                    activeIndex === i ? "var(--harissa)" : "var(--ink)",
-                  opacity: activeIndex === i ? 1 : 0.5,
-                }}
-              >
-                {ing.dosage}
-              </span>
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Detail Card */}
-        <AnimatePresence mode="wait">
-          {activeIndex !== null && (
-            <motion.div
-              key={activeIndex}
-              className="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl"
-              style={{
-                backgroundColor: ingredients[activeIndex].color,
-                border: "3px solid var(--ink)",
-                boxShadow: "6px 6px 0 var(--ink)",
-              }}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
-              <div className="flex items-start gap-4">
-                <StickerCircle
-                  size={60}
-                  color="var(--ink)"
-                  shadow={false}
-                  innerRing={false}
-                  animate={false}
-                >
-                  <span
-                    className="text-lg"
-                    style={{ color: ingredients[activeIndex].color }}
-                  >
-                    {activeIndex === 0
-                      ? "🍵"
-                      : activeIndex === 1
-                      ? "☕"
-                      : "💊"}
-                  </span>
-                </StickerCircle>
-                <div className="flex-1">
-                  <h3
-                    className="heading-lg text-lg sm:text-xl mb-2"
-                    style={{ color: "var(--ink)" }}
-                  >
-                    {ingredients[activeIndex].name}{" "}
-                    <span className="opacity-50 text-sm">
-                      {ingredients[activeIndex].dosage}
-                    </span>
-                  </h3>
-                  <p
-                    className="text-sm sm:text-base leading-relaxed"
-                    style={{
-                      color: "var(--ink)",
-                      opacity: 0.8,
-                      fontFamily: "var(--font-body)",
-                    }}
-                  >
-                    {ingredients[activeIndex].description}
+                <div>
+                  <p className="font-semibold text-ink">
+                    <span className="text-muted tabular-nums me-2">0{i + 1}</span>
+                    {title}
                   </p>
+                  <p className="text-sm text-muted mt-1 leading-relaxed">{text}</p>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="flex flex-col gap-5">
+          <div className="relative aspect-[3/2] rounded-[20px] overflow-hidden bg-paper">
+            <Image
+              src="/images/focus-ingredients-nobottle.webp"
+              alt={isAr ? "الغوارانا، أوراق التاي و كاشيات OMNIS FOCUS" : "Guarana, feuilles de thé et gélules OMNIS FOCUS"}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <CompositionPanel />
+        </div>
       </div>
     </section>
   );

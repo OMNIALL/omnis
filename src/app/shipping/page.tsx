@@ -28,14 +28,14 @@ export default function ShippingPage() {
 
         {/* Title */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="label-sm px-3.5 py-1.5 rounded-full border-2 border-ink bg-sun text-ink text-xs inline-block mb-3">
-            {isAr ? "توصيل سريع وموثوق 🇹🇳" : "EXPÉDITION EXPRESS 🇹🇳"}
+          <span className="label-sm px-3.5 py-1.5 rounded-full border border-line bg-paper text-ink text-xs inline-block mb-3">
+            {isAr ? "توصيل سريع وموثوق " : "EXPÉDITION EXPRESS "}
           </span>
           <h1
-            className="heading-xl text-3xl sm:text-5xl text-ink uppercase"
+            className="heading-xl text-3xl sm:text-5xl text-ink"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            {isAr ? "التوصيل في تونس" : "LIVRAISON EN TUNISIE"}
+            {isAr ? "التوصيل في تونس" : "Livraison en Tunisie"}
           </h1>
           <p className="text-sm sm:text-base text-ink/70 mt-3 font-sans">
             {isAr
@@ -47,42 +47,42 @@ export default function ShippingPage() {
         {/* 3 Highlights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div
-            className="p-6 rounded-3xl border-3 bg-white"
-            style={{ borderColor: "var(--ink)", boxShadow: "5px 5px 0 var(--ink)" }}
+            className="p-6 rounded-3xl border bg-white"
+            style={{ borderColor: "var(--line)", boxShadow: "var(--shadow-card)" }}
           >
-            <span className="text-3xl mb-2 block">⏱️</span>
-            <h3 className="heading-lg text-base text-ink uppercase mb-1">
-              {isAr ? "المدة : 24 إلى 48 ساعة" : "DÉLAIS : 24 À 48H"}
+            <span className="text-3xl mb-2 block"></span>
+            <h3 className="heading-lg text-base text-ink mb-1">
+              {isAr ? "المدة : 24 إلى 48 ساعة" : "Délais : 24 à 48h"}
             </h3>
             <p className="text-xs text-ink/75 leading-relaxed">
               {isAr
                 ? "تجهيز وشحن الطلبيات يتم خلال 24 ساعة لضمان وصولها السريع."
-                : "Toute commande passée avant 14h est expédiée le jour même."}
+                : "Les commandes sont préparées et expédiées sous 24h."}
             </p>
           </div>
 
           <div
-            className="p-6 rounded-3xl border-3 bg-sun"
-            style={{ borderColor: "var(--ink)", boxShadow: "5px 5px 0 var(--ink)" }}
+            className="p-6 rounded-3xl border bg-paper"
+            style={{ borderColor: "var(--line)", boxShadow: "var(--shadow-card)" }}
           >
-            <span className="text-3xl mb-2 block">💰</span>
-            <h3 className="heading-lg text-base text-ink uppercase mb-1">
-              {isAr ? "معلوم التوصيل : 7 د.ت" : "TARIF FIXE : 7 TND"}
+            <span className="text-3xl mb-2 block"></span>
+            <h3 className="heading-lg text-base text-ink mb-1">
+              {isAr ? "التوصيل : 7 د.ت · مجاني من علبتين" : "LIVRAISON : 7 TND · OFFERTE DÈS 2 FLACONS"}
             </h3>
             <p className="text-xs text-ink/75 leading-relaxed">
               {isAr
-                ? "سعر شحن موحد وثابت مهما كانت ولايتك في تونس."
-                : "Tarif unique pour l'ensemble du territoire tunisien."}
+                ? "نفس السوم لكل الولايات، و مجاني كي تاخو علبتين ولا أكثر."
+                : "Même tarif partout en Tunisie, offert dès 2 flacons."}
             </p>
           </div>
 
           <div
-            className="p-6 rounded-3xl border-3 bg-white"
-            style={{ borderColor: "var(--ink)", boxShadow: "5px 5px 0 var(--ink)" }}
+            className="p-6 rounded-3xl border bg-white"
+            style={{ borderColor: "var(--line)", boxShadow: "var(--shadow-card)" }}
           >
-            <span className="text-3xl mb-2 block">💵</span>
-            <h3 className="heading-lg text-base text-ink uppercase mb-1">
-              {isAr ? "الدفع عند الاستلام" : "PAIEMENT À LA LIVRAISON"}
+            <span className="text-3xl mb-2 block"></span>
+            <h3 className="heading-lg text-base text-ink mb-1">
+              {isAr ? "الدفع عند الاستلام" : "Paiement à la livraison"}
             </h3>
             <p className="text-xs text-ink/75 leading-relaxed">
               {isAr
@@ -94,11 +94,11 @@ export default function ShippingPage() {
 
         {/* Governorates Covered */}
         <div
-          className="p-8 sm:p-10 rounded-3xl border-3 bg-white mb-12"
-          style={{ borderColor: "var(--ink)", boxShadow: "6px 6px 0 var(--ink)" }}
+          className="p-8 sm:p-10 rounded-3xl border bg-white mb-12"
+          style={{ borderColor: "var(--line)", boxShadow: "var(--shadow-card)" }}
         >
           <h2
-            className="heading-lg text-xl text-ink uppercase mb-4"
+            className="heading-lg text-xl text-ink mb-4"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             {isAr ? "الولايات المشمولة بالتوصيل (24 ولاية)" : "GOUVERNORATS COUVERTS (LES 24 RÉGIONS)"}
@@ -122,9 +122,9 @@ export default function ShippingPage() {
         </div>
 
         {/* Live track link */}
-        <div className="text-center p-8 rounded-3xl border-3 bg-sun/40 border-ink">
-          <h3 className="heading-lg text-lg text-ink uppercase mb-2">
-            {isAr ? "هل لديك طلبية جارية بالفعل ؟" : "TU AS DÉJÀ UNE COMMANDE EN COURS ?"}
+        <div className="text-center p-8 rounded-3xl border bg-sun/40 border-ink">
+          <h3 className="heading-lg text-lg text-ink mb-2">
+            {isAr ? "هل لديك طلبية جارية بالفعل ؟" : "Tu as déjà une commande en cours ?"}
           </h3>
           <p className="text-xs text-ink/75 mb-5">
             {isAr

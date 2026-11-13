@@ -12,7 +12,7 @@ export default function AdminOrdersPage() {
   const [statusFilter, setStatusFilter] = useState("Tous");
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
-  const fetchOrders = useCallback(async () => {
+  const fetchOrders = useCallback(async () =>{
     try {
       setLoading(true);
       const res = await fetch(`/api/orders?_t=${Date.now()}`, { cache: "no-store" });
@@ -27,21 +27,21 @@ export default function AdminOrdersPage() {
     }
   }, []);
 
-  useEffect(() => {
+  useEffect(() =>{
     fetchOrders();
-    const interval = setInterval(() => {
+    const interval = setInterval(() =>{
       fetch(`/api/orders?_t=${Date.now()}`, { cache: "no-store" })
         .then((res) => (res.ok ? res.json() : null))
-        .then((data) => {
+        .then((data) =>{
           if (data && Array.isArray(data)) setOrders(data);
         })
-        .catch(() => {});
+        .catch(() =>{});
     }, 3000);
 
     return () => clearInterval(interval);
   }, [fetchOrders]);
 
-  const handleStatusChange = async (id: string, newStatus: Order["status"]) => {
+  const handleStatusChange = async (id: string, newStatus: Order["status"]) =>{
     setUpdatingId(id);
     try {
       const res = await fetch("/api/orders", {
@@ -61,7 +61,7 @@ export default function AdminOrdersPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string) =>{
     if (!confirm(`Supprimer la commande ${id} ?`)) return;
     try {
       const res = await fetch(`/api/orders?id=${id}`, { method: "DELETE" });
@@ -74,7 +74,7 @@ export default function AdminOrdersPage() {
   };
 
   // Filtered orders
-  const filteredOrders = orders.filter((order) => {
+  const filteredOrders = orders.filter((order) =>{
     const matchesSearch =
       order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -110,7 +110,7 @@ export default function AdminOrdersPage() {
         className="w-full px-4 sm:px-8 py-4 border-b-3"
         style={{
           backgroundColor: "white",
-          borderColor: "var(--ink)",
+          borderColor: "var(--line)",
           borderBottom: "3px solid var(--ink)",
         }}
       >
@@ -123,13 +123,13 @@ export default function AdminOrdersPage() {
               className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border-2"
               style={{
                 backgroundColor: "var(--sun)",
-                borderColor: "var(--ink)",
+                borderColor: "var(--line)",
                 color: "var(--ink)",
               }}
             >
               PANNEAU D&apos;ADMINISTRATION
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 border-2 border-ink text-xs font-bold text-emerald-950">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 border border-line text-xs font-bold text-emerald-950">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               Direct / Live Sync
             </span>
@@ -139,9 +139,9 @@ export default function AdminOrdersPage() {
             <button
               onClick={fetchOrders}
               className="px-4 py-2 rounded-full border-2 font-bold text-xs uppercase tracking-wider hover:bg-cream transition-colors"
-              style={{ borderColor: "var(--ink)" }}
+              style={{ borderColor: "var(--line)" }}
             >
-              🔄 Actualiser
+               Actualiser
             </button>
             <Link
               href="/"
@@ -158,26 +158,26 @@ export default function AdminOrdersPage() {
         {/* Title */}
         <div className="mb-8">
           <h1
-            className="heading-xl text-3xl sm:text-4xl text-ink uppercase"
+            className="heading-xl text-3xl sm:text-4xl text-ink"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             COMMANDES CLIENTS ({orders.length})
           </h1>
           <p className="text-sm text-ink/70 mt-1 font-sans">
-            Consultez les coordonnées des acheteurs, les pastilles commandées et gérez les livraisons en Tunisie 🇹🇳.
+            Consultez les coordonnées des acheteurs, les produits commandés et gérez les livraisons en Tunisie .
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
           <div
-            className="p-5 rounded-2xl border-3 bg-white"
+            className="p-5 rounded-2xl border bg-white"
             style={{
-              borderColor: "var(--ink)",
-              boxShadow: "4px 4px 0 var(--ink)",
+              borderColor: "var(--line)",
+              boxShadow: "var(--shadow-card)",
             }}
           >
-            <span className="text-xs font-black uppercase tracking-wider text-ink/50">
+            <span className="text-xs font-black uppercase tracking-wider text-muted">
               CHIFFRE D&apos;AFFAIRES TOTAL
             </span>
             <div className="flex items-baseline gap-1 mt-2">
@@ -189,20 +189,20 @@ export default function AdminOrdersPage() {
               </span>
               <span className="text-sm font-black text-ink">TND</span>
             </div>
-            <span className="text-[0.7rem] text-ink/60 mt-1 block">
+            <span className="text-[0.7rem] text-muted mt-1 block">
               Paiements à l&apos;encaissement
             </span>
           </div>
 
           <div
-            className="p-5 rounded-2xl border-3 bg-white"
+            className="p-5 rounded-2xl border bg-white"
             style={{
-              borderColor: "var(--ink)",
-              boxShadow: "4px 4px 0 var(--ink)",
+              borderColor: "var(--line)",
+              boxShadow: "var(--shadow-card)",
             }}
           >
-            <span className="text-xs font-black uppercase tracking-wider text-ink/50">
-              TOTAL COMMANDES
+            <span className="text-xs font-black uppercase tracking-wider text-muted">
+              Total commandes
             </span>
             <div className="flex items-baseline gap-1 mt-2">
               <span
@@ -212,21 +212,21 @@ export default function AdminOrdersPage() {
                 {orders.length}
               </span>
             </div>
-            <span className="text-[0.7rem] text-ink/60 mt-1 block">
+            <span className="text-[0.7rem] text-muted mt-1 block">
               Toutes régions confondues
             </span>
           </div>
 
           <div
-            className="p-5 rounded-2xl border-3"
+            className="p-5 rounded-2xl border"
             style={{
               backgroundColor: "var(--sun)",
-              borderColor: "var(--ink)",
-              boxShadow: "4px 4px 0 var(--ink)",
+              borderColor: "var(--line)",
+              boxShadow: "var(--shadow-card)",
             }}
           >
             <span className="text-xs font-black uppercase tracking-wider text-ink/70">
-              EN ATTENTE DE LIVRAISON
+              En attente de livraison
             </span>
             <div className="flex items-baseline gap-1 mt-2">
               <span
@@ -242,15 +242,15 @@ export default function AdminOrdersPage() {
           </div>
 
           <div
-            className="p-5 rounded-2xl border-3"
+            className="p-5 rounded-2xl border"
             style={{
               backgroundColor: "#BBF7D0",
-              borderColor: "var(--ink)",
-              boxShadow: "4px 4px 0 var(--ink)",
+              borderColor: "var(--line)",
+              boxShadow: "var(--shadow-card)",
             }}
           >
             <span className="text-xs font-black uppercase tracking-wider text-ink/70">
-              LIVRAISONS EFFECTUÉES
+              Livraisons effectuées
             </span>
             <div className="flex items-baseline gap-1 mt-2">
               <span
@@ -268,10 +268,10 @@ export default function AdminOrdersPage() {
 
         {/* Filters and Search Bar */}
         <div
-          className="p-5 rounded-2xl border-3 bg-white mb-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4"
+          className="p-5 rounded-2xl border bg-white mb-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4"
           style={{
-            borderColor: "var(--ink)",
-            boxShadow: "4px 4px 0 var(--ink)",
+            borderColor: "var(--line)",
+            boxShadow: "var(--shadow-card)",
           }}
         >
           {/* Search Input */}
@@ -281,7 +281,7 @@ export default function AdminOrdersPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Rechercher par nom, téléphone, ville, n° commande..."
-              className="w-full px-4 py-2.5 rounded-xl border-2 border-ink text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
+              className="w-full px-4 py-2.5 rounded-xl border border-line text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
             />
           </div>
 
@@ -308,28 +308,28 @@ export default function AdminOrdersPage() {
         {/* Orders Table / Cards */}
         {loading ? (
           <div className="py-20 text-center">
-            <div className="w-12 h-12 rounded-full border-3 border-ink bg-sun mx-auto animate-spin mb-4" />
+            <div className="w-12 h-12 rounded-full border border-ink bg-sun mx-auto animate-spin mb-4" />
             <p className="font-bold text-sm text-ink/70">Chargement des commandes...</p>
           </div>
         ) : filteredOrders.length === 0 ? (
           <div
-            className="p-12 rounded-3xl border-3 bg-white text-center"
+            className="p-12 rounded-3xl border bg-white text-center"
             style={{
-              borderColor: "var(--ink)",
-              boxShadow: "6px 6px 0 var(--ink)",
+              borderColor: "var(--line)",
+              boxShadow: "var(--shadow-card)",
             }}
           >
-            <p className="text-4xl mb-3">📦</p>
-            <h3 className="heading-lg text-lg text-ink uppercase mb-2">
-              AUCUNE COMMANDE TROUVÉE
+            <p className="text-4xl mb-3"></p>
+            <h3 className="heading-lg text-lg text-ink mb-2">
+              Aucune commande trouvée
             </h3>
-            <p className="text-xs text-ink/60">
+            <p className="text-xs text-muted">
               Aucune commande ne correspond aux filtres actuels.
             </p>
           </div>
         ) : (
           <div className="space-y-5">
-            {filteredOrders.map((order) => {
+            {filteredOrders.map((order) =>{
               const currentStatusStyle = statusStyles[order.status] || {
                 bg: "var(--cream)",
                 text: "var(--ink)",
@@ -342,17 +342,17 @@ export default function AdminOrdersPage() {
               return (
                 <div
                   key={order.id}
-                  className="p-6 rounded-3xl border-3 bg-white flex flex-col gap-5 transition-all"
+                  className="p-6 rounded-3xl border bg-white flex flex-col gap-5 transition-all"
                   style={{
-                    borderColor: "var(--ink)",
-                    boxShadow: "5px 5px 0 var(--ink)",
+                    borderColor: "var(--line)",
+                    boxShadow: "var(--shadow-card)",
                   }}
                 >
                   {/* Top Bar: Order ID, Date, Status */}
                   <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b-2 border-ink/15">
                     <div className="flex items-center gap-3">
                       <span
-                        className="px-3 py-1 rounded-xl font-mono font-black text-sm border-2 border-ink bg-cream text-ink"
+                        className="px-3 py-1 rounded-xl font-mono font-black text-sm border border-line bg-cream text-ink"
                       >
                         {order.id}
                       </span>
@@ -364,7 +364,7 @@ export default function AdminOrdersPage() {
                       >
                         Suivi client ↗
                       </Link>
-                      <span className="text-xs text-ink/60 font-medium">
+                      <span className="text-xs text-muted font-medium">
                         {new Date(order.createdAt).toLocaleDateString("fr-TN", {
                           day: "2-digit",
                           month: "short",
@@ -377,7 +377,7 @@ export default function AdminOrdersPage() {
 
                     {/* Status Dropdown */}
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-black uppercase tracking-wider text-ink/60">
+                      <span className="text-xs font-black uppercase tracking-wider text-muted">
                         Statut :
                       </span>
                       <select
@@ -396,16 +396,16 @@ export default function AdminOrdersPage() {
                           borderColor: currentStatusStyle.border,
                         }}
                       >
-                        <option value="Nouveau">🟡 Nouveau</option>
-                        <option value="En préparation">⚪ En préparation</option>
-                        <option value="Expédié">🔵 Expédié</option>
-                        <option value="Livré">🟢 Livré</option>
-                        <option value="Annulé">🔴 Annulé</option>
+                        <option value="Nouveau"> Nouveau</option>
+                        <option value="En préparation"> En préparation</option>
+                        <option value="Expédié"> Expédié</option>
+                        <option value="Livré"> Livré</option>
+                        <option value="Annulé"> Annulé</option>
                       </select>
 
                       <button
                         onClick={() => handleDelete(order.id)}
-                        className="p-1.5 text-ink/40 hover:text-harissa transition-colors ml-2"
+                        className="p-1.5 text-muted hover:text-harissa transition-colors ml-2"
                         title="Supprimer la commande"
                       >
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -420,7 +420,7 @@ export default function AdminOrdersPage() {
                     {/* Client Info (7 cols) */}
                     <div className="md:col-span-7 space-y-3">
                       <div>
-                        <span className="text-[0.65rem] font-black uppercase tracking-wider text-ink/50 block">
+                        <span className="text-[0.65rem] font-black uppercase tracking-wider text-muted block">
                           CLIENT / DESTINATAIRE
                         </span>
                         <p className="font-black text-base text-ink">
@@ -432,40 +432,40 @@ export default function AdminOrdersPage() {
                       <div className="flex flex-wrap items-center gap-3">
                         <a
                           href={`tel:${order.phone}`}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border-2 border-ink text-xs font-bold bg-sun/40 hover:bg-sun text-ink transition-colors"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-line text-xs font-bold bg-sun/40 hover:bg-sun text-ink transition-colors"
                         >
-                          📞 {order.phone}
+                           {order.phone}
                         </a>
                         <a
                           href={whatsappUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border-2 border-ink text-xs font-bold bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition-colors"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-line text-xs font-bold bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition-colors"
                         >
-                          💬 Contacter sur WhatsApp
+                           Contacter sur WhatsApp
                         </a>
                       </div>
 
                       {/* Address */}
                       <div className="p-3 rounded-2xl border border-ink/20 bg-cream/40 text-xs space-y-1">
                         <p className="font-bold text-ink">
-                          📍 {order.address}
+                           {order.address}
                         </p>
                         <p className="text-ink/75">
                           {order.city}, <strong>Gouvernorat de {order.governorate}</strong> (Tunisie)
                         </p>
                         {order.notes && (
                           <p className="text-harissa font-medium italic pt-1 border-t border-ink/10">
-                            📝 Note client : &ldquo;{order.notes}&rdquo;
+                             Note client : &ldquo;{order.notes}&rdquo;
                           </p>
                         )}
                       </div>
                     </div>
 
                     {/* Order Items & Total (5 cols) */}
-                    <div className="md:col-span-5 p-4 rounded-2xl border-2 border-ink bg-cream/30 space-y-3">
-                      <span className="text-[0.65rem] font-black uppercase tracking-wider text-ink/50 block">
-                        ARTICLES COMMANDÉS
+                    <div className="md:col-span-5 p-4 rounded-2xl border border-line bg-cream/30 space-y-3">
+                      <span className="text-[0.65rem] font-black uppercase tracking-wider text-muted block">
+                        Articles commandés
                       </span>
 
                       <div className="space-y-2">
@@ -484,7 +484,7 @@ export default function AdminOrdersPage() {
                               <span className="font-black text-ink">
                                 {item.name}
                               </span>
-                              <span className="text-ink/60">
+                              <span className="text-muted">
                                 × {item.quantity}
                               </span>
                             </div>
@@ -501,12 +501,12 @@ export default function AdminOrdersPage() {
                           <span>{order.shippingFee} TND</span>
                         </div>
                         <div className="flex justify-between font-black text-sm text-ink pt-1 border-t border-ink/10">
-                          <span>TOTAL À ENCAISSER :</span>
+                          <span>Total à encaisser :</span>
                           <span className="text-harissa text-base">
                             {order.total} TND
                           </span>
                         </div>
-                        <span className="text-[0.65rem] font-bold text-ink/60 block pt-1">
+                        <span className="text-[0.65rem] font-bold text-muted block pt-1">
                           Mode : {order.paymentMethod}
                         </span>
                       </div>
