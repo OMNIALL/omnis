@@ -4,7 +4,7 @@ import Image from "next/image";
  * Product visual: the FOCUS pack shot (white background, blended into the cream UI with multiply).
  * Set FOCUS_BOTTLE_IMAGE to null to fall back to the vector illustration below.
  */
-export const FOCUS_BOTTLE_IMAGE: string | null = "/images/focus-bottle.webp"; // 1254×1254, cream background
+export const FOCUS_BOTTLE_IMAGE: string | null = "/images/focus-bottle-front.webp"; // 1254×1254, cream background
 
 interface Props {
   className?: string;

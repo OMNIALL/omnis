@@ -8,7 +8,7 @@ import Image from "next/image";
 import { orderHref } from "@/config/site";
 
 const PACK_IMAGES: Record<1 | 2 | 3, string> = {
-  1: "/images/focus-bottle.webp",
+  1: "/images/focus-bottle-front.webp",
   2: "/images/bundle-2.webp",
   3: "/images/bundle-3.webp",
 };

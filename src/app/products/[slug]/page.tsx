@@ -55,7 +55,7 @@ function ProductJsonLd({ slug }: { slug: string }) {
     name: "OMNIS FOCUS",
     description:
       "Complément alimentaire : 100 mg de caféine naturelle de guarana, 180 mg de L-théanine, vitamines B6 et B12. 30 gélules végétales fabriquées en Tunisie.",
-    image: [`${base}/images/focus-bottle.webp`, `${base}/images/og.jpg`],
+    image: [`${base}/images/focus-bottle-front.webp`, `${base}/images/og.jpg`],
     brand: { "@type": "Brand", name: "OMNIS" },
     sku: product.id,
     offers: {

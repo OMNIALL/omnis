@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 const SHOTS = [
-  { src: "/images/focus-bottle.webp", w: 1254, h: 1254, alt: "OMNIS FOCUS — flacon de 30 gélules végétales" },
+  { src: "/images/focus-bottle-front.webp", w: 1254, h: 1254, alt: "OMNIS FOCUS — flacon de 30 gélules végétales" },
   { src: "/images/hand-bottle.webp", w: 1254, h: 1254, alt: "OMNIS FOCUS — flacon en main" },
   { src: "/images/focus-label.webp", w: 1224, h: 1285, alt: "Étiquette OMNIS FOCUS : composition, mode d'emploi, informations nutritionnelles", contain: true },
   { src: "/images/focus-ingredients.webp", w: 1254, h: 1254, alt: "Guarana, feuilles de thé, gélules et flacon OMNIS FOCUS" },
