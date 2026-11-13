@@ -57,18 +57,18 @@ export default function BrandStory() {
           <div className="space-y-4 text-lg leading-relaxed text-muted">
             {isAr ? (
               <>
-                <p>عملنا OMNIS على خاطر المكمّلات اللي نلقاوها في تونس يا مستوردة و غالية، يا مكتوب عليها برشا و ما تفهم فيها شي.</p>
+                <p>في تونس، المكمّلات يا مستوردة و غالية، يا مكتوب عليها برشا و ما تفهم فيها شي. من حقّك تعرف شنوّة تاخو.</p>
                 <p>حبّينا حاجة بسيطة: تركيبة واضحة، جرعات مكتوبة بالملغ، مصنوعة في مخبر تونسي، و توصلك لدارك.</p>
               </>
             ) : (
               <>
                 <p>
-                  Nous avons créé OMNIS parce que les compléments disponibles en Tunisie étaient soit importés et chers,
-                  soit difficiles à comprendre.
+                  En Tunisie, les compléments sont souvent importés, chers, et impossibles à déchiffrer.
+                  Tu mérites de savoir exactement ce que tu prends.
                 </p>
                 <p>
-                  Notre approche est simple : une formule courte, des doses affichées en mg, une fabrication par un
-                  laboratoire tunisien, et une livraison jusqu&apos;à ta porte.
+                  OMNIS, c&apos;est une formule courte, des doses affichées en mg, une fabrication par un
+                  laboratoire tunisien, et une livraison jusqu&apos;à ta porte, payée à la réception.
                 </p>
               </>
             )}

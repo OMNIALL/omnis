@@ -1,13 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Package, Smartphone, Truck } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { ORDER_HREF } from "@/config/site";
 import { DELIVERY_TIME } from "@/lib/pricing";
+import Section from "@/components/ui/Section";
+import Button from "@/components/ui/Button";
 
-/** How it works — 3 simple steps so ordering feels easy and risk-free. */
+/** How it works — 3 simple steps so ordering feels easy and risk-free. (Reference usage of the UI primitives.) */
 export default function HowItWorks() {
   const { language } = useLanguage();
   const isAr = language === "ar";
@@ -25,41 +26,35 @@ export default function HowItWorks() {
       ];
 
   return (
-    <section id="comment-ca-marche" className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-      <div className="max-w-7xl mx-auto">
-        <div className="max-w-2xl mb-10">
-          <p className="eyebrow mb-3">{isAr ? "كيفاش تكوموندي" : "Comment ça marche"}</p>
-          <h2 className="heading-xl text-3xl sm:text-5xl text-ink">
-            {isAr ? "ثلاثة خطوات. بلاش مخاطرة." : "Trois étapes. Zéro risque."}
-          </h2>
-        </div>
-        <ol className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {steps.map(({ Icon, title, text }, i) => (
-            <motion.li
-              key={title}
-              className="border-t border-ink pt-5"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-9 h-9 rounded-full bg-ink text-cream flex items-center justify-center font-semibold tabular-nums">
-                  {i + 1}
-                </span>
-                <Icon className="w-5 h-5 text-harissa" strokeWidth={1.75} />
-              </div>
-              <p className="heading-lg text-xl text-ink mb-1.5">{title}</p>
-              <p className="text-muted">{text}</p>
-            </motion.li>
-          ))}
-        </ol>
-        <div className="mt-10">
-          <Link href={ORDER_HREF} className="btn-sticker btn-primary">
-            {isAr ? "نبدا: نختار الپاك" : "Je choisis mon pack"}
-          </Link>
-        </div>
+    <Section
+      id="comment-ca-marche"
+      eyebrow={isAr ? "كيفاش تكوموندي" : "Comment ça marche"}
+      title={isAr ? "ثلاثة خطوات. بلاش مخاطرة." : "Trois étapes. Zéro risque."}
+    >
+      <ol className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {steps.map(({ Icon, title, text }, i) => (
+          <motion.li
+            key={title}
+            className="border-t border-ink pt-5"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08 }}
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-9 h-9 rounded-full bg-ink text-cream flex items-center justify-center font-semibold tabular-nums">
+                {i + 1}
+              </span>
+              <Icon className="w-5 h-5 text-harissa" strokeWidth={1.75} />
+            </div>
+            <p className="heading-lg text-xl text-ink mb-1.5">{title}</p>
+            <p className="text-muted">{text}</p>
+          </motion.li>
+        ))}
+      </ol>
+      <div className="mt-10">
+        <Button href={ORDER_HREF}>{isAr ? "نبدا: نختار الپاك" : "Je choisis mon pack"}</Button>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -161,7 +161,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           { Icon: Dumbbell, title: "Sport", text: "De l'énergie avant la séance, la tête claire pendant l'effort." },
         ],
         faqTitle: "Questions fréquentes",
-        sticky: "Commander",
+        sticky: "Je commande",
       };
 
   const productFaqs = isAr
