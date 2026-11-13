@@ -45,7 +45,7 @@ function toPublicOrder(o: Order) {
 const str = (v: unknown, max = 300) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 const storageError = (err: unknown) => {
   console.error("[orders] storage error:", err);
-  return NextResponse.json({ success: false, error: "Stockage indisponible" }, { status: 503 });
+  return NextResponse.json({ success: false, error: "Stockage indisponible", codes: ["storage"] }, { status: 503 });
 };
 
 // GET ?id=<order id or phone> is public (tracking page, returns a masked order).
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ success: false, error: "Requête invalide" }, { status: 400 });
+    return NextResponse.json({ success: false, error: "Requête invalide", codes: ["invalid"] }, { status: 400 });
   }
 
   const fullName = str(body.fullName, 100);
@@ -84,11 +84,12 @@ export async function POST(req: Request) {
   const address = str(body.address, 300);
   const notes = str(body.notes, 500);
 
-  const errors: string[] = [];
-  if (fullName.length < 3) errors.push("Nom invalide");
-  if (!phone) errors.push("Numéro de téléphone tunisien invalide (8 chiffres)");
-  if (!governorate) errors.push("Gouvernorat manquant");
-  if (address.length < 5) errors.push("Adresse incomplète");
+  // `codes` lets the client show the message in the customer's language; `error` stays FR for logs/admin.
+  const errors: { code: string; fr: string }[] = [];
+  if (fullName.length < 3) errors.push({ code: "name", fr: "Nom invalide" });
+  if (!phone) errors.push({ code: "phone", fr: "Numéro de téléphone tunisien invalide (8 chiffres)" });
+  if (!governorate) errors.push({ code: "governorate", fr: "Gouvernorat manquant" });
+  if (address.length < 5) errors.push({ code: "address", fr: "Adresse incomplète" });
 
   // Prices always come from the catalog, never from the client.
   const items: OrderItem[] = [];
@@ -99,10 +100,13 @@ export async function POST(req: Request) {
     if (!product || !(quantity >= 1 && quantity <= MAX_QTY_PER_ITEM)) continue;
     items.push({ id: product.id, name: product.name, price: product.price, quantity, color: product.color });
   }
-  if (items.length === 0) errors.push("Panier vide");
+  if (items.length === 0) errors.push({ code: "cart", fr: "Panier vide" });
 
   if (errors.length) {
-    return NextResponse.json({ success: false, error: errors.join(" · ") }, { status: 400 });
+    return NextResponse.json(
+      { success: false, error: errors.map((e) => e.fr).join(" · "), codes: errors.map((e) => e.code) },
+      { status: 400 }
+    );
   }
 
   // Anti-spam (fake COD orders cost delivery fees).
@@ -125,7 +129,7 @@ export async function POST(req: Request) {
       rate_ip: "Trop de commandes depuis cette connexion. Écris-nous sur WhatsApp.",
       rate_phone: "Tu as déjà commandé plusieurs fois aujourd'hui avec ce numéro. Écris-nous sur WhatsApp pour une nouvelle commande.",
     };
-    return NextResponse.json({ success: false, error: msg[spam.reason] }, { status: spam.reason === "bad_name" || spam.reason === "too_fast" ? 400 : 429 });
+    return NextResponse.json({ success: false, error: msg[spam.reason], codes: [spam.reason] }, { status: spam.reason === "bad_name" || spam.reason === "too_fast" ? 400 : 429 });
   }
 
   const priced = quote(items);
@@ -166,10 +170,10 @@ export async function POST(req: Request) {
     } catch (err) {
       if (err instanceof DuplicateOrderIdError) continue; // extremely rare — pick a new id
       console.error("[orders] failed to save order:", err);
-      return NextResponse.json({ success: false, error: "Enregistrement impossible" }, { status: 500 });
+      return NextResponse.json({ success: false, error: "Enregistrement impossible", codes: ["storage"] }, { status: 500 });
     }
   }
-  return NextResponse.json({ success: false, error: "Enregistrement impossible" }, { status: 500 });
+  return NextResponse.json({ success: false, error: "Enregistrement impossible", codes: ["storage"] }, { status: 500 });
 }
 
 export async function PATCH(req: Request) {
