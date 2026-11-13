@@ -4,7 +4,7 @@ import Image from "next/image";
  * Product visual: the FOCUS pack shot (white background, blended into the cream UI with multiply).
  * Set FOCUS_BOTTLE_IMAGE to null to fall back to the vector illustration below.
  */
-export const FOCUS_BOTTLE_IMAGE: string | null = "/images/focus-bottle.webp"; // 1458×1800
+export const FOCUS_BOTTLE_IMAGE: string | null = "/images/focus-bottle.webp"; // 1254×1254, cream background
 
 interface Props {
   className?: string;
@@ -29,8 +29,8 @@ export default function BottleVisual({
       <Image
         src={src}
         alt={`OMNIS ${name} — flacon de 30 gélules végétales`}
-        width={1458}
-        height={1800}
+        width={1254}
+        height={1254}
         priority={priority}
         sizes="(max-width: 640px) 60vw, 360px"
         className={`${className} h-auto mix-blend-multiply select-none`}

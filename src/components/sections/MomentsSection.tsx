@@ -25,7 +25,7 @@ const MOMENTS: Moment[] = [
   {
     id: "deep-work",
     Icon: Laptop,
-    image: null,
+    image: "/images/moments/deep-work.webp",
     title: { fr: "Deep work", ar: "الخدمة" },
     text: {
       fr: "Une journée chargée ? Une gélule le matin pour rester sur l'essentiel, sans le café de trop.",
@@ -35,7 +35,7 @@ const MOMENTS: Moment[] = [
   {
     id: "sport",
     Icon: Dumbbell,
-    image: null,
+    image: "/images/moments/sport.webp",
     title: { fr: "Salle de sport", ar: "السبور" },
     text: {
       fr: "30 min avant ta séance : l'énergie d'un café, sans te sentir à cran.",
@@ -45,7 +45,7 @@ const MOMENTS: Moment[] = [
   {
     id: "revisions",
     Icon: BookOpen,
-    image: null,
+    image: "/images/moments/revisions.webp",
     title: { fr: "Révisions", ar: "المراجعة" },
     text: {
       fr: "Reste dans tes fiches, sans le coup de barre de 14h.",
@@ -55,7 +55,7 @@ const MOMENTS: Moment[] = [
   {
     id: "gaming",
     Icon: Gamepad2,
-    image: null,
+    image: "/images/moments/gaming.webp",
     title: { fr: "Gaming", ar: "القايمينغ" },
     text: {
       fr: "Les longues sessions : reste dans la partie sans enchaîner les canettes.",
