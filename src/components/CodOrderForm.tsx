@@ -181,7 +181,7 @@ export default function CodOrderForm({ items, total, onSuccess, showNotes = fals
       >
         {submitting
           ? isAr ? "جاري التسجيل…" : "Envoi en cours…"
-          : isAr ? `كوموندي · ${total} DT` : `Commander · ${total} DT`}
+          : isAr ? `كوموندي · ${total} DT` : `Je commande · ${total} DT`}
       </button>
       <p className="text-center text-sm text-muted -mt-1">
         {isAr ? "تخلّص كي توصلك · ما تخلّص حتى شي توّا" : "Tu paies à la livraison · rien à payer maintenant"}

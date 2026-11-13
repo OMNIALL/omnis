@@ -3,7 +3,7 @@ import MerciClient from "./MerciClient";
 
 // Thank-you page: clean conversion URL for ad platforms; never indexed.
 export const metadata: Metadata = {
-  title: "Merci — OMNIS FOCUS",
+  title: "Merci",
   robots: { index: false, follow: false },
 };
 
