@@ -27,7 +27,7 @@ export interface Translations {
   // Products
   productRangeTitle: string;
   productRangeSubtitle: string;
-  pastilles: string;
+  capsules: string;
   addToCart: string;
   comingSoon: string;
   viewProduct: string;
@@ -68,7 +68,7 @@ export interface Translations {
 
 export const translations: Record<Language, Translations> = {
   fr: {
-    announcement: "Livraison partout en Tunisie · Fabriqué en Tunisie 🇹🇳 · Paiement à la livraison",
+    announcement: "Livraison partout en Tunisie · Fabriqué en Tunisie  · Paiement à la livraison",
     navProducts: "Produits",
     navIngredients: "Ingrédients",
     navStory: "Notre histoire",
@@ -77,51 +77,51 @@ export const translations: Record<Language, Translations> = {
     navContact: "Contact",
     cart: "Panier",
 
-    heroTagline: "30 PASTILLES · + VITAMINES B6 ET B12 · FABRIQUÉ EN TUNISIE",
-    heroHeadline1: "ALLUME TON",
-    heroHeadlineHighlight: "FOCUS.",
-    heroSubtitle: "Des pastilles qui boostent ta concentration, sans le crash.",
+    heroTagline: "30 GÉLULES · + VITAMINES B6 ET B12 · FABRIQUÉ EN TUNISIE",
+    heroHeadline1: "Allume ton",
+    heroHeadlineHighlight: "focus.",
+    heroSubtitle: "Des gélules qui boostent ta concentration, sans le crash.",
     btnOrder: "Commander",
     btnDiscover: "Découvrir",
-    heroCaption: "30 PASTILLES · + VITAMINES B6 ET B12 · FABRIQUÉ EN TUNISIE",
+    heroCaption: "30 GÉLULES · + VITAMINES B6 ET B12 · FABRIQUÉ EN TUNISIE",
 
-    productRangeTitle: "LA GAMME OMNIS",
-    productRangeSubtitle: "Tout ce qu'il te faut, dans une seule pastille.",
-    pastilles: "PASTILLES",
+    productRangeTitle: "La gamme OMNIS",
+    productRangeSubtitle: "Tout ce qu'il te faut, dans une seule gélule.",
+    capsules: "GÉLULES",
     addToCart: "Ajouter au panier",
     comingSoon: "BIENTÔT",
     viewProduct: "Voir le produit",
 
-    whyTitle: "TOUT-EN-UN. ZÉRO BLABLA.",
+    whyTitle: "Une formule simple. Des doses claires.",
     whySubtitle: "Pourquoi choisir OMNIS au quotidien",
 
-    storyTitle: "NOTRE HISTOIRE",
+    storyTitle: "Notre histoire",
     storyP1: "OMNI = tout. S = supplément.",
-    storyP2: "Tout ce qu'il te faut, dans une seule pastille.",
+    storyP2: "Tout ce qu'il te faut, dans une seule gélule.",
     storyP3: "On a créé OMNIS pour offrir des compléments sains, efficaces et fabriqués fièrement en Tunisie.",
 
-    testimonialsTitle: "ILS EN PARLENT",
-    ratingScore: "4.9 / 5 avis vérifiés",
-    communityTitle: "#OMNISSQUAD SUR INSTAGRAM",
+    testimonialsTitle: "Ils en parlent",
+    ratingScore: "Fabriqué en Tunisie · Paiement à la livraison",
+    communityTitle: "#OMNISSQUAD sur Instagram",
 
-    faqTitle: "QUESTIONS FRÉQUENTES",
+    faqTitle: "Questions fréquentes",
 
-    newsletterTitle: "REJOINS LE CLUB OMNIS",
+    newsletterTitle: "Rejoins le club OMNIS",
     newsletterSubtitle: "Sois le premier au courant des nouveaux produits, offres et surprises.",
     newsletterPlaceholder: "ton@email.com",
-    newsletterBtn: "S'INSCRIRE",
-    newsletterSuccess: "✓ Bienvenue dans le club !",
+    newsletterBtn: "S'inscrire",
+    newsletterSuccess: " Bienvenue dans le club !",
 
     deliveryTunisia: "Livraison 24-48h partout en Tunisie",
     codBadge: "Paiement à la livraison",
-    madeInTunisia: "100% Fabriqué en Tunisie 🇹🇳",
+    madeInTunisia: "100% Fabriqué en Tunisie ",
     backToHome: "Retour à l'accueil",
     totalTND: "Total en Dinars Tunisiens (TND)",
     checkout: "Passer commande",
   },
 
   ar: {
-    announcement: "توصيل لكامل تراب الجمهورية التونسية · صنع في تونس 🇹🇳 · الدفع عند الاستلام",
+    announcement: "توصيل لكامل تراب الجمهورية التونسية · صنع في تونس  · الدفع عند الاستلام",
     navProducts: "المنتجات",
     navIngredients: "المكونات",
     navStory: "قصتنا",
@@ -130,17 +130,17 @@ export const translations: Record<Language, Translations> = {
     navContact: "اتصل بنا",
     cart: "السلة",
 
-    heroTagline: "30 قرص مضغ · مع فيتامينات B6 و B12 · صنع في تونس",
+    heroTagline: "30 كبسولة نباتية · مع فيتامينات B6 و B12 · صنع في تونس",
     heroHeadline1: "شَعّل",
     heroHeadlineHighlight: "تركيزك.",
-    heroSubtitle: "حلوى منشطة ترفع تركيزك الذهني بدون هبوط أو توتر.",
+    heroSubtitle: "كبسولة طبيعية ترفع تركيزك الذهني بدون هبوط أو توتر.",
     btnOrder: "اطلب الآن",
     btnDiscover: "اكتشف المزيد",
-    heroCaption: "30 قرص · مع فيتامينات B6 و B12 · صنع في تونس",
+    heroCaption: "30 كبسولة · مع فيتامينات B6 و B12 · صنع في تونس",
 
     productRangeTitle: "مجموعة أومنيس",
-    productRangeSubtitle: "كل ما تحتاجه في قرص واحد.",
-    pastilles: "أقراص",
+    productRangeSubtitle: "كل ما تحتاجه في كبسولة واحدة.",
+    capsules: "كبسولات",
     addToCart: "أضف إلى السلة",
     comingSoon: "قريباً",
     viewProduct: "تفاصيل المنتج",
@@ -150,11 +150,11 @@ export const translations: Record<Language, Translations> = {
 
     storyTitle: "قصة أومنيس",
     storyP1: "أومني = الكل. إس = مكمل غذائي.",
-    storyP2: "كل ما تحتاجه لصحتك في قرص واحد لذيذ.",
-    storyP3: "ابتكرنا أومنيس في تونس لنقدم مكملات عصرية، لذيذة وفعالة بأعلى معايير الجودة.",
+    storyP2: "كل ما تحتاجه لصحتك في كبسولة واحدة.",
+    storyP3: "ابتكرنا أومنيس في تونس لنقدم مكملات عصرية، نظيفة وفعالة بأعلى معايير الجودة.",
 
     testimonialsTitle: "آراء عملائنا",
-    ratingScore: "4.9 / 5 تقييم ممتاز",
+    ratingScore: "مصنوع في تونس · تخلّص كي توصلك",
     communityTitle: "مجتمع #OMNISSQUAD على إنستغرام",
 
     faqTitle: "الأسئلة المتكررة",
@@ -163,11 +163,11 @@ export const translations: Record<Language, Translations> = {
     newsletterSubtitle: "كن أول من يعلم بإطلاق المنتجات الجديدة والعروض الحصرية.",
     newsletterPlaceholder: "بريدك الإلكتروني",
     newsletterBtn: "اشتراك",
-    newsletterSuccess: "✓ مرحباً بك في النادي !",
+    newsletterSuccess: " مرحباً بك في النادي !",
 
     deliveryTunisia: "توصيل سريع 24-48 ساعة في كل تونس",
     codBadge: "الدفع نقداً عند الاستلام",
-    madeInTunisia: "صنع 100% في تونس 🇹🇳",
+    madeInTunisia: "صنع 100% في تونس ",
     backToHome: "العودة للرئيسية",
     totalTND: "المجموع بالدينار التونسي (د.ت)",
     checkout: "تأكيد الطلب",
@@ -186,7 +186,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("fr");
 
-  useEffect(() => {
+  useEffect(() =>{
     try {
       const saved = localStorage.getItem("omnis_lang") as Language | null;
       if (saved && (saved === "fr" || saved === "ar")) {
@@ -197,7 +197,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = (lang: Language) =>{
     setLanguageState(lang);
     try {
       localStorage.setItem("omnis_lang", lang);

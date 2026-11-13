@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import StickerCircle from "@/components/StickerCircle";
 import { useLanguage } from "@/context/LanguageContext";
 
+import { CONTACT_EMAIL, PHONE_DISPLAY, phoneLink, whatsappLink } from "@/config/site";
 export default function ContactPage() {
   const { language } = useLanguage();
   const isAr = language === "ar";
@@ -24,10 +25,10 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) =>{
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setTimeout(() =>{
       setLoading(false);
       setSubmitted(true);
       setFormData({ name: "", email: "", phone: "", subject: "Question produit", message: "" });
@@ -51,14 +52,14 @@ export default function ContactPage() {
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="label-sm px-3.5 py-1.5 rounded-full border-2 border-ink bg-sun text-ink text-xs inline-block mb-3">
-            {isAr ? "نحن في الاستماع دائماً 🇹🇳" : "À TON ÉCOUTE 🇹🇳"}
+          <span className="label-sm px-3.5 py-1.5 rounded-full border border-line bg-paper text-ink text-xs inline-block mb-3">
+            {isAr ? "نحن في الاستماع دائماً " : "À TON ÉCOUTE "}
           </span>
           <h1
-            className="heading-xl text-3xl sm:text-5xl text-ink uppercase"
+            className="heading-xl text-3xl sm:text-5xl text-ink"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            {isAr ? "تواصل مع فريق أومنيس" : "CONTACTE L'ÉQUIPE OMNIS"}
+            {isAr ? "تواصل مع فريق أومنيس" : "Contacte l'équipe OMNIS"}
           </h1>
           <p className="text-sm sm:text-base text-ink/70 mt-3 font-sans">
             {isAr
@@ -70,30 +71,30 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left: Contact Form (7 cols) */}
           <div
-            className="lg:col-span-7 p-6 sm:p-10 rounded-3xl border-3 bg-white"
+            className="lg:col-span-7 p-6 sm:p-10 rounded-3xl border bg-white"
             style={{
-              borderColor: "var(--ink)",
-              boxShadow: "8px 8px 0 var(--ink)",
+              borderColor: "var(--line)",
+              boxShadow: "var(--shadow-card)",
             }}
           >
             <h2
-              className="heading-lg text-xl text-ink uppercase mb-6"
+              className="heading-lg text-xl text-ink mb-6"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {isAr ? "أرسل لنا رسالة" : "ENVOIE-NOUS UN MESSAGE"}
+              {isAr ? "أرسل لنا رسالة" : "Envoie-nous un message"}
             </h2>
 
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="p-8 rounded-2xl border-2 border-ink bg-sun/30 text-center space-y-4"
+                className="p-8 rounded-2xl border border-line bg-sun/30 text-center space-y-4"
               >
                 <StickerCircle size={80} color="var(--sun)" shadow={true} innerRing={true} className="mx-auto">
-                  <span className="text-3xl">✓</span>
+                  <span className="text-3xl"></span>
                 </StickerCircle>
-                <h3 className="heading-lg text-xl text-ink uppercase">
-                  {isAr ? "تم إرسال رسالتك بنجاح !" : "MESSAGE BIEN REÇU !"}
+                <h3 className="heading-lg text-xl text-ink">
+                  {isAr ? "تم إرسال رسالتك بنجاح !" : "Message bien reçu !"}
                 </h3>
                 <p className="text-sm text-ink/80 max-w-md mx-auto">
                   {isAr
@@ -121,7 +122,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={isAr ? "مثال: أمين بن سالم" : "Ex: Amina Ben Salem"}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-ink text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-line text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
                     />
                   </div>
 
@@ -135,7 +136,7 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="Ex: 98 123 456"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-ink text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-line text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
                     />
                   </div>
                 </div>
@@ -151,7 +152,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="ton@email.com"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-ink text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-line text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium"
                     />
                   </div>
 
@@ -162,7 +163,7 @@ export default function ContactPage() {
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-ink text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-bold cursor-pointer"
+                      className="w-full px-4 py-3 rounded-xl border border-line text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-bold cursor-pointer"
                     >
                       <option value="Question produit">{isAr ? "سؤال حول المنتج FOCUS" : "Question sur le produit FOCUS"}</option>
                       <option value="Suivi commande">{isAr ? "تتبع طلبيتي الحالية" : "Suivi de ma commande"}</option>
@@ -186,7 +187,7 @@ export default function ContactPage() {
                         ? "اكتب استفسارك هنا بكل وضوح..."
                         : "Comment pouvons-nous t'aider aujourd'hui ?"
                     }
-                    className="w-full px-4 py-3 rounded-xl border-2 border-ink text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-line text-sm bg-cream/40 focus:outline-none focus:ring-2 focus:ring-harissa font-medium resize-none"
                   />
                 </div>
 
@@ -207,19 +208,19 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-5">
             {/* WhatsApp Card */}
             <div
-              className="p-6 rounded-3xl border-3 bg-[#E7F8EE]"
+              className="p-6 rounded-3xl border bg-[#E7F8EE]"
               style={{
-                borderColor: "var(--ink)",
-                boxShadow: "6px 6px 0 var(--ink)",
+                borderColor: "var(--line)",
+                boxShadow: "var(--shadow-card)",
               }}
             >
               <div className="flex items-center gap-3 mb-3">
-                <span className="w-10 h-10 rounded-full bg-emerald-500 border-2 border-ink flex items-center justify-center text-xl text-white">
-                  💬
+                <span className="w-10 h-10 rounded-full bg-emerald-500 border border-line flex items-center justify-center text-xl text-white">
+                  
                 </span>
                 <div>
                   <h3 className="font-black text-sm uppercase text-ink">
-                    WHATSAPP SUPPORT
+                    WhatsApp support
                   </h3>
                   <p className="text-xs text-ink/70">
                     {isAr ? "رد فوري عبر واتساب" : "Réponse immédiate en direct"}
@@ -232,71 +233,71 @@ export default function ContactPage() {
                   : "Besoin d'une réponse rapide ? Écris-nous directement sur WhatsApp pour toute question commande ou livraison."}
               </p>
               <a
-                href="https://wa.me/21698456789"
+                href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-sticker w-full py-2.5 text-xs font-bold text-center justify-center bg-emerald-500 text-white border-2 border-ink hover:bg-emerald-600 block"
+                className="btn-sticker w-full py-2.5 text-xs font-bold text-center justify-center bg-emerald-500 text-white border border-line hover:bg-emerald-600 block"
               >
-                {isAr ? "فتح محادثة واتساب (+216 98 456 789)" : "Discuter sur WhatsApp (+216 98 456 789)"}
+                {isAr ? `فتح محادثة واتساب (${PHONE_DISPLAY})` : `Discuter sur WhatsApp (${PHONE_DISPLAY})`}
               </a>
             </div>
 
             {/* Direct Phone & Office */}
             <div
-              className="p-6 rounded-3xl border-3 bg-white"
+              className="p-6 rounded-3xl border bg-white"
               style={{
-                borderColor: "var(--ink)",
-                boxShadow: "6px 6px 0 var(--ink)",
+                borderColor: "var(--line)",
+                boxShadow: "var(--shadow-card)",
               }}
             >
               <h3
-                className="heading-lg text-base text-ink uppercase mb-4"
+                className="heading-lg text-base text-ink mb-4"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                {isAr ? "معلومات الاتصال المباشر" : "INFOS PRATIQUES"}
+                {isAr ? "معلومات الاتصال المباشر" : "Infos pratiques"}
               </h3>
 
               <div className="space-y-4 text-xs font-bold text-ink">
                 <div className="flex items-start gap-3">
-                  <span className="text-lg">📞</span>
+                  <span className="text-lg"></span>
                   <div>
-                    <span className="text-[0.65rem] text-ink/50 uppercase block">
+                    <span className="text-[0.65rem] text-muted uppercase block">
                       {isAr ? "الهاتف" : "Téléphone"}
                     </span>
-                    <a href="tel:+21698456789" className="hover:text-harissa transition-colors font-mono font-black text-sm">
-                      +216 98 456 789
+                    <a href={phoneLink} className="hover:text-harissa transition-colors font-mono font-black text-sm">
+                      {PHONE_DISPLAY}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="text-lg">✉️</span>
+                  <span className="text-lg"></span>
                   <div>
-                    <span className="text-[0.65rem] text-ink/50 uppercase block">
+                    <span className="text-[0.65rem] text-muted uppercase block">
                       {isAr ? "البريد الإلكتروني" : "Email"}
                     </span>
-                    <a href="mailto:hello@omnis.tn" className="hover:text-harissa transition-colors font-bold text-sm">
-                      hello@omnis.tn
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-harissa transition-colors font-bold text-sm">
+                      {CONTACT_EMAIL}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="text-lg">📍</span>
+                  <span className="text-lg"></span>
                   <div>
-                    <span className="text-[0.65rem] text-ink/50 uppercase block">
+                    <span className="text-[0.65rem] text-muted uppercase block">
                       {isAr ? "المقر والمختبر" : "Laboratoire & Siège"}
                     </span>
                     <p className="font-bold text-xs leading-snug">
-                      OMNIS Labs, Les Berges du Lac 2, Tunis 1053, Tunisie 🇹🇳
+                      OMNIS Labs, Les Berges du Lac 2, Tunis 1053, Tunisie 
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 pt-2 border-t border-ink/15">
-                  <span className="text-lg">⏰</span>
+                  <span className="text-lg"></span>
                   <div>
-                    <span className="text-[0.65rem] text-ink/50 uppercase block">
+                    <span className="text-[0.65rem] text-muted uppercase block">
                       {isAr ? "ساعات العمل" : "Horaires de service"}
                     </span>
                     <p className="font-medium text-xs text-ink/80">

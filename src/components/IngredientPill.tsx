@@ -1,48 +1,27 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 interface IngredientPillProps {
   name: string;
   dosage?: string;
+  /** Kept for API compatibility; pills now share one calm style. */
   color?: string;
   textColor?: string;
   className?: string;
   size?: "sm" | "md" | "lg";
 }
 
-export default function IngredientPill({
-  name,
-  dosage,
-  color = "var(--sun)",
-  textColor = "var(--ink)",
-  className = "",
-  size = "md",
-}: IngredientPillProps) {
+/** Calm ingredient tag: hairline border, sentence-weight text, dosage in muted tabular figures. */
+export default function IngredientPill({ name, dosage, className = "", size = "md" }: IngredientPillProps) {
   const sizeStyles = {
-    sm: "px-3 py-1 text-[0.65rem]",
-    md: "px-4 py-1.5 text-xs",
-    lg: "px-5 py-2 text-sm",
+    sm: "px-3 py-1 text-xs",
+    md: "px-3.5 py-1.5 text-[13px]",
+    lg: "px-4 py-2 text-sm",
   };
-
+  const label = name.charAt(0) + name.slice(1).toLowerCase();
   return (
-    <motion.span
-      className={`inline-flex items-center gap-1.5 font-bold uppercase tracking-wider rounded-full border-2 border-ink whitespace-nowrap ${sizeStyles[size]} ${className}`}
-      style={{
-        backgroundColor: color,
-        color: textColor,
-        letterSpacing: "0.08em",
-      }}
-      whileHover={{
-        scale: 1.05,
-        rotate: 2,
-      }}
-      transition={{ type: "spring", stiffness: 300 }}
+    <span
+      className={`inline-flex items-center gap-1.5 font-semibold rounded-full border border-line bg-paper text-ink whitespace-nowrap ${sizeStyles[size]} ${className}`}
     >
-      {name}
-      {dosage && (
-        <span style={{ opacity: 0.7 }}>{dosage}</span>
-      )}
-    </motion.span>
+      {label}
+      {dosage && <span className="text-muted tabular-nums">{dosage.toLowerCase()}</span>}
+    </span>
   );
 }

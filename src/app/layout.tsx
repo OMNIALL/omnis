@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Unbounded, DM_Sans } from "next/font/google";
+import { Unbounded, DM_Sans, Fraunces, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { LanguageProvider } from "@/context/LanguageContext";
-import CustomCursor from "@/components/CustomCursor";
+import AdPixels from "@/components/AdPixels";
 
+// Logo / one display word only.
 const unbounded = Unbounded({
   variable: "--font-unbounded",
   subsets: ["latin"],
@@ -12,6 +13,7 @@ const unbounded = Unbounded({
   display: "swap",
 });
 
+// Body text.
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
@@ -19,25 +21,32 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+// Headings: warm, editorial serif ("clinical warmth").
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+});
+
+// Arabic UI text.
+const plexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-plex-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "OMNIS — Tout ce qu'il te faut | Compléments alimentaires fabriqués en Tunisie",
+  title: "OMNIS FOCUS — Caféine naturelle + L-théanine | Fabriqué en Tunisie",
   description:
-    "OMNIS, la marque tunisienne de compléments alimentaires. Des pastilles qui boostent ta concentration, ton énergie et ton bien-être. Fabriqué en Tunisie 🇹🇳",
-  keywords: [
-    "OMNIS",
-    "compléments alimentaires",
-    "Tunisie",
-    "focus",
-    "vitamines",
-    "pastilles",
-    "L-théanine",
-    "caféine",
-  ],
+    "OMNIS FOCUS : 100 mg de caféine naturelle de guarana, 180 mg de L-théanine, vitamines B6 et B12. 30 gélules végétales fabriquées en Tunisie. Paiement à la livraison.",
+  keywords: ["OMNIS", "FOCUS", "compléments alimentaires", "Tunisie", "L-théanine", "caféine naturelle", "guarana", "gélules"],
   openGraph: {
-    title: "OMNIS — Tout ce qu'il te faut",
-    description:
-      "Des pastilles qui boostent ta concentration, sans le crash. Fabriqué en Tunisie.",
+    title: "OMNIS FOCUS — L'énergie d'un café, sans le crash",
+    description: "Caféine naturelle de guarana + L-théanine + B6/B12. Fabriqué en Tunisie. Paiement à la livraison.",
     siteName: "OMNIS",
+    images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "OMNIS FOCUS" }],
   },
   icons: {
     icon: "/favicon.svg",
@@ -54,15 +63,12 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${unbounded.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${unbounded.variable} ${dmSans.variable} ${fraunces.variable} ${plexArabic.variable} h-full antialiased`}
     >
-      <body
-        className="min-h-full flex flex-col"
-        style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
-      >
+      <body className="min-h-full flex flex-col">
         <LanguageProvider>
           <CartProvider>
-            <CustomCursor />
+            <AdPixels />
             {children}
           </CartProvider>
         </LanguageProvider>

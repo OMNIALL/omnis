@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
+import { quote, type Quote } from "@/lib/pricing";
 
 export interface CartItem {
   id: string;
@@ -14,8 +15,12 @@ interface CartContextType {
   items: CartItem[];
   isOpen: boolean;
   totalItems: number;
+  /** Subtotal after bundle pricing (delivery excluded). */
   totalPrice: number;
-  addItem: (item: Omit<CartItem, "quantity">) => void;
+  /** Full price breakdown: subtotal, savings, shipping (free from 2 bottles), total. */
+  cartQuote: Quote;
+  /** Adds `qty` units (default 1). */
+  addItem: (item: Omit<CartItem, "quantity">, qty?: number) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -58,17 +63,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, isLoaded]);
 
-  const addItem = useCallback((newItem: Omit<CartItem, "quantity">) => {
+  const addItem = useCallback((newItem: Omit<CartItem, "quantity">, qty = 1) => {
     setItems((prev) => {
       const existing = prev.find((item) => item.id === newItem.id);
       if (existing) {
         return prev.map((item) =>
           item.id === newItem.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + qty }
             : item
         );
       }
-      return [...prev, { ...newItem, quantity: 1 }];
+      return [...prev, { ...newItem, quantity: qty }];
     });
     setIsOpen(true);
   }, []);
@@ -101,10 +106,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const closeCart = useCallback(() => setIsOpen(false), []);
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const cartQuote = quote(items);
+  const totalPrice = cartQuote.subtotal;
 
   return (
     <CartContext.Provider
@@ -113,6 +116,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         isOpen,
         totalItems,
         totalPrice,
+        cartQuote,
         addItem,
         removeItem,
         updateQuantity,

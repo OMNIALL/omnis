@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/context/LanguageContext";
 
+import { CONTACT_EMAIL, PHONE_DISPLAY } from "@/config/site";
 export default function LegalPage() {
   const { language } = useLanguage();
   const isAr = language === "ar";
@@ -28,10 +29,10 @@ export default function LegalPage() {
         {/* Title */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <h1
-            className="heading-xl text-3xl sm:text-5xl text-ink uppercase"
+            className="heading-xl text-3xl sm:text-5xl text-ink"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            {isAr ? "الإشعار القانوني والخصوصية" : "MENTIONS LÉGALES & CONFIDENTIALITÉ"}
+            {isAr ? "الإشعار القانوني والخصوصية" : "Mentions légales & confidentialité"}
           </h1>
           <p className="text-sm sm:text-base text-ink/70 mt-3 font-sans">
             {isAr
@@ -42,36 +43,36 @@ export default function LegalPage() {
 
         {/* Content Box */}
         <div
-          className="p-8 sm:p-10 rounded-3xl border-3 bg-white space-y-6 text-sm text-ink/85 leading-relaxed font-sans"
-          style={{ borderColor: "var(--ink)", boxShadow: "6px 6px 0 var(--ink)" }}
+          className="p-8 sm:p-10 rounded-3xl border bg-white space-y-6 text-sm text-ink/85 leading-relaxed font-sans"
+          style={{ borderColor: "var(--line)", boxShadow: "var(--shadow-card)" }}
         >
           <div>
-            <h2 className="heading-lg text-lg text-ink uppercase mb-2">
-              {isAr ? "1. هوية الشركة والناشر" : "1. ÉDITEUR DU SITE"}
+            <h2 className="heading-lg text-lg text-ink mb-2">
+              {isAr ? "1. هوية الشركة والناشر" : "1. Éditeur du site"}
             </h2>
             <p>
               <strong>OMNIS Nutrition SARL</strong> — Société de droit tunisien enregistrée au Registre National des Entreprises (RNE).
               <br />
               Siège social : Les Berges du Lac 2, Tunis 1053, Tunisie.
               <br />
-              Email : <a href="mailto:hello@omnis.tn" className="underline font-bold">hello@omnis.tn</a> | Téléphone : +216 98 456 789.
+              Email : <a href={`mailto:${CONTACT_EMAIL}`} className="underline font-bold">{CONTACT_EMAIL}</a> | Téléphone : {PHONE_DISPLAY}.
             </p>
           </div>
 
           <div className="border-t border-ink/15 pt-5">
-            <h2 className="heading-lg text-lg text-ink uppercase mb-2">
-              {isAr ? "2. طبيعة المنتجات والاستخدام" : "2. AVERTISSEMENT RÉGLEMENTAIRE"}
+            <h2 className="heading-lg text-lg text-ink mb-2">
+              {isAr ? "2. طبيعة المنتجات والاستخدام" : "2. Avertissement réglementaire"}
             </h2>
             <p className="p-4 rounded-xl bg-sun/20 border border-ink/20 font-bold text-xs text-ink">
-              ⚠️ {isAr
+               {isAr
                 ? "منتجات أومنيس هي مكملات غذائية وليست أدوية. لا تعوض نظاماً غذائياً متنوعاً ومتوازناً أو نمط حياة صحي. يُنصح بعدم تجاوز الجرعة اليومية الموصى بها."
                 : "Les produits OMNIS sont des compléments alimentaires déclarés et ne remplacent en aucun cas une alimentation saine, équilibrée et variée. Tenir hors de portée des jeunes enfants. Ne pas dépasser la dose conseillée."}
             </p>
           </div>
 
           <div className="border-t border-ink/15 pt-5">
-            <h2 className="heading-lg text-lg text-ink uppercase mb-2">
-              {isAr ? "3. حماية البيانات الشخصية" : "3. PROTECTION DES DONNÉES PERSONNELLES"}
+            <h2 className="heading-lg text-lg text-ink mb-2">
+              {isAr ? "3. حماية البيانات الشخصية" : "3. Protection des données personnelles"}
             </h2>
             <p>
               {isAr
@@ -81,8 +82,8 @@ export default function LegalPage() {
           </div>
 
           <div className="border-t border-ink/15 pt-5">
-            <h2 className="heading-lg text-lg text-ink uppercase mb-2">
-              {isAr ? "4. الملكية الفكرية والعلامة التجارية" : "4. PROPRIÉTÉ INTELLECTUELLE"}
+            <h2 className="heading-lg text-lg text-ink mb-2">
+              {isAr ? "4. الملكية الفكرية والعلامة التجارية" : "4. Propriété intellectuelle"}
             </h2>
             <p>
               {isAr

@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 import ProductDetailClient from "./ProductDetailClient";
 
@@ -13,5 +14,6 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (!products.some((p) => p.slug === slug)) notFound();
   return <ProductDetailClient slug={slug} />;
 }

@@ -10,7 +10,7 @@ export interface Product {
   bgColor: string;
   textColor: string;
   available: boolean;
-  pastilles: number;
+  capsules: number;
   ingredients: Ingredient[];
   benefits: string[];
   usage: string;
@@ -29,29 +29,29 @@ export const products: Product[] = [
     id: "focus-30",
     name: "FOCUS",
     slug: "focus",
-    tagline: "Des pastilles qui boostent ta concentration, sans le crash.",
+    tagline: "Des gélules qui boostent ta concentration, sans le crash.",
     description:
-      "FOCUS par OMNIS combine L-Théanine et Caféine naturelle avec des Vitamines B6 et B12 pour une concentration nette, sans nervosité ni crash. 30 pastilles au goût pop, fabriquées en Tunisie.",
+      "FOCUS par OMNIS combine L-Théanine et Caféine naturelle de guarana avec des Vitamines B6 et B12 pour une concentration nette, sans nervosité ni crash. 30 gélules végétales, fabriquées en Tunisie.",
     price: 39,
     currency: "TND",
     color: "#E8432A",
     bgColor: "var(--harissa)",
     textColor: "var(--cream)",
     available: true,
-    pastilles: 30,
+    capsules: 30,
     ingredients: [
       {
         name: "L-THÉANINE",
         dosage: "180 MG",
         description:
-          "Acide aminé naturellement présent dans le thé vert. Favorise la relaxation sans somnolence et améliore l'attention.",
+          "Acide aminé présent naturellement dans le thé vert. Accompagne la caféine pour une énergie plus douce.",
         color: "var(--sun)",
       },
       {
         name: "CAFÉINE",
-        dosage: "80 MG",
+        dosage: "100 MG",
         description:
-          "Dose équivalente à un espresso. Booste la vigilance et la concentration sans les effets secondaires d'un excès de café.",
+          "Caféine naturelle issue d'un extrait de guarana : l'énergie d'un café, dosée avec précision.",
         color: "var(--cream)",
       },
       {
@@ -65,19 +65,19 @@ export const products: Product[] = [
         name: "VITAMINE B12",
         dosage: "2.5 µG",
         description:
-          "Essentielle pour le métabolisme énergétique et le fonctionnement du système nerveux.",
+          "Contribue à un métabolisme énergétique normal et au fonctionnement normal du système nerveux.",
         color: "var(--sky)",
       },
     ],
     benefits: [
       "Concentration améliorée",
       "Zéro crash",
-      "Goût pop fruité",
+      "Gélule 100% végétale",
       "Fabriqué en Tunisie",
     ],
     usage:
-      "Prends 1 pastille le matin ou avant une session de travail. Ne pas dépasser 2 pastilles par jour. À croquer ou à laisser fondre.",
-    caption: "30 PASTILLES · + VITAMINES B6 ET B12 · FABRIQUÉ EN TUNISIE",
+      "Prends 1 gélule par jour avec un verre d'eau, le matin ou avant une session de travail. Ne pas dépasser 2 gélules par jour.",
+    caption: "30 GÉLULES · + VITAMINES B6 ET B12 · FABRIQUÉ EN TUNISIE",
   },
   {
     id: "energie-30",
@@ -91,7 +91,7 @@ export const products: Product[] = [
     bgColor: "var(--sun)",
     textColor: "var(--ink)",
     available: false,
-    pastilles: 30,
+    capsules: 30,
     ingredients: [],
     benefits: [],
     usage: "",
@@ -109,7 +109,7 @@ export const products: Product[] = [
     bgColor: "var(--sky)",
     textColor: "var(--ink)",
     available: false,
-    pastilles: 30,
+    capsules: 30,
     ingredients: [],
     benefits: [],
     usage: "",
@@ -127,7 +127,7 @@ export const products: Product[] = [
     bgColor: "var(--cream)",
     textColor: "var(--ink)",
     available: false,
-    pastilles: 30,
+    capsules: 30,
     ingredients: [],
     benefits: [],
     usage: "",
@@ -164,42 +164,11 @@ export const governorates = [
   "Kébili",
 ];
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Sami B.",
-    text: "J'ai remplacé mon 3ème café par FOCUS. Résultat : même concentration, zéro crash à 16h.",
-    rating: 5,
-    location: "Tunis",
-  },
-  {
-    id: 2,
-    name: "Yasmine K.",
-    text: "Le goût est incroyable. On dirait un bonbon mais ça marche vraiment. Mon nouveau rituel du matin.",
-    rating: 5,
-    location: "Sousse",
-  },
-  {
-    id: 3,
-    name: "Omar T.",
-    text: "Enfin un produit tunisien de qualité dans ce domaine. Je recommande à fond !",
-    rating: 5,
-    location: "Sfax",
-  },
-  {
-    id: 4,
-    name: "Ines M.",
-    text: "Je prends FOCUS avant mes révisions. La différence est nette. Merci OMNIS !",
-    rating: 5,
-    location: "Ariana",
-  },
-];
-
 export const faqItems = [
   {
     question: "C'est quoi OMNIS exactement ?",
     answer:
-      "OMNIS est une marque tunisienne de compléments alimentaires sous forme de pastilles à croquer. Notre premier produit, FOCUS, combine L-Théanine, Caféine naturelle et Vitamines B6/B12 pour booster ta concentration.",
+      "OMNIS est une marque tunisienne de compléments alimentaires sous forme de gélules végétales. Notre premier produit, FOCUS, combine L-Théanine, Caféine naturelle et Vitamines B6/B12 pour booster ta concentration.",
   },
   {
     question: "C'est fabriqué où ?",
@@ -209,17 +178,17 @@ export const faqItems = [
   {
     question: "Comment je prends FOCUS ?",
     answer:
-      "Croque 1 pastille le matin ou avant une session de travail. Tu peux aussi la laisser fondre. Ne dépasse pas 2 pastilles par jour.",
+      "Prends 1 gélule par jour avec un verre d'eau, le matin ou avant une session de travail. Ne dépasse pas 2 gélules par jour.",
   },
   {
     question: "Il y a des effets secondaires ?",
     answer:
-      "FOCUS contient 80 mg de caféine (l'équivalent d'un espresso). Si tu es sensible à la caféine, commence par une demi-pastille. Déconseillé aux femmes enceintes et aux enfants.",
+      "FOCUS contient 100 mg de caféine naturelle de guarana par gélule (l'équivalent d'un café). Si tu es sensible à la caféine, demande l'avis d'un professionnel de santé. Déconseillé aux femmes enceintes ou allaitantes et aux enfants.",
   },
   {
     question: "Comment se passe la livraison ?",
     answer:
-      "Livraison partout en Tunisie sous 2-5 jours ouvrables. Paiement à la livraison disponible. Frais de livraison : 7 TND.",
+      "Livraison partout en Tunisie sous 24–48h. Paiement à la livraison. Frais de livraison : 7 TND, offerte dès 2 flacons.",
   },
   {
     question: "Je peux retourner le produit ?",

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import OmnisLogo from "./OmnisLogo";
@@ -21,7 +22,7 @@ export default function Navbar() {
     { label: t.navFAQ, href: "/faq" },
   ];
 
-  useEffect(() => {
+  useEffect(() =>{
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -40,9 +41,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/" className="shrink-0">
+          <Link href="/" className="shrink-0" aria-label="OMNIS">
             <OmnisLogo size="sm" />
-          </a>
+          </Link>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -70,8 +71,8 @@ export default function Navbar() {
           <div className="flex items-center gap-2.5">
             {/* Language Switcher */}
             <div
-              className="flex items-center rounded-full border-2 border-ink p-0.5 bg-white text-xs font-black"
-              style={{ boxShadow: "2px 2px 0 var(--ink)" }}
+              className="flex items-center rounded-full border border-line p-0.5 bg-white text-xs font-black"
+              style={{ boxShadow: "var(--shadow-card)" }}
             >
               <button
                 type="button"
@@ -79,7 +80,7 @@ export default function Navbar() {
                 className={`px-2.5 py-1 rounded-full transition-all ${
                   language === "fr"
                     ? "bg-sun text-ink font-black border border-ink"
-                    : "text-ink/60 hover:text-ink font-bold"
+                    : "text-muted hover:text-ink font-bold"
                 }`}
                 title="Passer en Français"
               >
@@ -91,11 +92,11 @@ export default function Navbar() {
                 className={`px-2.5 py-1 rounded-full transition-all ${
                   language === "ar"
                     ? "bg-sun text-ink font-black border border-ink"
-                    : "text-ink/60 hover:text-ink font-bold"
+                    : "text-muted hover:text-ink font-bold"
                 }`}
                 title="التحويل إلى العربية"
               >
-                عربي 🇹🇳
+                عربي
               </button>
             </div>
 
@@ -105,9 +106,9 @@ export default function Navbar() {
               className="relative flex items-center gap-2 px-4 py-2 rounded-full border-2 font-bold text-sm uppercase tracking-wider transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px]"
               style={{
                 backgroundColor: "var(--sun)",
-                borderColor: "var(--ink)",
+                borderColor: "var(--line)",
                 color: "var(--ink)",
-                boxShadow: "4px 4px 0 var(--ink)",
+                boxShadow: "var(--shadow-card)",
               }}
               aria-label={t.cart}
             >

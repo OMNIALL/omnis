@@ -1,181 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
-import StickerCircle from "./StickerCircle";
+import { FlaskConical, Leaf, MapPin } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BrandStory() {
+  const { language } = useLanguage();
+  const isAr = language === "ar";
+
+  const values = isAr
+    ? [
+        { Icon: MapPin, label: "مصنوع في تونس" },
+        { Icon: FlaskConical, label: "جرعات مضبوطة" },
+        { Icon: Leaf, label: "كاشية نباتية" },
+      ]
+    : [
+        { Icon: MapPin, label: "Fabriqué en Tunisie" },
+        { Icon: FlaskConical, label: "Doses précises" },
+        { Icon: Leaf, label: "Gélule végétale" },
+      ];
+
   return (
-    <section
-      id="histoire"
-      className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundColor: "var(--cream)" }}
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Sticker illustrations */}
-          <motion.div
-            className="relative flex items-center justify-center min-h-[300px] sm:min-h-[400px]"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            {/* Large OMNIS circle */}
-            <motion.div
-              animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <StickerCircle
-                size={200}
-                color="var(--sun)"
-                shadow={true}
-                innerRing={true}
-                delay={0.2}
-              >
-                <span
-                  className="heading-xl text-2xl sm:text-3xl"
-                  style={{ color: "var(--ink)" }}
-                >
-                  OMNIS
-                </span>
-              </StickerCircle>
-            </motion.div>
-
-            {/* Small circles */}
-            <motion.div
-              className="absolute top-4 right-8 sm:right-16"
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-            >
-              <StickerCircle
-                size={70}
-                color="var(--harissa)"
-                shadow={true}
-                innerRing={true}
-                rotate={-5}
-                delay={0.4}
-              >
-                <span className="text-xs font-bold" style={{ color: "var(--cream)" }}>
-                  ALL
-                </span>
-              </StickerCircle>
-            </motion.div>
-
-            <motion.div
-              className="absolute bottom-8 left-8 sm:left-16"
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                duration: 4.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-            >
-              <StickerCircle
-                size={80}
-                color="var(--ink)"
-                borderColor="var(--ink)"
-                shadow={false}
-                innerRing={true}
-                rotate={5}
-                delay={0.6}
-              >
-                <span
-                  className="heading-lg text-xl"
-                  style={{ color: "var(--sun)" }}
-                >
-                  S
-                </span>
-              </StickerCircle>
-            </motion.div>
-
-            <motion.div
-              className="absolute top-16 left-4"
-              animate={{ y: [0, -5, 0] }}
-              transition={{
-                duration: 5.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 2,
-              }}
-            >
-              <StickerCircle
-                size={50}
-                color="var(--sky)"
-                shadow={true}
-                innerRing={false}
-                rotate={-3}
-                delay={0.8}
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Right: Text */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2
-              className="heading-xl text-3xl sm:text-4xl md:text-5xl mb-6"
-              style={{ color: "var(--ink)" }}
-            >
-              NOTRE
-              <br />
-              HISTOIRE
-            </h2>
-
-            <div className="space-y-4 text-base sm:text-lg leading-relaxed" style={{ opacity: 0.8 }}>
-              <p>
-                <strong style={{ color: "var(--harissa)" }}>OMNI</strong> = tout.{" "}
-                <strong style={{ color: "var(--sun)" }}>S</strong> = supplément.
-              </p>
-              <p>
-                Tout ce qu&apos;il te faut, dans une seule pastille.
-              </p>
-              <p>
-                On a créé OMNIS parce qu&apos;on en avait marre des compléments
-                alimentaires fades, compliqués, importés et hors de prix. On voulait
-                quelque chose de <strong>simple</strong>, <strong>efficace</strong>,
-                avec un <strong>goût de ouf</strong> — et surtout, fabriqué chez nous,
-                en Tunisie.
-              </p>
-              <p>
-                Chaque pastille OMNIS est formulée avec des ingrédients actifs dosés
-                avec précision. Pas de remplissage, pas de blabla marketing.
-                Juste ce qui marche.
-              </p>
+    <section id="histoire" className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        {/* Brand mark */}
+        <motion.div
+          className="rounded-[28px] bg-harissa text-cream p-10 sm:p-14 min-h-[300px] flex flex-col justify-between"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-2" dir="ltr">
+            <span className="font-display-keep text-5xl sm:text-7xl font-black tracking-tight">OMNI</span>
+            <span className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-sun border-[3px] border-ink flex items-center justify-center">
+              <span className="font-display-keep text-2xl sm:text-3xl font-black text-ink">S</span>
+            </span>
+          </div>
+          <dl className="grid grid-cols-2 gap-6 mt-10 text-sm" dir="ltr">
+            <div>
+              <dt className="font-display-keep font-black text-xl">OMNI</dt>
+              <dd className="opacity-85">{isAr ? "الكل" : "tout, en latin"}</dd>
             </div>
-
-            {/* Values */}
-            <div className="flex flex-wrap gap-3 mt-8">
-              {["🇹🇳 Made in Tunisia", "⚡ Dosé avec précision", "🍬 Goût pop"].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="px-4 py-2 rounded-full border-2 font-bold text-sm"
-                    style={{
-                      borderColor: "var(--ink)",
-                      backgroundColor: "var(--sun)",
-                      color: "var(--ink)",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                )
-              )}
+            <div>
+              <dt className="font-display-keep font-black text-xl">S</dt>
+              <dd className="opacity-85">{isAr ? "مكمّل غذائي" : "supplément"}</dd>
             </div>
-          </motion.div>
-        </div>
+          </dl>
+        </motion.div>
+
+        {/* Story */}
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <p className="eyebrow mb-3">{isAr ? "قصّتنا" : "Notre histoire"}</p>
+          <h2 className="heading-xl text-3xl sm:text-5xl text-ink mb-6">
+            {isAr ? "كل اللي تحتاجو، في كاشية وحدة." : "Tout ce qu'il te faut, dans une seule gélule."}
+          </h2>
+          <div className="space-y-4 text-lg leading-relaxed text-muted">
+            {isAr ? (
+              <>
+                <p>عملنا OMNIS على خاطر المكمّلات اللي نلقاوها في تونس يا مستوردة و غالية، يا مكتوب عليها برشا و ما تفهم فيها شي.</p>
+                <p>حبّينا حاجة بسيطة: تركيبة واضحة، جرعات مكتوبة بالملغ، مصنوعة في مخبر تونسي، و توصلك لدارك.</p>
+              </>
+            ) : (
+              <>
+                <p>
+                  Nous avons créé OMNIS parce que les compléments disponibles en Tunisie étaient soit importés et chers,
+                  soit difficiles à comprendre.
+                </p>
+                <p>
+                  Notre approche est simple : une formule courte, des doses affichées en mg, une fabrication par un
+                  laboratoire tunisien, et une livraison jusqu&apos;à ta porte.
+                </p>
+              </>
+            )}
+          </div>
+          <ul className="flex flex-wrap gap-x-6 gap-y-3 mt-8">
+            {values.map(({ Icon, label }) => (
+              <li key={label} className="flex items-center gap-2 text-sm font-semibold text-ink">
+                <Icon className="w-4 h-4 text-harissa" strokeWidth={1.75} />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </section>
   );

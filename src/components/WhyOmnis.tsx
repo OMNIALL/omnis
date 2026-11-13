@@ -1,107 +1,56 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Target, Sun, BatteryCharging, Clock } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const features = [
-  {
-    icon: "⚡",
-    title: "INGRÉDIENTS ACTIFS DOSÉS",
-    description:
-      "Chaque pastille contient des doses précises et efficaces. Pas de poudre de perlimpinpin.",
-    color: "var(--sun)",
-    rotate: -2,
-  },
-  {
-    icon: "🍬",
-    title: "GOÛT POP",
-    description:
-      "On a bossé le goût pour que tu aies envie de la prendre. C'est bon, tout simplement.",
-    color: "var(--harissa)",
-    textColor: "var(--cream)",
-    rotate: 1,
-  },
-  {
-    icon: "📉",
-    title: "SANS CRASH",
-    description:
-      "La L-Théanine lisse l'effet de la caféine. Tu montes en douceur, tu redescends tranquille.",
-    color: "var(--sky)",
-    rotate: -1,
-  },
-  {
-    icon: "🇹🇳",
-    title: "FABRIQUÉ EN TUNISIE",
-    description:
-      "De la formulation à l'emballage, tout est fait ici. On soutient le savoir-faire local.",
-    color: "var(--cream)",
-    rotate: 2,
-  },
-];
-
+/** Benefits — outcome-led ("so that…"), not features. Claims kept within the brand rulebook. */
 export default function WhyOmnis() {
-  return (
-    <section
-      className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundColor: "var(--ink)" }}
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
-        <motion.h2
-          className="heading-xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-12 sm:mb-16"
-          style={{ color: "var(--sun)" }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          TOUT-EN-UN.
-          <br />
-          ZÉRO BLABLA.
-        </motion.h2>
+  const { language } = useLanguage();
+  const isAr = language === "ar";
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => (
+  const benefits = isAr
+    ? [
+        { Icon: Target, title: "تقعد مركّز، موش نيرفي", text: "الكافيين يفيّقك و الـ L-théanine تخلّي الإينرجي رايقة، باش تكمّل اللي بديتو." },
+        { Icon: Sun, title: "العشية تولّي عادية", text: "إينرجي أنعم من القهوة وحدها، باش الوحدة و نص ما تطيّحكش." },
+        { Icon: BatteryCharging, title: "أقل تعب", text: "فيتامين B6 و B12 يساهمو في نقص التعب." },
+        { Icon: Clock, title: "روتين في 5 ثواني", text: "كاشية مع كاس ما. ما فمّا ما تحضّر، ما فمّا ما تشري كل نهار." },
+      ]
+    : [
+        { Icon: Target, title: "Concentré, pas nerveux", text: "La caféine réveille, la L-théanine l'adoucit — pour aller au bout de ce que tu as commencé." },
+        { Icon: Sun, title: "Des après-midi qui tiennent", text: "Une énergie plus régulière que le café seul, pour que 14h ne soit plus un mur." },
+        { Icon: BatteryCharging, title: "Moins de fatigue", text: "Les vitamines B6 et B12 contribuent à réduire la fatigue." },
+        { Icon: Clock, title: "Une routine de 5 secondes", text: "Une gélule, un verre d'eau. Rien à préparer, rien à acheter chaque jour." },
+      ];
+
+  return (
+    <section className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-ink text-cream">
+      <div className="max-w-7xl mx-auto">
+        <div className="max-w-2xl mb-12">
+          <p className="eyebrow mb-3" style={{ color: "var(--sun)" }}>{isAr ? "شنوّة تربح" : "Ce que tu y gagnes"}</p>
+          <motion.h2
+            className="heading-xl text-3xl sm:text-5xl"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {isAr ? "نهار كامل، بنفس التركيز." : "Toute ta journée, avec le même focus."}
+          </motion.h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
+          {benefits.map(({ Icon, title, text }, i) => (
             <motion.div
-              key={feature.title}
-              className="relative p-6 sm:p-8 rounded-3xl border-3 hover-wiggle"
-              style={{
-                backgroundColor: feature.color,
-                border: "3px solid var(--ink)",
-                boxShadow: "6px 6px 0 rgba(255,255,255,0.1)",
-                transform: `rotate(${feature.rotate}deg)`,
-                color: feature.textColor || "var(--ink)",
-              }}
-              initial={{ opacity: 0, y: 40, rotate: feature.rotate }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-                rotate: feature.rotate,
-              }}
+              key={title}
+              className="p-6 sm:p-8 bg-ink"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{
-                rotate: 0,
-                scale: 1.03,
-                boxShadow: "8px 8px 0 rgba(255,255,255,0.15)",
-              }}
+              transition={{ delay: i * 0.06 }}
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3
-                className="heading-lg text-base sm:text-lg mb-3"
-                style={{ color: feature.textColor || "var(--ink)" }}
-              >
-                {feature.title}
-              </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{
-                  opacity: 0.8,
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {feature.description}
-              </p>
+              <Icon className="w-6 h-6 mb-5" style={{ color: "var(--sun)" }} strokeWidth={1.5} />
+              <h3 className="heading-lg text-xl mb-2">{title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,244,227,0.75)" }}>{text}</p>
             </motion.div>
           ))}
         </div>

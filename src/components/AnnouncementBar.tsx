@@ -2,29 +2,16 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 
+/** Static, quiet announcement line (the scrolling marquee is gone). */
 export default function AnnouncementBar() {
-  const { t } = useLanguage();
-  const message = `${t.announcement} · `;
+  const { language } = useLanguage();
+  const isAr = language === "ar";
 
   return (
-    <div
-      className="w-full overflow-hidden py-2.5"
-      style={{
-        backgroundColor: "var(--ink)",
-        color: "var(--sun)",
-      }}
-    >
-      <div className="marquee-track">
-        {[...Array(6)].map((_, i) => (
-          <span
-            key={i}
-            className="label-sm whitespace-nowrap px-8"
-            style={{ fontSize: "0.7rem", letterSpacing: "0.15em" }}
-          >
-            {message}
-          </span>
-        ))}
-      </div>
+    <div className="w-full bg-ink text-cream text-center px-4 py-2 text-[13px] font-medium">
+      {isAr
+        ? "تخلّص كي توصلك · توصيل لكل الولايات · مجاني من علبتين"
+        : "Paiement à la livraison · Livraison dans les 24 gouvernorats · Offerte dès 2 flacons"}
     </div>
   );
 }

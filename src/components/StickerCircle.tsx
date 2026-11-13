@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import React from "react";
 
 interface StickerCircleProps {
@@ -9,6 +8,7 @@ interface StickerCircleProps {
   borderColor?: string;
   children?: React.ReactNode;
   className?: string;
+  /** Kept for API compatibility — circles no longer rotate, bounce or cast hard shadows. */
   rotate?: number;
   shadow?: boolean;
   innerRing?: boolean;
@@ -16,55 +16,27 @@ interface StickerCircleProps {
   delay?: number;
 }
 
+/** Calm circular badge (legacy name). Paper surface, hairline border, no motion. */
 export default function StickerCircle({
   size = 120,
-  color = "var(--sun)",
-  borderColor = "var(--ink)",
+  color = "var(--paper)",
   children,
   className = "",
-  rotate = 0,
-  shadow = true,
-  innerRing = true,
-  animate = true,
-  delay = 0,
 }: StickerCircleProps) {
+  // Map the old loud fills onto the calm palette.
+  const fill = color === "var(--sun)" || color === "var(--sky)" || color === "var(--cream)" ? "var(--paper)" : color;
   return (
-    <motion.div
+    <div
       className={`relative flex items-center justify-center rounded-full ${className}`}
       style={{
         width: size,
         height: size,
-        backgroundColor: color,
-        border: `3px solid ${borderColor}`,
-        boxShadow: shadow ? "6px 6px 0 var(--ink)" : "none",
-        transform: `rotate(${rotate}deg)`,
-      }}
-      initial={animate ? { scale: 0, rotate: rotate - 10 } : false}
-      animate={animate ? { scale: 1, rotate } : false}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 15,
-        delay,
-      }}
-      whileHover={{
-        scale: 1.05,
-        rotate: rotate + 3,
-        transition: { duration: 0.2 },
+        backgroundColor: fill,
+        border: "1px solid var(--line)",
+        boxShadow: "var(--shadow-card)",
       }}
     >
-      {innerRing && (
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: size - 16,
-            height: size - 16,
-            border: `2px solid ${borderColor}`,
-            opacity: 0.3,
-          }}
-        />
-      )}
       {children}
-    </motion.div>
+    </div>
   );
 }

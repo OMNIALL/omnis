@@ -1,5 +1,6 @@
 "use client";
 
+import { FlaskConical, Leaf, MapPin } from "lucide-react";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
@@ -28,18 +29,18 @@ export default function AboutPage() {
 
         {/* Hero Banner */}
         <div
-          className="rounded-3xl p-8 sm:p-14 mb-12 border-3 text-center relative overflow-hidden"
+          className="rounded-3xl p-8 sm:p-14 mb-12 border text-center relative overflow-hidden"
           style={{
-            backgroundColor: "var(--sun)",
-            borderColor: "var(--ink)",
-            boxShadow: "8px 8px 0 var(--ink)",
+            backgroundColor: "var(--paper)",
+            borderColor: "var(--line)",
+            boxShadow: "var(--shadow-card)",
           }}
         >
-          <span className="label-sm px-3.5 py-1.5 rounded-full border-2 border-ink bg-cream text-ink text-xs inline-block mb-4">
-            {isAr ? "صنع بكل فخر في تونس 🇹🇳" : "MADE IN TUNISIA 🇹🇳"}
+          <span className="label-sm px-3.5 py-1.5 rounded-full border border-line bg-cream text-ink text-xs inline-block mb-4">
+            {isAr ? "صنع بكل فخر في تونس " : "MADE IN TUNISIA "}
           </span>
           <h1
-            className="heading-xl text-3xl sm:text-6xl text-ink uppercase max-w-3xl mx-auto"
+            className="heading-xl text-3xl sm:text-6xl text-ink max-w-3xl mx-auto"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             {isAr ? "OMNI = الكل. S = مكمل غذائي." : "OMNI = TOUT. S = SUPPLÉMENT."}
@@ -55,23 +56,23 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6 text-sm sm:text-base text-ink/85 leading-relaxed font-sans">
             <h2
-              className="heading-xl text-2xl sm:text-4xl text-ink uppercase"
+              className="heading-xl text-2xl sm:text-4xl text-ink"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {isAr ? "لماذا أطلقنا أومنيس ؟" : "POURQUOI OMNIS ?"}
+              {isAr ? "لماذا أطلقنا أومنيس ؟" : "Pourquoi OMNIS ?"}
             </h2>
             <p>
               {isAr
-                ? "في تونس، اعتدنا على استهلاك قهوة تلو الأخرى طوال اليوم، مهدورين أموالنا على كبسولات ومشروبات طاقة مليئة بالسكر وتسبب الهبوط بعد ساعات قليلة."
+                ? "في تونس، اعتدنا على استهلاك قهوة تلو الأخرى طوال اليوم، مهدورين أموالنا على القهوة ومشروبات طاقة مليئة بالسكر وتسبب الهبوط بعد ساعات قليلة."
                 : "Entre les espressos à répétition, les boissons énergisantes pleines de sucre et les compléments pharmaceutiques insipides importés à prix d'or, il manquait une alternative intelligente."}
             </p>
             <p>
               {isAr
-                ? "أردنا حلاً عصرياً ولذيذاً : حلوى مضغ مبتكرة تجمع بين الل-ثيانين (مستخلص الشاي الأخضر) والكافيين الطبيعي بنسب علمية مدروسة تمنحك تركيزاً فائقاً يدوم ساعات دون أي ارتعاش أو هبوط."
+                ? "أردنا حلاً عصرياً وبسيطاً : كبسولة نباتية مبتكرة تجمع بين الل-ثيانين (مستخلص الشاي الأخضر) والكافيين الطبيعي من الغوارانا بنسب علمية مدروسة تمنحك تركيزاً فائقاً يدوم ساعات دون أي ارتعاش أو هبوط."
                 : "Nous avons formulé OMNIS avec les meilleurs nootropiques reconnus par la science : l'alliance parfaite de la L-Théanine et de la Caféine, enrichie en vitamines B6 et B12 pour nourrir ton cerveau."}
             </p>
-            <div className="p-5 rounded-2xl border-2 border-ink bg-white font-bold text-ink">
-              💡 {isAr ? "مهمتنا : تركيز نقي، طاقة متوازنة، ومذاق ممتع في متناول كل التونسيين." : "Notre mission : une énergie propre, une concentration laser et un goût pop fabriqué localement."}
+            <div className="p-5 rounded-2xl border border-line bg-white font-bold text-ink">
+               {isAr ? "مهمتنا : تركيز نقي، طاقة متوازنة، وتركيبة نظيفة في متناول كل التونسيين." : "Notre mission : une énergie propre, une concentration laser et une formule clean fabriquée localement."}
             </div>
           </div>
 
@@ -83,7 +84,7 @@ export default function AboutPage() {
                   OMNIS
                 </span>
                 <span className="text-xs font-bold text-sun uppercase tracking-widest mt-1 block">
-                  TUNISIE 🇹🇳
+                  TUNISIE 
                 </span>
               </div>
             </StickerCircle>
@@ -94,35 +95,35 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              icon: "🔬",
-              title: isAr ? "دقة علمية في الجرعات" : "DOSAGES PRÉCIS",
-              desc: isAr ? "180 مجم ل-ثيانين و 80 مجم كافيين لفاعلية قصوى مضمونة." : "180 mg de L-Théanine et 80 mg de caféine pure : le ratio parfait.",
+              icon: FlaskConical,
+              title: isAr ? "دقة علمية في الجرعات" : "Dosages précis",
+              desc: isAr ? "180 مجم ل-ثيانين و 100 مجم كافيين طبيعي لفاعلية قصوى مضمونة." : "180 mg de L-Théanine et 100 mg de caféine naturelle de guarana : le ratio parfait.",
               bg: "var(--cream)",
             },
             {
-              icon: "🇹🇳",
+              icon: MapPin,
               title: isAr ? "صناعة محلية 100%" : "100% FABRIQUÉ EN TUNISIE",
               desc: isAr ? "من الفكرة حتى التغليف في معامل تونسية مطابقة للمعايير الصحية." : "De la formulation au packaging, tout est produit dans nos ateliers tunisiens.",
               bg: "var(--sun)",
             },
             {
-              icon: "🍬",
-              title: isAr ? "نكهة منعشة ولذيذة" : "GOÛT POP FRUITÉ",
-              desc: isAr ? "قرص مضغ لذيذ تأخذه معك أينما كنت بدون الحاجة للماء." : "À croquer ou laisser fondre. Un goût gourmand que tu auras plaisir à prendre.",
+              icon: Leaf,
+              title: isAr ? "كبسولة نباتية 100%" : "GÉLULE 100% VÉGÉTALE",
+              desc: isAr ? "كبسولة نباتية تبلعها مع كأس ماء، بكافيين طبيعي من الغوارانا." : "Une gélule végétale à avaler avec un verre d'eau. Caféine naturelle issue du guarana.",
               bg: "var(--sky)",
             },
           ].map((pillar) => (
             <div
               key={pillar.title}
-              className="p-6 rounded-3xl border-3"
+              className="p-6 rounded-3xl border"
               style={{
                 backgroundColor: pillar.bg,
-                borderColor: "var(--ink)",
-                boxShadow: "5px 5px 0 var(--ink)",
+                borderColor: "var(--line)",
+                boxShadow: "var(--shadow-card)",
               }}
             >
-              <span className="text-3xl mb-3 block">{pillar.icon}</span>
-              <h3 className="heading-lg text-lg text-ink uppercase mb-2">
+              <pillar.icon className="w-6 h-6 mb-3 text-harissa" strokeWidth={1.5} />
+              <h3 className="heading-lg text-lg text-ink mb-2">
                 {pillar.title}
               </h3>
               <p className="text-xs sm:text-sm text-ink/75 leading-relaxed font-sans">
