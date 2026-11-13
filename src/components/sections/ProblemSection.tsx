@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Coffee, Zap, BatteryLow } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -24,16 +25,27 @@ export default function ProblemSection() {
   return (
     <section className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-paper border-y border-line">
       <div className="max-w-7xl mx-auto">
-        <div className="max-w-2xl mb-10">
-          <p className="eyebrow mb-3">{isAr ? "المشكلة" : "Le problème"}</p>
-          <h2 className="heading-xl text-3xl sm:text-5xl text-ink mb-4">
-            {isAr ? "تعرف النهار هذا؟" : "Tu connais cette journée ?"}
-          </h2>
-          <p className="text-lg text-muted">
-            {isAr
-              ? "القهوة وحدها تعطيك دفعة… و بعد تخلّصها. كل ما تزيد قهوة، تولّي نيرفي أكثر، و الطيحة تجي أقوى."
-              : "Le café seul donne un coup de fouet… puis te le fait payer. Plus tu en rajoutes, plus tu es nerveux, et plus le coup de barre arrive fort."}
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-14 items-center mb-10">
+          <div>
+            <p className="eyebrow mb-3">{isAr ? "المشكلة" : "Le problème"}</p>
+            <h2 className="heading-xl text-3xl sm:text-5xl text-ink mb-4">
+              {isAr ? "تعرف النهار هذا؟" : "Tu connais cette journée ?"}
+            </h2>
+            <p className="text-lg text-muted">
+              {isAr
+                ? "القهوة وحدها تعطيك دفعة… و بعد تخلّصها. كل ما تزيد قهوة، تولّي نيرفي أكثر، و الطيحة تجي أقوى."
+                : "Le café seul donne un coup de fouet… puis te le fait payer. Plus tu en rajoutes, plus tu es nerveux, et plus le coup de barre arrive fort."}
+            </p>
+          </div>
+          <div className="relative aspect-[4/3] lg:aspect-[3/4] max-h-[460px] rounded-[20px] overflow-hidden bg-cream">
+            <Image
+              src="/images/problem-coffee-desk.webp"
+              alt={isAr ? "بيرو فيه برشا فناجن قهوة فارغة في العشية" : "Bureau en fin d'après-midi avec plusieurs tasses de café vides"}
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover"
+            />
+          </div>
         </div>
         <ol className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map(({ Icon, time, title, text }, i) => (

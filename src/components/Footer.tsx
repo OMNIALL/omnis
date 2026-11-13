@@ -24,6 +24,7 @@ export default function Footer() {
       links: [
         { label: isAr ? "قصتنا وراء أومنيس" : "Notre histoire", href: "/about" },
         { label: isAr ? "المكونات والجرعات" : "Ingrédients actifs", href: "/ingredients" },
+        { label: isAr ? "الأبحاث" : "La science", href: "/science" },
         { label: isAr ? "الأسئلة الشائعة" : "Foire aux questions", href: "/faq" },
         { label: isAr ? "تتبع طلبيتك مباشرة" : "Suivi de commande", href: "/track" },
       ],

@@ -46,17 +46,15 @@ export async function placeOrder(
   isAr = false
 ): Promise<PlacedOrder> {
   if (items.length === 0) {
-    throw new OrderError(isAr ? "السلة فارغة." : "Ton panier est vide.", "cart");
+    throw new OrderError(ERROR_COPY.cart[isAr ? "ar" : "fr"], "cart");
   }
   const phone = normalizeTunisianPhone(form.phone);
   if (!phone) {
-    throw new OrderError(
-      isAr ? "رقم غير صحيح: 8 أرقام، مثال 98 123 456" : "Numéro invalide : 8 chiffres, ex. 98 123 456",
-      "phone"
-    );
+    throw new OrderError(ERROR_COPY.phone[isAr ? "ar" : "fr"], "phone");
   }
 
-  let data: { success?: boolean; error?: string; order?: PlacedOrder } | null = null;
+  let data: { success?: boolean; error?: string; codes?: string[]; order?: PlacedOrder } | null = null;
+  let networkFailed = false;
   try {
     const res = await fetch("/api/orders", {
       method: "POST",
@@ -64,12 +62,17 @@ export async function placeOrder(
       body: JSON.stringify({ ...form, phone, items, utm: getUtm() }),
     });
     data = await res.json().catch(() => null);
-    if (!res.ok || !data?.success || !data.order) throw new Error(data?.error);
-  } catch (err) {
-    const serverMsg = err instanceof Error && err.message && res400(data) ? err.message : "";
-    throw new OrderError(
-      serverMsg || (isAr ? "ما تنجّمش الكوموند تتسجّل." : "Ta commande n'a pas pu être enregistrée.")
-    );
+  } catch {
+    networkFailed = true;
+  }
+
+  if (networkFailed || !data?.success || !data.order) {
+    const codes = data?.codes ?? [];
+    const lang = isAr ? "ar" : "fr";
+    const known = codes.filter((c): c is ErrorCode => c in ERROR_COPY);
+    const message = known.length ? known.map((c) => ERROR_COPY[c][lang]).join(" ") : ERROR_COPY.storage[lang];
+    const field = known.includes("phone") ? "phone" : known.includes("cart") ? "cart" : undefined;
+    throw new OrderError(message, field);
   }
 
   const order = data.order;
@@ -77,9 +80,45 @@ export async function placeOrder(
   return order;
 }
 
-// Validation errors (400) carry a readable message; storage errors don't.
-const res400 = (data: { error?: string } | null) =>
-  !!data?.error && !/Enregistrement|Stockage/.test(data.error);
+/** Customer-facing copy for the error codes returned by /api/orders: what happened + what to do. */
+const ERROR_COPY = {
+  name: {
+    fr: "Écris ton nom et prénom (3 lettres minimum).",
+    ar: "اكتب اسمك و لقبك (3 حروف على الأقل).",
+  },
+  bad_name: {
+    fr: "Ton nom ne peut contenir que des lettres.",
+    ar: "الاسم لازم يكون حروف برك.",
+  },
+  phone: {
+    fr: "Numéro invalide : 8 chiffres, ex. 98 123 456",
+    ar: "رقم غير صحيح: 8 أرقام، مثال 98 123 456",
+  },
+  governorate: { fr: "Choisis ton gouvernorat.", ar: "اختار الولاية متاعك." },
+  address: {
+    fr: "Ajoute ta ville et ta rue pour que le livreur te trouve.",
+    ar: "زيد المدينة و النهج باش الليفرور يلقاك.",
+  },
+  cart: { fr: "Ton panier est vide.", ar: "السلة فارغة." },
+  too_fast: { fr: "Vérifie tes informations puis réessaie.", ar: "ثبّت في المعلومات متاعك و عاود جرّب." },
+  rate_phone: {
+    fr: "Tu as déjà commandé aujourd'hui avec ce numéro. Pour une autre commande, écris-nous sur WhatsApp.",
+    ar: "عملت كوموند اليوم بالنومرو هذا. باش تزيد وحدة، ابعثلنا على الواتساب.",
+  },
+  rate_ip: {
+    fr: "Plusieurs commandes viennent d'être passées depuis cette connexion. Pour en ajouter une, écris-nous sur WhatsApp.",
+    ar: "تعدّاو برشا كوموندات من الكونيكسيون هذي. باش تزيد وحدة، ابعثلنا على الواتساب.",
+  },
+  invalid: {
+    fr: "Ta commande n'est pas passée. Recharge la page et réessaie.",
+    ar: "الكوموند ما تعدّاتش. عاود حلّ الصفحة و جرّب.",
+  },
+  storage: {
+    fr: "Ta commande n'est pas passée, c'est un souci de notre côté. Réessaie dans une minute, ou envoie-la sur WhatsApp.",
+    ar: "الكوموند ما تعدّاتش، المشكل من عندنا. عاود بعد دقيقة، ولا ابعثها على الواتساب.",
+  },
+} as const;
+type ErrorCode = keyof typeof ERROR_COPY;
 
 // ---- Last order hand-off to the /merci thank-you page ----
 export const LAST_ORDER_KEY = "omnis_last_order";

@@ -4,8 +4,14 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOCUS_BUNDLES, FOCUS_UNIT_PRICE } from "@/lib/pricing";
-import BottleVisual from "./brand/BottleVisual";
+import Image from "next/image";
 import { orderHref } from "@/config/site";
+
+const PACK_IMAGES: Record<1 | 2 | 3, string> = {
+  1: "/images/focus-bottle-front.webp",
+  2: "/images/bundle-2.webp",
+  3: "/images/bundle-3.webp",
+};
 
 /** Home "Pack & économise" block — links into the product page with the pack pre-selected. */
 export default function BundleSection() {
@@ -48,10 +54,14 @@ export default function BundleSection() {
                     </span>
                   )}
                 </div>
-                <div className="flex items-end justify-center gap-1 h-32">
-                  {Array.from({ length: b.qty }).map((_, i) => (
-                    <BottleVisual key={i} className={b.qty === 1 ? "w-20" : "w-16"} />
-                  ))}
+                <div className="relative aspect-square rounded-[14px] overflow-hidden bg-cream">
+                  <Image
+                    src={PACK_IMAGES[b.qty]}
+                    alt={isAr ? `${b.qty} علب OMNIS FOCUS` : `${b.qty} flacon${b.qty > 1 ? "s" : ""} OMNIS FOCUS`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <p className="heading-lg text-2xl text-ink">

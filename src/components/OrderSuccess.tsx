@@ -17,12 +17,12 @@ export default function OrderSuccess({ order }: { order: PlacedOrder }) {
   const confirmText = `Bonjour OMNIS, je confirme ma commande ${order.id} (${summary}, ${order.total} DT, paiement à la livraison). Nom : ${order.fullName}. Adresse : ${order.address}${order.city ? ", " + order.city : ""} (${order.governorate}).`;
 
   const rows: [string, React.ReactNode][] = [
-    [isAr ? "المنتوج" : "Produits", summary],
+    [isAr ? "الكوموند" : "Ta commande", summary],
     [isAr ? "الاسم" : "Destinataire", order.fullName],
     [isAr ? "التليفون" : "Téléphone", <span key="p" dir="ltr">{order.phone}</span>],
     [isAr ? "العنوان" : "Adresse", `${order.address}${order.city ? `, ${order.city}` : ""} (${order.governorate})`],
     [
-      isAr ? "تخلّص كي توصلك" : "À payer au livreur",
+      isAr ? "تخلّص للليفرور" : "À payer au livreur",
       `${order.total} DT${order.shippingFee === 0 ? (isAr ? " · التوصيل مجاني" : " · livraison offerte") : ""}`,
     ],
   ];
@@ -34,9 +34,9 @@ export default function OrderSuccess({ order }: { order: PlacedOrder }) {
       className="card max-w-2xl mx-auto p-6 sm:p-10 my-4 sm:my-8"
     >
       <CheckCircle2 className="w-10 h-10 text-emerald-600 mb-4" strokeWidth={1.5} />
-      <p className="eyebrow mb-2">{isAr ? "تسجّلت الكوموند" : "Commande enregistrée"}</p>
+      <p className="eyebrow mb-2">{isAr ? "بقات خطوة وحدة" : "Plus qu'une étape"}</p>
       <h1 className="heading-xl text-3xl sm:text-4xl text-ink mb-2">
-        {isAr ? "مبروك! الـ FOCUS متاعك في الثنية." : "Merci ! Ton FOCUS est en route."}
+        {isAr ? "شكراً! الكوموند متاعك وصلتنا." : "Merci ! Ta commande est bien reçue."}
       </h1>
       <p className="text-muted mb-6">
         {isAr ? "رقم الكوموند: " : "Numéro de commande : "}
