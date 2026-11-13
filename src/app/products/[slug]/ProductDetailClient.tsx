@@ -7,10 +7,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Banknote,
-  BookOpen,
-  Briefcase,
   Check,
-  Dumbbell,
   MessageCircle,
   Truck,
 } from "lucide-react";
@@ -23,6 +20,8 @@ import OrderSuccess from "@/components/OrderSuccess";
 import ComingSoonProduct from "@/components/ComingSoonProduct";
 import CompositionPanel from "@/components/CompositionPanel";
 import EnergyCurve from "@/components/EnergyCurve";
+import ScienceSection from "@/components/sections/ScienceSection";
+import MomentsSection from "@/components/sections/MomentsSection";
 import ProductGallery from "@/components/ProductGallery";
 import TunisiaFlag from "@/components/brand/TunisiaFlag";
 import { products, focusProduct } from "@/data/products";
@@ -117,12 +116,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
         ],
         formulaTitle: "التركيبة، بالتفصيل.",
         formulaText: "الكافيين يفيّقك، و الـ L-théanine تخلّيه رايق، و فيتامين B6 و B12 يساهمو في نقص التعب.",
-        forWho: "لشكون؟",
-        who: [
-          { Icon: BookOpen, title: "الباك و القراية", text: "باش تقعد مركّز في المراجعة، من غير 3 قهاوي و كانيتات." },
-          { Icon: Briefcase, title: "الخدمة", text: "الرينيونات، الـ deadlines، و الطيحة متاع الوحدة و نص العشية." },
-          { Icon: Dumbbell, title: "السبور", text: "إينرجي قبل السيونس، و راسك صافي في التمرين." },
-        ],
         faqTitle: "أسئلة",
         sticky: "كوموندي",
       }
@@ -154,12 +147,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
         formulaTitle: "La formule, en détail.",
         formulaText:
           "La caféine apporte l'énergie, la L-théanine l'adoucit, et les vitamines B6 et B12 contribuent à réduire la fatigue.",
-        forWho: "Pour qui ?",
-        who: [
-          { Icon: BookOpen, title: "Bac & études", text: "Rester concentré sur tes révisions, sans enchaîner cafés et canettes." },
-          { Icon: Briefcase, title: "Travail", text: "Réunions, deadlines et le coup de barre de 14h." },
-          { Icon: Dumbbell, title: "Sport", text: "De l'énergie avant la séance, la tête claire pendant l'effort." },
-        ],
         faqTitle: "Questions fréquentes",
         sticky: "Je commande",
       };
@@ -399,19 +386,11 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           <EnergyCurve compact />
         </div>
 
-        {/* For who */}
-        <section className="mt-16 sm:mt-24">
-          <h2 className="heading-xl text-3xl sm:text-4xl text-ink mb-8">{T.forWho}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {T.who.map(({ Icon, title, text }) => (
-              <div key={title} className="border-t border-ink pt-5">
-                <Icon className="w-6 h-6 text-harissa mb-3" strokeWidth={1.5} />
-                <p className="heading-lg text-xl text-ink mb-1.5">{title}</p>
-                <p className="text-muted">{text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Research + usage moments (full-bleed sections: cancel <main> side padding) */}
+        <div className="-mx-4 sm:-mx-6 lg:-mx-8 mt-8">
+          <ScienceSection tone="paper" />
+          <MomentsSection />
+        </div>
 
         {/* FAQ */}
         <section className="mt-16 sm:mt-24 max-w-3xl">
