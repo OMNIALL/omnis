@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { captureUtm } from "@/lib/analytics";
+import { captureUtm, trackContact } from "@/lib/analytics";
 
 const META_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const TIKTOK_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID;
@@ -12,6 +12,16 @@ const TIKTOK_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID;
 export default function AdPixels() {
   const pathname = usePathname();
   const first = useRef(true);
+
+  // WhatsApp clicks are a key COD funnel step (questions, confirmations): one listener for every wa.me link.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement | null)?.closest?.("a[href*='wa.me/']");
+      if (a) trackContact(window.location.pathname);
+    };
+    document.addEventListener("click", onClick, { capture: true });
+    return () => document.removeEventListener("click", onClick, { capture: true });
+  }, []);
 
   useEffect(() => {
     captureUtm();

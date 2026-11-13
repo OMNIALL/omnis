@@ -30,6 +30,7 @@ export async function notifyNewOrder(order: Order): Promise<void> {
         <tr><td><b>Total (COD)</b></td><td>${order.total} DT (livraison ${order.shippingFee} DT)</td></tr>
         <tr><td><b>Note</b></td><td>${esc(order.notes || "—")}</td></tr>
         <tr><td><b>Source</b></td><td>${esc(utm)}</td></tr>
+        <tr><td><b>Variante hero</b></td><td>${esc(order.abVariant || "A")}</td></tr>
       </table>
     </div>`;
 

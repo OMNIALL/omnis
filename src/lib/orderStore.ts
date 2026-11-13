@@ -29,6 +29,8 @@ export interface Order {
   total: number;
   status: OrderStatus;
   utm?: Record<string, string>;
+  /** Hero A/B variant the customer saw ("A" | "B"). */
+  abVariant?: string;
 }
 
 export class DuplicateOrderIdError extends Error {}

@@ -47,11 +47,21 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {isAr ? (
-              <>الإينرجي متاع قهوة. <span className="text-harissa">من غير الطيحة.</span></>
-            ) : (
-              <>L&apos;énergie d&apos;un café. <span className="text-harissa italic">Sans le crash.</span></>
-            )}
+            {/* A/B: both variants render; CSS shows the one in <html data-hero> (src/lib/abTest.ts) */}
+            <span className="hero-a">
+              {isAr ? (
+                <>الإينرجي متاع قهوة. <span className="text-harissa">من غير الطيحة.</span></>
+              ) : (
+                <>L&apos;énergie d&apos;un café. <span className="text-harissa italic">Sans le crash.</span></>
+              )}
+            </span>
+            <span className="hero-b">
+              {isAr ? (
+                <>ثالث قهوة ما عادش تنفع؟ <span className="text-harissa">بدّلها بكاشية.</span></>
+              ) : (
+                <>Ton 3ème café ne marche plus ? <span className="text-harissa italic">Passe à une gélule.</span></>
+              )}
+            </span>
           </motion.h1>
 
           <motion.p

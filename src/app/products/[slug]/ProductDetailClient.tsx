@@ -28,7 +28,7 @@ import TunisiaFlag from "@/components/brand/TunisiaFlag";
 import { products, focusProduct } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { trackAddToCart, trackViewContent } from "@/lib/analytics";
+import { trackAddToCart, trackInitiateCheckout, trackViewContent } from "@/lib/analytics";
 import { DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice } from "@/lib/pricing";
 import { whatsappLink } from "@/config/site";
 import { merciHref, type PlacedOrder } from "@/lib/placeOrder";
@@ -320,7 +320,19 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
             {/* Inline COD order form */}
             <div ref={formRef} className="card p-5 sm:p-6 scroll-mt-24">
               <p className="heading-lg text-xl text-ink mb-4">{T.orderTitle}</p>
-              <CodOrderForm id="order-form" items={bundleItems} total={total} onSuccess={onPlaced} />
+              <CodOrderForm
+                id="order-form"
+                items={bundleItems}
+                total={total}
+                onSuccess={onPlaced}
+                onStart={() =>
+                  trackInitiateCheckout(
+                    [{ id: product.id, name: product.name, price: total / qty, quantity: qty }],
+                    total,
+                    "product_form"
+                  )
+                }
+              />
               <button
                 type="button"
                 onClick={handleAddToCart}
