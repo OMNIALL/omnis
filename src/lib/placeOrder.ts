@@ -13,6 +13,8 @@ export interface OrderFormData {
   /** Anti-spam: honeypot value and first-interaction timestamp. */
   hp_extra?: string;
   startedAt?: number;
+  /** Hero A/B variant shown to this visitor (saved with the order). */
+  abVariant?: string;
 }
 
 export interface PlacedOrder {

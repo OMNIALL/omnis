@@ -7,6 +7,7 @@ import { normalizeTunisianPhone } from "@/lib/phone";
 import { OrderError, placeOrder, type PlacedOrder } from "@/lib/placeOrder";
 import { useLanguage } from "@/context/LanguageContext";
 import { whatsappLink } from "@/config/site";
+import { getHeroVariant } from "@/lib/abTest";
 
 interface Props {
   /** What is being ordered (prices are recomputed on the server). */
@@ -17,13 +18,15 @@ interface Props {
   /** Show the optional "notes for the courier" field. */
   showNotes?: boolean;
   id?: string;
+  /** Called once, on the customer's first interaction with the form (funnel: "form start"). */
+  onStart?: () => void;
 }
 
 const inputCls =
   "w-full px-4 py-3 rounded-xl border text-base bg-white focus:outline-none focus:ring-2 focus:ring-harissa/40 focus:border-ink font-medium";
 
 /** Minimal Cash-on-Delivery order form: name, phone, governorate, address. */
-export default function CodOrderForm({ items, total, onSuccess, showNotes = false, id }: Props) {
+export default function CodOrderForm({ items, total, onSuccess, showNotes = false, id, onStart }: Props) {
   const { language } = useLanguage();
   const isAr = language === "ar";
   const [form, setForm] = useState({ fullName: "", phone: "", governorate: "", address: "", notes: "" });
@@ -45,7 +48,7 @@ export default function CodOrderForm({ items, total, onSuccess, showNotes = fals
     setSubmitError("");
     setSubmitting(true);
     try {
-      const order = await placeOrder({ ...form, hp_extra: hp, startedAt: startedAt.current }, items.map((i) => ({ id: i.id, quantity: i.quantity })), isAr);
+      const order = await placeOrder({ ...form, hp_extra: hp, startedAt: startedAt.current, abVariant: getHeroVariant() }, items.map((i) => ({ id: i.id, quantity: i.quantity })), isAr);
       onSuccess(order);
     } catch (err) {
       if (err instanceof OrderError && err.field === "phone") setPhoneError(err.message);
@@ -62,7 +65,10 @@ export default function CodOrderForm({ items, total, onSuccess, showNotes = fals
       id={id}
       onSubmit={submit}
       onFocusCapture={() => {
-        if (!startedAt.current) startedAt.current = Date.now();
+        if (!startedAt.current) {
+          startedAt.current = Date.now();
+          onStart?.();
+        }
       }}
       className="flex flex-col gap-3 scroll-mt-28"
       noValidate={false}

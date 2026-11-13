@@ -224,6 +224,15 @@ body {
 }
 
 /* ============================================
+   Hero A/B test — variant chosen in <head> before paint (src/lib/abTest.ts)
+   ============================================ */
+
+/* variant B hidden by default */
+.hero-b { display: none; }
+html[data-hero="B"] .hero-a { display: none; }
+html[data-hero="B"] .hero-b { display: inline; }
+
+/* ============================================
    Cards
    ============================================ */
 

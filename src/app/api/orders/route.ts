@@ -154,6 +154,7 @@ export async function POST(req: Request) {
     total: priced.total,
     status: "Nouveau",
     ...(utm && Object.keys(utm).length ? { utm } : {}),
+    ...(body.abVariant === "A" || body.abVariant === "B" ? { abVariant: body.abVariant } : {}),
   };
 
   for (let attempt = 0; attempt < 3; attempt++) {

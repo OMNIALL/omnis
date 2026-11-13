@@ -5,6 +5,9 @@
  * Every helper is a safe no-op when a pixel isn't loaded.
  */
 
+import { track as vercelTrack } from "@vercel/analytics";
+import { getHeroVariant } from "@/lib/abTest";
+
 type Params = Record<string, unknown>;
 type W = Window & {
   fbq?: (...args: unknown[]) => void;
@@ -23,6 +26,15 @@ export interface TrackedItem {
 function send(metaEvent: string, ttEvent: string, params: Params, eventId?: string) {
   if (typeof window === "undefined") return;
   const w = window as W;
+  // Vercel Web Analytics custom events (recorded on Vercel Pro; harmless no-op otherwise).
+  try {
+    const v = params.value;
+    vercelTrack(metaEvent, {
+      ...(typeof v === "number" ? { value: v } : {}),
+      variant: getHeroVariant(),
+      ...(typeof params.source === "string" ? { source: params.source } : {}),
+    });
+  } catch {}
   try {
     w.fbq?.("track", metaEvent, params, eventId ? { eventID: eventId } : undefined);
   } catch {}
@@ -48,8 +60,12 @@ export const trackViewContent = (item: Omit<TrackedItem, "quantity">) =>
 export const trackAddToCart = (item: TrackedItem) =>
   send("AddToCart", "AddToCart", itemsParams([item], item.price * item.quantity));
 
-export const trackInitiateCheckout = (items: TrackedItem[], value: number) =>
-  send("InitiateCheckout", "InitiateCheckout", itemsParams(items, value));
+/** Fired when checkout starts: on /checkout load, or on first interaction with the product-page order form. */
+export const trackInitiateCheckout = (items: TrackedItem[], value: number, source = "checkout") =>
+  send("InitiateCheckout", "InitiateCheckout", { ...itemsParams(items, value), source });
+
+/** WhatsApp clicks (questions, confirmations, waitlist). */
+export const trackContact = (source: string) => send("Contact", "Contact", { source });
 
 /** orderId is used as the dedup event id (match it in a future Conversions API call). */
 export const trackPurchase = (items: TrackedItem[], value: number, orderId: string) =>

@@ -16,7 +16,7 @@ var SHEET_NAME = "Commandes";
 var HEADERS = [
   "id", "createdAt", "status", "fullName", "phone", "governorate", "city", "address", "notes",
   "products", "quantity", "subtotal", "shippingFee", "total", "paymentMethod",
-  "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "itemsJson",
+  "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "itemsJson", "abVariant",
 ];
 var STATUSES = ["Nouveau", "En préparation", "Expédié", "Livré", "Annulé"];
 
@@ -69,6 +69,10 @@ function sheet_() {
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
   }
+  // Upgrade older sheets: add any header columns introduced after the first deploy (e.g. abVariant).
+  if (sheet.getLastRow() > 0 && sheet.getLastColumn() < HEADERS.length) {
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight("bold").setBackground("#FFC83D");
+  }
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
@@ -117,6 +121,7 @@ function rowToOrder_(r) {
     shippingFee: Number(o.shippingFee),
     total: Number(o.total),
     utm: Object.keys(utm).length ? utm : undefined,
+    abVariant: o.abVariant ? String(o.abVariant) : undefined,
   };
 }
 
@@ -151,6 +156,7 @@ function create_(sheet, o) {
     o.subtotal, o.shippingFee, o.total, o.paymentMethod,
     utm.utm_source || "", utm.utm_medium || "", utm.utm_campaign || "", utm.utm_content || "", utm.utm_term || "",
     JSON.stringify(o.items || []),
+    o.abVariant || "",
   ];
   sheet.appendRow(row);
   return { ok: true };

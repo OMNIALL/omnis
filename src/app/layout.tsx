@@ -5,6 +5,8 @@ import { CartProvider } from "@/context/CartContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import AdPixels from "@/components/AdPixels";
 import { siteUrl } from "@/lib/siteUrl";
+import { AB_BOOT_SCRIPT } from "@/lib/abTest";
+import { Analytics } from "@vercel/analytics/next";
 
 // Logo / one display word only.
 const unbounded = Unbounded({
@@ -86,7 +88,13 @@ export default function RootLayout({
     <html
       lang="fr"
       className={`${unbounded.variable} ${dmSans.variable} ${fraunces.variable} ${plexArabic.variable} h-full antialiased`}
+      // data-hero (A/B variant) and dir/lang are set on the client before/after hydration.
+      suppressHydrationWarning
     >
+      <head>
+        {/* Picks the hero A/B variant before first paint (no flicker). See src/lib/abTest.ts */}
+        <script dangerouslySetInnerHTML={{ __html: AB_BOOT_SCRIPT }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
           <CartProvider>
@@ -94,6 +102,8 @@ export default function RootLayout({
             {children}
           </CartProvider>
         </LanguageProvider>
+        {/* Page views + Web Vitals (Vercel Web Analytics — enable it in the Vercel dashboard). */}
+        <Analytics />
       </body>
     </html>
   );
