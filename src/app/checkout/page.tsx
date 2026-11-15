@@ -11,7 +11,7 @@ import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { focusProduct } from "@/data/products";
 import { trackAddToCart, trackInitiateCheckout } from "@/lib/analytics";
-import { DELIVERY_TIME, FREE_SHIPPING_MIN_BOTTLES, linePrice } from "@/lib/pricing";
+import { FOCUS_UNIT_PRICE, DELIVERY_TIME, FREE_SHIPPING_MIN_BOTTLES, linePrice } from "@/lib/pricing";
 import { merciHref, type PlacedOrder } from "@/lib/placeOrder";
 import { useRouter } from "next/navigation";
 
@@ -49,7 +49,7 @@ export default function CheckoutPage() {
         form: "معلوماتك",
         summary: "الكوموند متاعك",
         empty: "السلّة فارغة.",
-        addFocus: " زيد FOCUS (39 DT)",
+        addFocus: ` زيد FOCUS (${FOCUS_UNIT_PRICE} DT)`,
         qty: "الكمية",
         subtotal: "المجموع",
         savings: "التوفير",
@@ -66,7 +66,7 @@ export default function CheckoutPage() {
         form: "Tes coordonnées",
         summary: "RÉCAPITULATIF",
         empty: "Ton panier est vide.",
-        addFocus: " Ajouter FOCUS (39 DT)",
+        addFocus: ` Ajouter FOCUS (${FOCUS_UNIT_PRICE} DT)`,
         qty: "Quantité",
         subtotal: "Sous-total",
         savings: "Économie pack",

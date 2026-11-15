@@ -1,6 +1,7 @@
 /**
  * Single source of truth for prices — used by the product page, cart, checkout AND the orders API.
- * FOCUS bundles: 1 = 39 DT · 2 = 72 DT · 3 = 99 DT · each extra bottle beyond 3 = 33 DT.
+ * FOCUS bundles: 1 = 59 DT · 2 = 99 DT · 3 = 129 DT · each extra bottle beyond 3 = 43 DT.
+ * Set 2026-11-15 from a 10 DT unit cost (marketing/pricing-margins.md): ~66–68 % gross margin.
  * Delivery: 7 DT, free from 2 bottles.
  */
 
@@ -9,8 +10,8 @@ export const FREE_SHIPPING_MIN_BOTTLES = 2;
 export const DELIVERY_TIME = { fr: "24–48h", ar: "24-48 ساعة" };
 
 export const FOCUS_ID = "focus-30";
-export const FOCUS_UNIT_PRICE = 39;
-const EXTRA_BOTTLE_PRICE = 33;
+export const FOCUS_UNIT_PRICE = 59;
+const EXTRA_BOTTLE_PRICE = 43;
 
 export interface Bundle {
   qty: 1 | 2 | 3;
@@ -19,13 +20,13 @@ export interface Bundle {
 }
 
 export const FOCUS_BUNDLES: Bundle[] = [
-  { qty: 1, price: 39 },
+  { qty: 1, price: FOCUS_UNIT_PRICE },
   // "Recommandé", not "Le plus choisi": no sales data yet to back a popularity claim.
-  { qty: 2, price: 72, tag: { fr: "Recommandé", ar: "ننصحوك بيه" } },
-  { qty: 3, price: 99, tag: { fr: "Meilleur prix", ar: "أحسن سوم" } },
+  { qty: 2, price: 99, tag: { fr: "Recommandé", ar: "ننصحوك بيه" } },
+  { qty: 3, price: 129, tag: { fr: "Meilleur prix", ar: "أحسن سوم" } },
 ];
 
-/** Price per day for a FOCUS bundle (1 capsule/day, 30 per bottle), formatted "1,10" for display. */
+/** Price per day for a FOCUS bundle (1 capsule/day, 30 per bottle), formatted "1,43" for display. */
 export const pricePerDay = (qty: number) =>
   (FOCUS_BUNDLES[qty - 1].price / (qty * 30)).toFixed(2).replace(".", ",");
 

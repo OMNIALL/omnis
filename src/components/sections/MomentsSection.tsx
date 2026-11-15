@@ -1,5 +1,6 @@
 "use client";
 
+import { FOCUS_UNIT_PRICE } from "@/lib/pricing";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Laptop, Dumbbell, BookOpen, Gamepad2, type LucideIcon } from "lucide-react";
@@ -114,7 +115,7 @@ export default function MomentsSection() {
         ))}
       </ul>
       <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
-        <Button href={ORDER_HREF}>{isAr ? "كوموندي · 39 DT" : "Je commande · 39 DT"}</Button>
+        <Button href={ORDER_HREF}>{isAr ? `كوموندي · ${FOCUS_UNIT_PRICE} DT` : `Je commande · ${FOCUS_UNIT_PRICE} DT`}</Button>
         <p className="text-sm text-muted">
           {isAr ? "كاشية في النهار، زوز ماكسيموم · موش في الليل" : "1 gélule par jour, 2 maximum · pas le soir"}
         </p>

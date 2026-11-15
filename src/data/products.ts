@@ -1,3 +1,4 @@
+import { FOCUS_UNIT_PRICE } from "@/lib/pricing";
 export interface Product {
   id: string;
   name: string;
@@ -32,7 +33,7 @@ export const products: Product[] = [
     tagline: "Des gélules qui boostent ta concentration, sans le crash.",
     description:
       "FOCUS par OMNIS combine L-Théanine et Caféine naturelle de guarana avec des Vitamines B6 et B12 pour une concentration nette, sans nervosité ni crash. 30 gélules végétales, fabriquées en Tunisie.",
-    price: 39,
+    price: FOCUS_UNIT_PRICE,
     currency: "TND",
     color: "#E8432A",
     bgColor: "var(--harissa)",
@@ -85,7 +86,7 @@ export const products: Product[] = [
     slug: "energie",
     tagline: "L'énergie qui dure, sans le crash.",
     description: "Bientôt disponible.",
-    price: 39,
+    price: FOCUS_UNIT_PRICE,
     currency: "TND",
     color: "#FFC83D",
     bgColor: "var(--sun)",
@@ -103,7 +104,7 @@ export const products: Product[] = [
     slug: "sommeil",
     tagline: "Un sommeil profond, naturellement.",
     description: "Bientôt disponible.",
-    price: 39,
+    price: FOCUS_UNIT_PRICE,
     currency: "TND",
     color: "#8CC4FF",
     bgColor: "var(--sky)",
@@ -121,7 +122,7 @@ export const products: Product[] = [
     slug: "immunite",
     tagline: "Ton bouclier au quotidien.",
     description: "Bientôt disponible.",
-    price: 39,
+    price: FOCUS_UNIT_PRICE,
     currency: "TND",
     color: "#FFF4E3",
     bgColor: "var(--cream)",

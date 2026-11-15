@@ -1,5 +1,6 @@
 "use client";
 
+import { FOCUS_UNIT_PRICE } from "@/lib/pricing";
 import { ORDER_HREF } from "@/config/site";
 import { Coffee, Dna, Leaf, Zap } from "lucide-react";
 import Link from "next/link";
@@ -154,11 +155,11 @@ export default function IngredientsPage() {
           </h3>
           <p className="text-sm text-ink/75 max-w-md mx-auto mb-6">
             {isAr
-              ? "اطلب علبتك الآن بـ 39 د.ت فقط مع توصيل سريع والدفع عند الاستلام."
+              ? `اطلب علبتك الآن بـ ${FOCUS_UNIT_PRICE} د.ت فقط مع توصيل سريع والدفع عند الاستلام.`
               : "30 gélules végétales pour booster tes journées, tes sessions de travail ou tes révisions."}
           </p>
           <Link href={ORDER_HREF} className="btn-sticker btn-primary px-8 py-3.5">
-            {isAr ? "اطلب FOCUS الآن (39 د.ت)" : "Commander FOCUS (39 TND)"}
+            {isAr ? `اطلب FOCUS الآن (${FOCUS_UNIT_PRICE} د.ت)` : `Commander FOCUS (${FOCUS_UNIT_PRICE} TND)`}
           </Link>
         </div>
       </main>

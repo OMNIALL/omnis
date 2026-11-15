@@ -3,7 +3,7 @@
 Fill the 4 sheets, then paste them into the **Brand Positioning AI project** (system prompt in `Brand_Positioning_Claude_Project_Setup.docx`) with the template message. Sheet 1 is filled from lab-confirmed facts; sheets 2–4 need real data — **never fill them with guesses**.
 
 **Brand context**
-- Brand: OMNIS · Product: OMNIS FOCUS (30 gélules, L-théanine 180 mg + caféine naturelle de guarana 100 mg + B6 + B12) · 39 / 72 / 99 DT, COD
+- Brand: OMNIS · Product: OMNIS FOCUS (30 gélules, L-théanine 180 mg + caféine naturelle de guarana 100 mg + B6 + B12) · 59 / 99 / 129 DT, COD
 - Market: Tunisia (all 24 governorates), FR + Darija
 - Current positioning: "L'énergie d'un café, sans le crash." — transparent Tunisian focus supplement, paid on delivery
 

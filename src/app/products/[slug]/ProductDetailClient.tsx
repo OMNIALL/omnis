@@ -31,7 +31,7 @@ import { products, focusProduct } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { trackAddToCart, trackInitiateCheckout, trackViewContent } from "@/lib/analytics";
-import { DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice, pricePerDay } from "@/lib/pricing";
+import { FOCUS_UNIT_PRICE, DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice, pricePerDay } from "@/lib/pricing";
 import { GUARANTEE, GUARANTEE_ACTIVE, GUIDE, GUIDE_ACTIVE } from "@/config/offer";
 import { whatsappLink } from "@/config/site";
 import { merciHref, type PlacedOrder } from "@/lib/placeOrder";
@@ -240,7 +240,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
               </h1>
               <p className="text-lg text-muted mb-4">{T.tagline}</p>
               <p className="flex items-baseline gap-2 mb-5">
-                <span className="heading-lg text-3xl text-ink">39 DT</span>
+                <span className="heading-lg text-3xl text-ink">{FOCUS_UNIT_PRICE} DT</span>
                 <span className="text-sm text-muted">
                   {isAr ? "· تخلّص كي توصلك" : "· paiement à la livraison"}
                 </span>

@@ -40,7 +40,7 @@ ad creative format tree, LPM cheat sheet (weekly iteration prompts), content-sys
 ### The three thresholds (cold Tunisian visitor, today)
 | Threshold | Where it is | What moves it for OMNIS |
 |---|---|---|
-| **Desire vs cost** (price, effort, time, sacrifice) | Close: the 14h crash is felt daily, 39 DT is low, COD = no effort | Identity framing, daily cost (1,10 DT/day), guide + follow-up |
+| **Desire vs cost** (price, effort, time, sacrifice) | Close: the 14h crash is felt daily, 59 DT ≈ 2 DT/day, COD = no effort | Identity framing, daily cost (1,43 DT/day in pack 3), guide + follow-up |
 | **Certainty** ("will it work for me?") | **Low** — supplement skepticism is extreme in Tunisia | Mechanism reframe, studies, *doubt-first* testimonials from people like them, demonstration (UGC) |
 | **Trust** (in the brand) | **Low** — new brand, no faces | Founder face & story, real reviews, lab certificate, Tunisian-made, WhatsApp human, COD |
 
@@ -78,7 +78,7 @@ The offer = **transformation + price/perceived value + risk reversal + reason to
 | Component | Today (after Phase 0) | Next move |
 |---|---|---|
 | **Transformation** | Before (3 coffees, 11h jitters, 14h crash) → after (one capsule, clear head until evening) | Add a **failed-attempts block** + mechanism reframe high on the page (§5) |
-| **Value stack** (goal: price feels irrelevant) | Product + « Protocole Focus 30 jours » + WhatsApp follow-up + free delivery from 2 · 1,10–1,30 DT/day | Lead with value, not the strikethrough (Lunésia: discount anchors train price comparison). Show the guide (cover + chapters) in the buy box. Optional physical add-on from the Riso direction: **sticker sheet in every 2–3 pack** once costed |
+| **Value stack** (goal: price feels irrelevant) | Product + « Protocole Focus 30 jours » + WhatsApp follow-up + free delivery from 2 · 1,43–1,97 DT/day | Lead with value, not the strikethrough (Lunésia: discount anchors train price comparison). Show the guide (cover + chapters) in the buy box. Optional physical add-on from the Riso direction: **sticker sheet in every 2–3 pack** once costed |
 | **Risk reversal** | COD + courier calls + sealed-bottle guarantee | Reframe as a confidence builder near the hero and in ads: *"Teste le premier flacon. Pas convaincu ? On te rembourse le second."* — not a logistics line |
 | **Reason to buy now** | — | **Real** calendar urgency: January exam session (from 15 Dec), then May–June / bac. Real batch number only when known |
 | **Proof** | Studies + Examine.com, Tunisian-made | Tester reviews (doubt-first, real faces, "produit offert"), founder story, lab certificate when in hand |
@@ -124,7 +124,7 @@ Full element-by-element map: `funnel-triggers-map.md`. Summary of what changes:
 
 | Metric | Target before launch | Rule |
 |---|---|---|
-| **COGS** | **≤ 25 % of selling price** → ≤ 9,75 DT per bottle at 39 DT | If higher, the price/pack structure must change before scaling |
+| **COGS** | **≤ 25 % of selling price** → ✅ 10 DT cost = 17–23 % at 59/99/129 DT | Gross margin ≈ 66–68 % (target 70 %+): see `pricing-margins.md` |
 | **CVR** (product page, cold) | **≥ 4 %** | Low CVR = offer/message problem, not traffic |
 | **Max CPA** | AOV − COGS − delivery cost − packaging − COD refusal loss − target profit | Formula + worked example in the PMF file; fill with your real unit cost |
 | **Delivery acceptance** | ≥ 80 % of shipped COD orders accepted | Below → WhatsApp confirmation and trust work first |
@@ -195,3 +195,4 @@ Guarantee, free guide, honest tags, daily cost, `/returns`, WhatsApp sequence, t
 | 5 | Founder face & story | **Yes — on hold** until you send a photo + 3 real lines | Biggest trust lever; can't be invented |
 | 6 | January exam pack | **Yes, as framing from 15 Dec**, no new SKU | Real urgency, zero stock risk |
 | 7 | Scaling gate | **No scaling before** COGS ≤ 25 %, CVR ≥ 4 %, offer audit ≥ 4 Strong | PMF worksheet rules |
+| 8 | Prices | **59 / 99 / 129 DT** (from 39 / 72 / 99), delivery 7 DT, free from 2 | 10 DT unit cost: old prices gave 52–57 % gross margin. New ≈ 66–68 %, just under the 70 % target — revisit to 69 / 119 / 159 if CPA is high. Details: `pricing-margins.md` |

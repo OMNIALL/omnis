@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
-import { FOCUS_BUNDLES } from "@/lib/pricing";
+import { FOCUS_UNIT_PRICE, FOCUS_BUNDLES } from "@/lib/pricing";
 import { siteUrl } from "@/lib/siteUrl";
 import ProductDetailClient from "./ProductDetailClient";
 
@@ -26,9 +26,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     };
   }
 
-  const title = "OMNIS FOCUS — gélules caféine naturelle + L-théanine (39 DT)";
+  const title = `OMNIS FOCUS — gélules caféine naturelle + L-théanine (${FOCUS_UNIT_PRICE} DT)`;
   const description =
-    "30 gélules végétales : 100 mg de caféine naturelle de guarana, 180 mg de L-théanine, vitamines B6 et B12. Packs dès 33 DT/flacon, livraison 24–48h, paiement à la livraison partout en Tunisie.";
+    "30 gélules végétales : 100 mg de caféine naturelle de guarana, 180 mg de L-théanine, vitamines B6 et B12. Packs dès 43 DT/flacon, livraison 24–48h, paiement à la livraison partout en Tunisie.";
   return {
     title: { absolute: title },
     description,
