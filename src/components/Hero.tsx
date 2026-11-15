@@ -11,7 +11,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Banknote, Truck, MapPin } from "lucide-react";
+import { Banknote, Truck, MapPin, ShieldCheck } from "lucide-react";
+import { GUARANTEE, GUARANTEE_ACTIVE } from "@/config/offer";
 import { useLanguage } from "@/context/LanguageContext";
 import { DELIVERY_TIME } from "@/lib/pricing";
 import { ORDER_HREF } from "@/config/site";
@@ -88,6 +89,14 @@ export default function Hero() {
               {isAr ? "كيفاش يخدم؟" : "Comment ça marche"}
             </a>
           </motion.div>
+
+          {/* Risk reversal as a confidence line, right under the CTA (not a logistics detail) */}
+          {GUARANTEE_ACTIVE && (
+            <Link href="/returns#garantie" className="flex items-start gap-2 text-sm text-ink max-w-md hover:underline underline-offset-4">
+              <ShieldCheck className="w-4 h-4 text-harissa shrink-0 mt-0.5" strokeWidth={1.75} />
+              {isAr ? GUARANTEE.packLine.ar : GUARANTEE.packLine.fr}
+            </Link>
+          )}
 
           {/* Trust strip, directly under the CTA */}
           <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-muted">

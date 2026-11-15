@@ -345,6 +345,26 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
               </button>
             </div>
 
+            {/* Value stack: what comes with the bottle (guide preview) */}
+            {GUIDE_ACTIVE && (
+              <div className="rounded-2xl border border-line bg-cream p-5">
+                <p className="flex items-center gap-2 font-semibold text-ink mb-1">
+                  <BookOpen className="w-5 h-5 text-harissa" strokeWidth={1.75} />
+                  {isAr ? "مع كل كوموند: " : "Inclus avec ta commande : "}
+                  {isAr ? GUIDE.short.ar : GUIDE.short.fr}
+                </p>
+                <p className="text-sm text-muted mb-3">{isAr ? GUIDE.line.ar : GUIDE.line.fr}</p>
+                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-sm text-ink">
+                  {(isAr ? GUIDE.chapters.ar : GUIDE.chapters.fr).map((c, i) => (
+                    <li key={c} className="flex gap-2">
+                      <span className="text-muted tabular-nums">{i + 1}.</span>
+                      {c}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
             {/* Product attribute badges (verified facts only) */}
             <ul className="flex flex-wrap gap-2">
               {(isAr

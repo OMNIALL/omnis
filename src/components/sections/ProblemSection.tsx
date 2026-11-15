@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Coffee, Zap, BatteryLow } from "lucide-react";
+import { Coffee, Zap, BatteryLow, CupSoda, BedDouble, Dumbbell } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 /** PAS — Problem + Agitate: the coffee trap. (Solution follows in the next sections.) */
@@ -20,6 +20,20 @@ export default function ProblemSection() {
         { Icon: Coffee, time: "9h", title: "Le premier café", text: "Tu te réveilles, la journée démarre." },
         { Icon: Zap, time: "11h", title: "Le troisième", text: "Tu deviens nerveux, tu n'arrives plus à rester sur une tâche." },
         { Icon: BatteryLow, time: "14h", title: "Le crash", text: "L'énergie s'effondre, et le cours ou la réunion devient interminable." },
+      ];
+
+  const attempts = isAr
+    ? [
+        { Icon: Coffee, label: "قهوة زيادة" },
+        { Icon: CupSoda, label: "كانيت إينرجي" },
+        { Icon: BedDouble, label: "ترقد أكثر نهار الأحد" },
+        { Icon: Dumbbell, label: "تغصب روحك" },
+      ]
+    : [
+        { Icon: Coffee, label: "Un café de plus" },
+        { Icon: CupSoda, label: "Une canette d'énergie" },
+        { Icon: BedDouble, label: "Dormir plus le week-end" },
+        { Icon: Dumbbell, label: "Te forcer" },
       ];
 
   return (
@@ -66,6 +80,29 @@ export default function ProblemSection() {
             </motion.li>
           ))}
         </ol>
+
+        {/* Failed attempts — recognition before prescription (marketing/funnel-triggers-map.md #07) */}
+        <div className="mt-10 rounded-[20px] border border-line bg-cream p-6 sm:p-8">
+          <p className="heading-lg text-xl text-ink mb-4">
+            {isAr ? "و جرّبت باش تتعدّى…" : "Et tu as déjà essayé de t'en sortir…"}
+          </p>
+          <ul className="flex flex-wrap gap-2.5 mb-4">
+            {attempts.map(({ Icon, label }) => (
+              <li
+                key={label}
+                className="flex items-center gap-2 rounded-full border border-line bg-paper px-3.5 py-2 text-sm font-medium text-ink"
+              >
+                <Icon className="w-4 h-4 text-muted" strokeWidth={1.75} />
+                <span className="line-through decoration-harissa/60">{label}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-muted max-w-2xl">
+            {isAr
+              ? "حتى حاجة فيهم موش غلطة. أما يعالجو التعب متاع اللحظة، موش الطلوع و الطيحة اللي يتعاودو كل نهار."
+              : "Rien de tout ça n'est une erreur. Mais ça traite la fatigue du moment, pas le pic puis la chute qui reviennent chaque jour."}
+          </p>
+        </div>
       </div>
     </section>
   );

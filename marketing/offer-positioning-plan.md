@@ -163,7 +163,7 @@ Guarantee, free guide, honest tags, daily cost, `/returns`, WhatsApp sequence, t
 2. Run 10 CIA interviews (`cia-interview-guide.md`) → fill workbook sheet 2 with their exact words.
 3. Fill workbook sheet 4 (competitors) from Meta Ad Library + pharmacy + Instagram.
 4. Get: real unit cost (COGS check), batch size, lab certificate, founder photo + story.
-5. Site: failed-attempts block, mechanism line on EnergyCurve, "what happens after you order" block, guarantee line near the hero CTA, guide preview in the buy box.
+5. ✅ Site (PR #6): failed-attempts block, mechanism line on EnergyCurve, "what happens after you order" block, guarantee line near the hero CTA, guide preview in the buy box.
 
 ### Phase 2 — minimum viable test (weeks 3–5)
 1. First tester reviews on the site (doubt-first story + review cards, "produit offert").
