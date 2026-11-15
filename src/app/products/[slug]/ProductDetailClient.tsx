@@ -7,8 +7,10 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Banknote,
+  BookOpen,
   Check,
   MessageCircle,
+  ShieldCheck,
   Truck,
 } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
@@ -28,7 +30,8 @@ import { products, focusProduct } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { trackAddToCart, trackInitiateCheckout, trackViewContent } from "@/lib/analytics";
-import { DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice } from "@/lib/pricing";
+import { DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice, pricePerDay } from "@/lib/pricing";
+import { GUARANTEE, GUARANTEE_ACTIVE, GUIDE, GUIDE_ACTIVE } from "@/config/offer";
 import { whatsappLink } from "@/config/site";
 import { merciHref, type PlacedOrder } from "@/lib/placeOrder";
 import { useRouter } from "next/navigation";
@@ -40,7 +43,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
   const router = useRouter();
   const { addItem } = useCart();
 
-  // 2-pack pre-selected ("Le plus choisi"); ?pack=1|3 from the home bundle cards overrides it.
+  // 2-pack pre-selected ("Recommandé"); ?pack=1|3 from the home bundle cards overrides it.
   // Read via useSyncExternalStore so server and first client render match (no hydration mismatch).
   const urlPack = useSyncExternalStore(
     noopSubscribe,
@@ -92,7 +95,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
     ? {
         home: "الرئيسية",
         inStock: "متوفّر",
-        limited: "أوّل دفعة محدودة",
         tagline: "الإينرجي متاع قهوة، من غير الطيحة.",
         bullets: [
           "100 ملغ كافيين طبيعي من الغوارانا، قدّ قهوة",
@@ -102,6 +104,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
         chooseBundle: "اختار الپاك متاعك",
         bottle: (n: number) => (n === 1 ? "علبة وحدة · 30 يوم" : `${n} علب · ${n * 30} يوم`),
         perBottle: (p: number) => `${p} DT للعلبة`,
+        perDay: (d: string) => `${d} DT في النهار`,
         save: (s: number) => `توفّر ${s} DT`,
         freeShip: "التوصيل مجاني",
         shipFee: "+ 7 DT توصيل",
@@ -112,6 +115,8 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           { Icon: Truck, label: `توصيل ${DELIVERY_TIME.ar} · مجاني من علبتين` },
           { Icon: Banknote, label: "تخلّص كي توصلك" },
           { Icon: TunisiaFlag, label: "مصنوع في تونس" },
+          ...(GUARANTEE_ACTIVE ? [{ Icon: ShieldCheck, label: GUARANTEE.short.ar }] : []),
+          ...(GUIDE_ACTIVE ? [{ Icon: BookOpen, label: GUIDE.short.ar }] : []),
           { Icon: MessageCircle, label: "عندك سؤال؟ واتساب", wa: true },
         ],
         formulaTitle: "التركيبة، بالتفصيل.",
@@ -122,7 +127,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
     : {
         home: "Accueil",
         inStock: "En stock",
-        limited: "Premier lot limité",
         tagline: "L'énergie d'un café, sans le crash.",
         bullets: [
           "100 mg de caféine naturelle de guarana, l'équivalent d'un café",
@@ -132,6 +136,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
         chooseBundle: "Choisis ton pack",
         bottle: (n: number) => (n === 1 ? "1 flacon · 30 jours" : `${n} flacons · ${n * 30} jours`),
         perBottle: (p: number) => `${p} DT / flacon`,
+        perDay: (d: string) => `${d} DT / jour`,
         save: (s: number) => `−${s} DT`,
         freeShip: "Livraison offerte",
         shipFee: "+ 7 DT de livraison",
@@ -142,6 +147,8 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           { Icon: Truck, label: `Livraison ${DELIVERY_TIME.fr} · offerte dès 2 flacons` },
           { Icon: Banknote, label: "Paiement à la livraison" },
           { Icon: TunisiaFlag, label: "Fabriqué en Tunisie" },
+          ...(GUARANTEE_ACTIVE ? [{ Icon: ShieldCheck, label: GUARANTEE.short.fr }] : []),
+          ...(GUIDE_ACTIVE ? [{ Icon: BookOpen, label: GUIDE.short.fr }] : []),
           { Icon: MessageCircle, label: "Une question ? WhatsApp", wa: true },
         ],
         formulaTitle: "La formule, en détail.",
@@ -223,8 +230,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                   <span className="w-2 h-2 rounded-full bg-emerald-600" aria-hidden />
                   {T.inStock}
                 </span>
-                <span className="text-sm text-muted">·</span>
-                <span className="text-sm font-semibold text-harissa">{T.limited}</span>
               </div>
               <p className="eyebrow mb-2">
                 {isAr ? "100 ملغ كافيين طبيعي · 180 ملغ L-théanine" : "100 mg caféine naturelle · 180 mg L-théanine"}
@@ -284,7 +289,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                         <span>
                           <span className="block font-semibold text-ink">{T.bottle(b.qty)}</span>
                           <span className="block text-sm text-muted">
-                            {b.qty > 1 ? T.perBottle(Math.round(b.price / b.qty)) + " · " : ""}
+                            {T.perDay(pricePerDay(b.qty))} · 
                             {b.qty >= 2 ? T.freeShip : T.shipFee}
                           </span>
                         </span>
@@ -302,6 +307,17 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                   );
                 })}
               </div>
+              {GUARANTEE_ACTIVE && qty >= 2 && (
+                <p className="mt-3 flex gap-2.5 rounded-2xl bg-cream border border-line p-3.5 text-sm text-ink">
+                  <ShieldCheck className="w-5 h-5 text-harissa shrink-0" strokeWidth={1.75} />
+                  <span>
+                    {isAr ? GUARANTEE.line.ar : GUARANTEE.line.fr}{" "}
+                    <Link href="/returns#garantie" className="underline underline-offset-4 text-muted hover:text-ink">
+                      {isAr ? "الشروط" : "Conditions"}
+                    </Link>
+                  </span>
+                </p>
+              )}
             </div>
 
             {/* Inline COD order form */}

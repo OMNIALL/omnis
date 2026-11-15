@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { DELIVERY_TIME } from "@/lib/pricing";
+import { GUARANTEE, GUARANTEE_ACTIVE } from "@/config/offer";
 
 /** Objections + FAQ (guide modules 5.7 + 5.8). Accessible <details> accordion. */
 export default function FAQ() {
@@ -14,6 +15,7 @@ export default function FAQ() {
         { q: "نجّم نشربها مع القهوة؟", a: "خير لا: FOCUS يعوّض قهوة. ما تخلطوش مع برشا قهوة ولا مشروبات فيها كافيين." },
         { q: "الرقاد يتلخبط؟", a: "كيف القهوة: خوذها الصباح ولا قبل الخدمة/المراجعة، موش في الليل." },
         { q: "شكون يصنعها؟", a: "مصنوعة في مخبر تونسي. التركيبة كاملة مكتوبة على العلبة و على السيت بالملغ." },
+        ...(GUARANTEE_ACTIVE ? [{ q: "و كان ما عجبتنيش؟", a: `${GUARANTEE.line.ar} ${GUARANTEE.terms.ar}` }] : []),
         { q: "و كان الكوليه يوصل مكسّر؟", a: "كلّمنا في 48 ساعة على الواتساب مع تصويرة، و نبعثولك علبة أخرى." },
         { q: "التوصيل قدّاش و وقتاش؟", a: `لكل الولايات في ${DELIVERY_TIME.ar}. 7 DT، و مجاني من علبتين. تخلّص كي توصلك.` },
         { q: "علبة تكفي قدّاش؟", a: "30 كاشية = 30 يوم بكاشية في النهار." },
@@ -23,6 +25,7 @@ export default function FAQ() {
         { q: "Je peux la prendre avec mon café ?", a: "Mieux vaut pas : FOCUS remplace un café. Évite de cumuler avec d'autres sources importantes de caféine." },
         { q: "Est-ce que ça peut gêner mon sommeil ?", a: "Comme un café : prends-la le matin ou avant ta session de travail, pas le soir." },
         { q: "Qui fabrique OMNIS ?", a: "Un laboratoire tunisien. La formule complète est indiquée en mg sur le flacon et sur ce site." },
+        ...(GUARANTEE_ACTIVE ? [{ q: "Et si ça ne me convient pas ?", a: `${GUARANTEE.line.fr} ${GUARANTEE.terms.fr}` }] : []),
         { q: "Et si mon colis arrive abîmé ?", a: "Écris-nous sur WhatsApp sous 48h avec une photo : on t'envoie un flacon de remplacement." },
         { q: "Délais et frais de livraison ?", a: `Partout en Tunisie en ${DELIVERY_TIME.fr}. 7 DT, offerte dès 2 flacons. Tu paies à la livraison.` },
         { q: "Un flacon dure combien de temps ?", a: "30 gélules = 30 jours, à raison d'une gélule par jour." },

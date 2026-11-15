@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { FOCUS_BUNDLES, FOCUS_UNIT_PRICE } from "@/lib/pricing";
+import { FOCUS_BUNDLES, FOCUS_UNIT_PRICE, pricePerDay } from "@/lib/pricing";
+import { GUARANTEE, GUARANTEE_ACTIVE, GUIDE, GUIDE_ACTIVE } from "@/config/offer";
 import Image from "next/image";
 import { orderHref } from "@/config/site";
 
@@ -21,7 +22,7 @@ export default function BundleSection() {
   const copy = {
     1: isAr ? { name: "التجربة", days: "30 يوم" } : { name: "Découverte", days: "30 jours" },
     2: isAr ? { name: "الروتين", days: "60 يوم" } : { name: "Routine", days: "60 jours" },
-    3: isAr ? { name: "الفصل الكامل", days: "90 يوم" } : { name: "Trimestre", days: "90 jours" },
+    3: isAr ? { name: "السيزون الكامل", days: "90 يوم" } : { name: "Session complète", days: "90 jours" },
   } as const;
 
   return (
@@ -71,6 +72,9 @@ export default function BundleSection() {
                     <span className="heading-lg text-3xl text-ink tabular-nums">{b.price} DT</span>
                     {saving > 0 && <s className="text-muted tabular-nums">{FOCUS_UNIT_PRICE * b.qty} DT</s>}
                   </p>
+                  <p className="text-sm text-muted tabular-nums">
+                    {isAr ? `يعني ${pricePerDay(b.qty)} DT في النهار` : `soit ${pricePerDay(b.qty)} DT / jour`}
+                  </p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
                   <li className="flex gap-2">
@@ -87,6 +91,18 @@ export default function BundleSection() {
                     <Check className="w-4 h-4 text-harissa mt-0.5" />
                     {isAr ? "تخلّص كي توصلك" : "Paiement à la livraison"}
                   </li>
+                  {GUIDE_ACTIVE && (
+                    <li className="flex gap-2">
+                      <Check className="w-4 h-4 text-harissa mt-0.5" />
+                      {isAr ? GUIDE.short.ar : GUIDE.short.fr}
+                    </li>
+                  )}
+                  {GUARANTEE_ACTIVE && b.qty >= 2 && (
+                    <li className="flex gap-2">
+                      <Check className="w-4 h-4 text-harissa mt-0.5" />
+                      {isAr ? GUARANTEE.short.ar : GUARANTEE.short.fr}
+                    </li>
+                  )}
                 </ul>
                 <span className={`btn-sticker mt-auto ${featured ? "btn-primary" : "btn-secondary"}`}>
                   {isAr ? `نختار ${copy[b.qty].days}` : `Je prends ${copy[b.qty].days}`}

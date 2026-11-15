@@ -20,9 +20,14 @@ export interface Bundle {
 
 export const FOCUS_BUNDLES: Bundle[] = [
   { qty: 1, price: 39 },
-  { qty: 2, price: 72, tag: { fr: "Le plus choisi", ar: "الأكثر طلباً" } },
+  // "Recommandé", not "Le plus choisi": no sales data yet to back a popularity claim.
+  { qty: 2, price: 72, tag: { fr: "Recommandé", ar: "ننصحوك بيه" } },
   { qty: 3, price: 99, tag: { fr: "Meilleur prix", ar: "أحسن سوم" } },
 ];
+
+/** Price per day for a FOCUS bundle (1 capsule/day, 30 per bottle), formatted "1,10" for display. */
+export const pricePerDay = (qty: number) =>
+  (FOCUS_BUNDLES[qty - 1].price / (qty * 30)).toFixed(2).replace(".", ",");
 
 /** Price of `qty` units of one product, applying FOCUS bundle pricing. */
 export function linePrice(productId: string, unitPrice: number, qty: number): number {
