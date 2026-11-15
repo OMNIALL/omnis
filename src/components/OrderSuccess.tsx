@@ -6,6 +6,7 @@ import { CheckCircle2, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { whatsappLink } from "@/config/site";
 import { DELIVERY_TIME } from "@/lib/pricing";
+import { GUARANTEE, GUARANTEE_ACTIVE, GUIDE_ACTIVE } from "@/config/offer";
 import type { PlacedOrder } from "@/lib/placeOrder";
 
 /** Thank-you screen: order recap + WhatsApp confirmation (cuts COD refusals) + tracking. */
@@ -73,11 +74,22 @@ export default function OrderSuccess({ order }: { order: PlacedOrder }) {
           </div>
         ))}
       </dl>
-      <p className="text-sm text-muted mb-8">
+      <p className="text-sm text-muted mb-2">
         {isAr
           ? `الليفرور باش يكلّمك قبل ما يوصل (${DELIVERY_TIME.ar}).`
           : `Le livreur t'appelle avant de passer (${DELIVERY_TIME.fr}).`}
       </p>
+      {GUIDE_ACTIVE && (
+        <p className="text-sm text-muted mb-2">
+          {isAr
+            ? "بعد التوصيل، يوصلك على الواتساب الڤيد « 30 يوم فوكوس » هدية."
+            : "Après la livraison, tu reçois sur WhatsApp ton guide « Protocole Focus 30 jours » offert."}
+        </p>
+      )}
+      {GUARANTEE_ACTIVE && order.items.reduce((n, i) => n + i.quantity, 0) >= 2 && (
+        <p className="text-sm text-muted mb-2">{isAr ? GUARANTEE.line.ar : GUARANTEE.line.fr}</p>
+      )}
+      <div className="mb-8" />
 
       <div className="flex flex-col sm:flex-row gap-3">
         <Link href={`/track?id=${order.id}`} className="btn-sticker btn-secondary">

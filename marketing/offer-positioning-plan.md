@@ -113,15 +113,15 @@ CVR (product page) · AOV / % 2–3 packs · CPA · WhatsApp confirmation rate �
 
 ---
 
-## 5. Decisions needed from you
-1. **Guarantee:** recommended version (refund the sealed 2nd bottle) or the stronger "même entamé"? Depends on your unit cost.
-2. **First batch size** — real number, or we drop the "limité" badge.
-3. **Tester budget:** how many free bottles (30? 50?).
-4. **Lab certificate / registration number** — do you have the documents to show?
-5. **Founder face & story** on the site — yes or no?
-6. **January exam pack** — yes (go live mid-December)?
-
----
+## 5. Decisions (taken 2026-11-15 — change any of them in `src/config/offer.ts` or here)
+| # | Decision | Choice | Why |
+|---|---|---|---|
+| 1 | Guarantee | **Sealed 2nd bottle** refunded, 2–3 packs, first order, 15 days | Capped cost, fits the hygiene rule, pushes the 2-pack. Upgrade to "même entamé" only once refund rate is known |
+| 2 | First batch size | **No number known → "Premier lot limité" removed** | Scarcity must be real. Put it back with the real figure when the lab confirms quantity |
+| 3 | Tester budget | **30 bottles** (12 students, 8 pros, 5 gym, 5 gamers) | Enough for 10+ displayable reviews; see `tester-programme.md` |
+| 4 | Lab certificate | **Not shown until the document is in hand** | No lab names or numbers without proof |
+| 5 | Founder face & story | **Recommended yes — on hold** until you send a photo + 3 real lines about why you started | Authority for cold traffic; can't be invented |
+| 6 | January exam pack | **Yes, as framing, from 15 December** (2–3 packs + exam-week routine from the guide), no new SKU | Real calendar urgency, zero stock risk |
 
 ## 6. Self-audit after the plan
 | Question | Answer after Phase 2 |
