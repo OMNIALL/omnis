@@ -18,9 +18,9 @@ _Check before testing B/C: keep claims experiential (no "guaranteed", no medical
 
 | # | FR | Tunisian | Angle |
 |---|---|---|---|
-| **A (live)** | Je commande · 39 DT | كوموندي · 39 DT | Clarity + price |
+| **A (live)** | Je commande · 59 DT | كوموندي · 59 DT | Clarity + price |
 | B | Je commande, je paie à la livraison | كوموندي، و خلّص كي توصلك | Risk reversal (COD) |
-| C | Je prends le pack 60 jours · 72 DT | نكوموندي الپاك 60 يوم · 72 DT | Anchors the best-value pack (raises basket size) |
+| C | Je prends le pack 60 jours · 99 DT | نكوموندي الپاك 60 يوم · 99 DT | Anchors the best-value pack (raises basket size) |
 
 ## Final CTA section headline
 - A (live): « Laisse tomber le 3ème café. Prends une gélule. »

@@ -14,7 +14,7 @@ import Image from "next/image";
 import { Banknote, Truck, MapPin, ShieldCheck } from "lucide-react";
 import { GUARANTEE, GUARANTEE_ACTIVE } from "@/config/offer";
 import { useLanguage } from "@/context/LanguageContext";
-import { DELIVERY_TIME } from "@/lib/pricing";
+import { FOCUS_UNIT_PRICE, DELIVERY_TIME } from "@/lib/pricing";
 import { ORDER_HREF } from "@/config/site";
 
 export default function Hero() {
@@ -83,7 +83,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Link href={ORDER_HREF} className="btn-sticker btn-primary">
-              {isAr ? "كوموندي · 39 DT" : "Je commande · 39 DT"}
+              {isAr ? `كوموندي · ${FOCUS_UNIT_PRICE} DT` : `Je commande · ${FOCUS_UNIT_PRICE} DT`}
             </Link>
             <a href="#comment-ca-marche" className="btn-sticker btn-outline hidden sm:inline-flex">
               {isAr ? "كيفاش يخدم؟" : "Comment ça marche"}

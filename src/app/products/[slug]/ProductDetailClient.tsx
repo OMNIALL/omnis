@@ -25,12 +25,13 @@ import EnergyCurve from "@/components/EnergyCurve";
 import ScienceSection from "@/components/sections/ScienceSection";
 import MomentsSection from "@/components/sections/MomentsSection";
 import ProductGallery from "@/components/ProductGallery";
+import OfferStack from "@/components/OfferStack";
 import TunisiaFlag from "@/components/brand/TunisiaFlag";
 import { products, focusProduct } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { trackAddToCart, trackInitiateCheckout, trackViewContent } from "@/lib/analytics";
-import { DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice, pricePerDay } from "@/lib/pricing";
+import { FOCUS_UNIT_PRICE, DELIVERY_TIME, FOCUS_BUNDLES, focusBundleTotal, linePrice, pricePerDay } from "@/lib/pricing";
 import { GUARANTEE, GUARANTEE_ACTIVE, GUIDE, GUIDE_ACTIVE } from "@/config/offer";
 import { whatsappLink } from "@/config/site";
 import { merciHref, type PlacedOrder } from "@/lib/placeOrder";
@@ -239,7 +240,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
               </h1>
               <p className="text-lg text-muted mb-4">{T.tagline}</p>
               <p className="flex items-baseline gap-2 mb-5">
-                <span className="heading-lg text-3xl text-ink">39 DT</span>
+                <span className="heading-lg text-3xl text-ink">{FOCUS_UNIT_PRICE} DT</span>
                 <span className="text-sm text-muted">
                   {isAr ? "· تخلّص كي توصلك" : "· paiement à la livraison"}
                 </span>
@@ -307,18 +308,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                   );
                 })}
               </div>
-              {GUARANTEE_ACTIVE && qty >= 2 && (
-                <p className="mt-3 flex gap-2.5 rounded-2xl bg-cream border border-line p-3.5 text-sm text-ink">
-                  <ShieldCheck className="w-5 h-5 text-harissa shrink-0" strokeWidth={1.75} />
-                  <span>
-                    {isAr ? GUARANTEE.line.ar : GUARANTEE.line.fr}{" "}
-                    <Link href="/returns#garantie" className="underline underline-offset-4 text-muted hover:text-ink">
-                      {isAr ? "الشروط" : "Conditions"}
-                    </Link>
-                  </span>
-                </p>
-              )}
             </div>
+
+            {/* Everything they get, in one place, right above the order button */}
+            <OfferStack qty={qty} />
 
             {/* Inline COD order form */}
             <div ref={formRef} className="card p-5 sm:p-6 scroll-mt-24">
@@ -343,27 +336,21 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
               >
                 {added ? T.addedTxt : T.orAdd}
               </button>
+              {/* Some buyers trust a chat more than a form: same order, pre-filled on WhatsApp */}
+              <a
+                href={whatsappLink(
+                  isAr
+                    ? `سلام OMNIS، نحب نكوموندي FOCUS: ${T.bottle(qty)} (${total} DT، نخلّص كي توصلني).`
+                    : `Bonjour OMNIS, je veux commander FOCUS : ${T.bottle(qty)} (${total} DT, paiement à la livraison).`
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex items-center justify-center gap-2 w-full rounded-full border border-line bg-white py-3 text-sm font-semibold text-ink hover:border-ink/40 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4 text-[#1DA851]" strokeWidth={2} />
+                {isAr ? "ولا كوموندي على الواتساب" : "Ou commande sur WhatsApp"}
+              </a>
             </div>
-
-            {/* Value stack: what comes with the bottle (guide preview) */}
-            {GUIDE_ACTIVE && (
-              <div className="rounded-2xl border border-line bg-cream p-5">
-                <p className="flex items-center gap-2 font-semibold text-ink mb-1">
-                  <BookOpen className="w-5 h-5 text-harissa" strokeWidth={1.75} />
-                  {isAr ? "مع كل كوموند: " : "Inclus avec ta commande : "}
-                  {isAr ? GUIDE.short.ar : GUIDE.short.fr}
-                </p>
-                <p className="text-sm text-muted mb-3">{isAr ? GUIDE.line.ar : GUIDE.line.fr}</p>
-                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-sm text-ink">
-                  {(isAr ? GUIDE.chapters.ar : GUIDE.chapters.fr).map((c, i) => (
-                    <li key={c} className="flex gap-2">
-                      <span className="text-muted tabular-nums">{i + 1}.</span>
-                      {c}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
 
             {/* Product attribute badges (verified facts only) */}
             <ul className="flex flex-wrap gap-2">

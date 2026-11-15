@@ -6,7 +6,7 @@ _Single source of truth for the site, ads and scripts. Keep in sync with `.claud
 **L'énergie d'un café, sans le crash.** — Tunisian: « الإينرجي متاع قهوة، من غير الطيحة. »
 
 ## Primary CTA
-**« Je commande · 39 DT »** → product page order form, cash on delivery.
+**« Je commande · 59 DT »** → product page order form, cash on delivery.
 Secondary (info): « Comment ça marche ».
 
 ## Ideal customers
@@ -33,7 +33,7 @@ _Next: first real customer reviews (WhatsApp screenshots with permission), lab n
 | "Will it ruin my sleep?" | Take it like a coffee: morning or before a session, not in the evening. |
 
 ## Offer
-1 bottle 39 DT (+7 DT delivery) · 2 bottles 72 DT (free delivery, pre-selected) · 3 bottles 99 DT (free delivery).
+1 bottle 59 DT (+7 DT delivery) · 2 bottles 99 DT (free delivery, pre-selected) · 3 bottles 129 DT (free delivery). Margins: `marketing/pricing-margins.md`.
 Honest scarcity: "Premier lot limité" (first batch = 200–300 bottles).
 
 ## Target keywords (SEO)

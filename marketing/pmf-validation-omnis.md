@@ -9,16 +9,16 @@
 |---|---|
 | **N — Niche** | Tunisians 18–35 whose day "counts": students in révisions/exam periods (bac, fac, prépa) and young professionals with meetings/deadlines. Precise situation: 14h, third coffee, re-reading the same line. Secondary: gym-goers, gamers. |
 | **T — Transformation** | From "3 cafés, nerveux à 11h, KO à 14h" → "une gélule le matin, la tête claire jusqu'au soir, sans le crash". |
-| **P — Price** | Mature markets sell caffeine + L-théanine capsules as everyday focus supplements and energy gums (e.g. Neurogum, studied earlier) — positioned as a coffee replacement, priced per serving. Locally: coffee 1,5–3 DT, energy drink 3–6 DT. **39 DT = 1,30 DT/day, 1,10 DT/day in pack 3** — below a café en terrasse. |
+| **P — Price** | Mature markets sell caffeine + L-théanine capsules as everyday focus supplements and energy gums (e.g. Neurogum, studied earlier) — positioned as a coffee replacement, priced per serving. Locally: coffee 1,5–3 DT, energy drink 3–6 DT. **59 DT ≈ 1,97 DT/day, 1,43 DT/day in pack 3** — about the price of one café. |
 | **M — Mechanism** | Natural caffeine (guarana) for energy + L-théanine to make it smoother; B6/B12 contribute to reducing fatigue. Story: the problem isn't missing energy, it's the spike then the crash. |
 | **A — Access channel** | US/EU: Meta + TikTok UGC, founder-led content, "coffee vs gum/capsule" comparisons, creator partnerships. Tunisia: Meta (FB/IG) for COD, TikTok organic for reach, WhatsApp for conversion and reorder. |
 
-**Research conclusion — angle to test first:** *the 14h crash / the third coffee* for students (exam season) with "sans le crash" as the promise. **Price:** keep 39 / 72 / 99 DT, push the 2-pack (guarantee + free delivery).
+**Research conclusion — angle to test first:** *the 14h crash / the third coffee* for students (exam season) with "sans le crash" as the promise. **Price:** 59 / 99 / 129 DT (set 2026-11-15 from a 10 DT unit cost), push the 2-pack (guarantee + free delivery).
 
 ### 1.2 Target metrics (set before launch — don't move them after)
 | Metric | Target | Why |
 |---|---|---|
-| **COGS** | ≤ 25 % of selling price = **≤ 9,75 DT / bottle** | Course rule: below 25 % you can scale and accept high CPAs. **Fill with the real lab price.** |
+| **COGS** | ≤ 25 % of selling price | ✅ 10 DT = 17 % (1 bottle) to 23 % (3-pack) |
 | **CVR** (product page, cold) | **≥ 4 %** | Course benchmark for cold traffic |
 | **Delivery acceptance** | **≥ 80 %** | COD refusals destroy margin in Tunisia |
 | **Target CPA** | see formula below | Must leave margin after all costs |
@@ -27,8 +27,8 @@
 **Max CPA formula (per delivered order):**
 `Max CPA = AOV − (COGS × bottles) − delivery cost paid − packaging − (refusal rate × return cost) − target profit`
 
-*Worked example with placeholder numbers (replace with yours):* 2-pack AOV 72 DT · COGS 9 DT × 2 = 18 · delivery we pay 7 · packaging 1 · refusals 20 % × 7 DT return = 1,4 · target profit 15 → **Max CPA ≈ 29,6 DT per delivered order.**
-Divide by the acceptance rate to get the max cost per *placed* order (29,6 × 0,8 ≈ 23,7 DT).
+*Worked example (assumed delivery 8 DT, packaging 1 DT, 20 % refusals, 4 DT return fee — replace with your real rates):* 2-pack AOV 99 DT · COGS 10 × 2 = 20 · delivery 8 · packaging 1 · refusals 3,25 → **66,75 DT before ads**. With a target profit of 20 DT → **Max CPA ≈ 46,75 DT per delivered order.** Full table: `pricing-margins.md`.
+Multiply by the acceptance rate to get the max cost per *placed* order (46,75 × 0,8 ≈ 37,4 DT).
 
 ### 1.3 Test results (fill after the minimum viable test)
 | Metric | Target | Actual |
@@ -53,7 +53,7 @@ Divide by the acceptance rate to get the max cost per *placed* order (29,6 × 0,
 |---|---|---|
 | Niche | Students + young pros (hypothesis) | ? — test after launch |
 | Transformation | "Sans le crash" | — |
-| Price | 39/72/99, 2-pack default | — |
+| Price | 59/99/129, 2-pack default | — |
 | Mechanism | Caffeine + L-théanine story | — |
 | Access channel | Meta (planned) | — |
 

@@ -11,7 +11,7 @@ Every order CTA must use `ORDER_HREF` / `orderHref(pack)`. Success → `/merci` 
 - 30 vegan capsules (hypromellose) per bottle · 1 capsule/day, 2 max
 - Per capsule: L-théanine 180 mg · caféine naturelle (guarana) 100 mg · vitamine B6 1,4 mg (100% VNR) · vitamine B12 2,5 µg (100% VNR)
 - Not for children, pregnant/breastfeeding women, caffeine-sensitive people
-- Price: 39 DT · packs 72 DT (2) / 99 DT (3) · delivery 7 DT, free from 2 bottles · 24–48h · paiement à la livraison
+- Price: 59 DT · packs 99 DT (2) / 129 DT (3) · delivery 7 DT, free from 2 bottles · 24–48h · paiement à la livraison
 - Pricing lives in `src/lib/pricing.ts` only — never hard-code prices elsewhere in logic.
 
 ## Copy rules

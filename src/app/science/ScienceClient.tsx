@@ -1,5 +1,6 @@
 "use client";
 
+import { FOCUS_UNIT_PRICE } from "@/lib/pricing";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -64,7 +65,7 @@ export default function ScienceClient() {
             <p className="heading-lg text-xl text-ink">
               {isAr ? "OMNIS FOCUS: 100 ملغ كافيين طبيعي + 180 ملغ L-théanine + B6 و B12." : "OMNIS FOCUS : 100 mg de caféine naturelle + 180 mg de L-théanine + B6 et B12."}
             </p>
-            <Button href={ORDER_HREF}>{isAr ? "كوموندي · 39 DT" : "Je commande · 39 DT"}</Button>
+            <Button href={ORDER_HREF}>{isAr ? `كوموندي · ${FOCUS_UNIT_PRICE} DT` : `Je commande · ${FOCUS_UNIT_PRICE} DT`}</Button>
           </div>
         </Section>
       </main>

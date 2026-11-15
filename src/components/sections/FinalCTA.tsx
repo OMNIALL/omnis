@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Banknote, Truck, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { orderHref } from "@/config/site";
-import { DELIVERY_TIME } from "@/lib/pricing";
+import { FOCUS_BUNDLES, FOCUS_UNIT_PRICE, DELIVERY_TIME } from "@/lib/pricing";
 
 /** Closing CTA — repeats the promise and the one action. */
 export default function FinalCTA() {
@@ -27,14 +27,14 @@ export default function FinalCTA() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href={orderHref(2)} className="btn-sticker btn-primary">
-              {isAr ? "نكوموندي الپاك 60 يوم · 72 DT" : "Je prends le pack 60 jours · 72 DT"}
+              {isAr ? `نكوموندي الپاك 60 يوم · ${FOCUS_BUNDLES[1].price} DT` : `Je prends le pack 60 jours · ${FOCUS_BUNDLES[1].price} DT`}
             </Link>
             <Link
               href={orderHref(1)}
               className="btn-sticker"
               style={{ borderColor: "rgba(255,244,227,0.35)", color: "var(--cream)" }}
             >
-              {isAr ? "علبة وحدة · 39 DT" : "1 flacon · 39 DT"}
+              {isAr ? `علبة وحدة · ${FOCUS_UNIT_PRICE} DT` : `1 flacon · ${FOCUS_UNIT_PRICE} DT`}
             </Link>
           </div>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm" style={{ color: "rgba(255,244,227,0.78)" }}>

@@ -1,5 +1,6 @@
 "use client";
 
+import { FOCUS_UNIT_PRICE } from "@/lib/pricing";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -37,7 +38,7 @@ export default function ComingSoonProduct({ product }: { product: Product }) {
             {isAr ? "علّمني كي يخرج" : "Préviens-moi"}
           </a>
           <Link href={ORDER_HREF} className="btn-sticker btn-primary">
-            {isAr ? "توّا: OMNIS FOCUS · 39 DT" : "Disponible : OMNIS FOCUS · 39 DT"}
+            {isAr ? `توّا: OMNIS FOCUS · ${FOCUS_UNIT_PRICE} DT` : `Disponible : OMNIS FOCUS · ${FOCUS_UNIT_PRICE} DT`}
           </Link>
         </div>
       </div>
