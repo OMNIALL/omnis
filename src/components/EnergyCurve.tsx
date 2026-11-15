@@ -26,6 +26,12 @@ export default function EnergyCurve({ compact = false }: { compact?: boolean }) 
               ? "القهوة وحدها تطلّعك فيسع و تطيّحك فيسع. مع الـ L-théanine، الكافيين يتصرّف بطريقة أنعم: لا نيرفي، لا طيحة متاع العشية."
               : "Le café seul fait monter vite et redescendre d'un coup. Associée à la L-théanine, la caféine se ressent de façon plus régulière : moins de nervosité, pas de coup de barre."}
           </p>
+          {/* Mechanism reframe — the page's biggest certainty lift (marketing/funnel-triggers-map.md #08) */}
+          <p
+            className={`mt-6 ps-4 border-s-4 heading-lg text-xl sm:text-2xl max-w-md ${compact ? "text-ink border-harissa" : "border-sun"}`}
+          >
+            {isAr ? "موش الإينرجي اللي ناقصتك. هو الطلوع، و بعدو الطيحة." : "Ce n'est pas l'énergie qui te manque. C'est le pic, puis la chute."}
+          </p>
         </div>
 
         <figure className={`rounded-[24px] p-5 sm:p-7 ${compact ? "card" : ""}`} style={compact ? undefined : { background: "rgba(255,244,227,0.06)", border: "1px solid rgba(255,244,227,0.14)" }}>
