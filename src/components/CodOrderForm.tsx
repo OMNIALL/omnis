@@ -171,11 +171,11 @@ export default function CodOrderForm({ items, total, onSuccess, showNotes = fals
         <div role="alert" className="p-3.5 rounded-2xl border-2 border-harissa bg-white text-sm text-ink">
           <p className="font-bold text-harissa mb-1 flex items-center gap-1.5"><AlertCircle className="w-4 h-4 shrink-0" />{submitError}</p>
           <p className="text-xs text-ink/80">
-            {isAr ? "عاود جرّب، ولا ابعث الكوموند مباشرة على " : "Réessaie, ou envoie ta commande directement sur "}
+            {isAr ? "ولا ابعث الكوموند على " : "Ou envoie ta commande sur "}
             <a href={whatsappLink(waText)} target="_blank" rel="noopener noreferrer" className="font-black underline">
               WhatsApp
             </a>
-            {isAr ? "." : " : on la confirme tout de suite."}
+            {isAr ? "، المعلومات متاعك مكتوبة." : ", avec tes infos déjà remplies."}
           </p>
         </div>
       )}
@@ -186,7 +186,7 @@ export default function CodOrderForm({ items, total, onSuccess, showNotes = fals
         className="btn-sticker btn-primary w-full justify-center py-4 text-base mt-1 disabled:opacity-50"
       >
         {submitting
-          ? isAr ? "جاري التسجيل…" : "Envoi en cours…"
+          ? isAr ? "قاعدين نسجّلو…" : "Envoi en cours…"
           : isAr ? `كوموندي · ${total} DT` : `Je commande · ${total} DT`}
       </button>
       <p className="text-center text-sm text-muted -mt-1">

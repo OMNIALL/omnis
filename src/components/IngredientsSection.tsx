@@ -60,7 +60,7 @@ export default function IngredientsSection() {
         <div className="flex flex-col gap-5">
           <div className="relative aspect-[3/2] rounded-[20px] overflow-hidden bg-paper">
             <Image
-              src="/images/focus-ingredients-nobottle.webp"
+              src="/images/focus-ingredients.webp"
               alt={isAr ? "الغوارانا، أوراق التاي و كاشيات OMNIS FOCUS" : "Guarana, feuilles de thé et gélules OMNIS FOCUS"}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

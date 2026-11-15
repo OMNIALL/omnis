@@ -108,8 +108,8 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
         >
           <Image
-            src="/images/focus-34-alt.webp"
-            alt={isAr ? "علبة OMNIS FOCUS محلولة و كاشيات نباتية" : "Flacon OMNIS FOCUS ouvert et gélules végétales"}
+            src="/images/focus-bottle-front.webp"
+            alt={isAr ? "علبة OMNIS FOCUS، 30 كاشية نباتية" : "Flacon OMNIS FOCUS, 30 gélules végétales"}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"

@@ -64,8 +64,8 @@ export default function MerciClient() {
             <h1 className="heading-xl text-3xl text-ink mb-3">{isAr ? "شكراً!" : "Merci !"}</h1>
             <p className="text-muted mb-6">
               {isAr
-                ? "الكوموند متاعك تسجّلت. تنجّم تتابعها برقم الكوموند ولا بتليفونك."
-                : "Ta commande est enregistrée. Tu peux la suivre avec ton numéro de commande ou ton téléphone."}
+                ? "الكوموند متاعك وصلتنا. تنجّم تتابعها برقم الكوموند ولا بتليفونك."
+                : "Ta commande est bien reçue. Tu peux la suivre avec ton numéro de commande ou ton téléphone."}
             </p>
             <Link href="/track" className="btn-sticker btn-primary">
               {isAr ? "تابع الكوموند" : "Suivre ma commande"}
